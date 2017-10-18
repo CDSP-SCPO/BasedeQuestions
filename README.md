@@ -14,13 +14,13 @@ Docker enables isolated install and execution of software stacks, which can be a
 
 Follow [Docker install instructions](https://docs.docker.com/installation/) to install Docker on your machine.
 
-Once you've Docker installed and running, [install Docker Compose](https://docs.docker.com/compose/install/) to set up and orchestrate Hyphe services in a single line.
+Once you've Docker installed and running, [install Docker Compose](https://docs.docker.com/compose/install/) to set up and orchestrate all services in a single line.
 
 
 
 ## Docker images
 
-I've created a PHP-FPM image based on PHP 5.3, that contains source code and is available on Docker Hub: 
+We've created a PHP-FPM image based on PHP 5.3, that contains source code and is available on Docker Hub: 
 * https://hub.docker.com/r/cdspscpo/quetelet-bdq/
 
 We also use an Apache Solr 1.4 image based on this work: https://github.com/sebstinkeste/solr-1.4
@@ -33,9 +33,10 @@ Finally, we use official Nginx and MySQL images for database and frontend:
 
 ## Get this repo
 
-Clone this repo to you server: 
+Clone this repo to you server, and move into: 
 ```bash
 git clone https://github.com/CDSP-SCPO/BasedeQuestions.git
+cd BasedeQuestions/
 ```
 
 ### Pull official image from Docker Store (recommended way)
@@ -58,7 +59,7 @@ Copy the `quetelet-data` folder in the root directory of this repository cloned 
 
 ### Create and run containers
 
-Once done, you can run Hyphe containers with this command:
+Once done, you can run containers with this command:
 
 ```bash
 docker-compose up
@@ -66,7 +67,7 @@ docker-compose up
 
 You can use `-d` option to run containers in the background. 
 
-Once the services are ready, you can access the frontend interface by connecting on `localhost` or the Docker host IP address:
+When the services are ready, you can access the frontend interface by connecting on `localhost` or the Docker host IP address:
 
 ```bash
 open http://localhost
