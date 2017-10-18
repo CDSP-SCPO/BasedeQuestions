@@ -1,0 +1,93 @@
+<?php 
+/**
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+
+$this->layout()->title = $this->translate->_('fr0235000000') . stripslashes($this->domain[0]['title']) . ' - ' . $this->translate->_('fr0235000050');
+$this->placeholder('fixedRightColumn')->set(true);
+$this->placeholder('topSection')->set(
+	'<h1>' .$this->translate->_('fr0235000100') . stripslashes($this->domain[0]['title']) . '</h1>'
+);
+$this->roundBoxStart(array('infoBox', 'studyList'));
+$this->resultsLink();
+?>
+<?php 
+if ($this->domain[0]['description']):
+?>
+<h2><?php echo $this->translate->_('fr0235000150'); ?></h2>
+	<?php 
+	echo stripslashes($this->domain[0]['description']);
+
+endif;
+?>
+<h2><?php  echo $this->translate->_('fr0235000200'); ?></h2>
+<?php 
+$i = 0;
+
+while(list($lang, $studies) = each($this->studiesGroupedByLanguages)):
+?>
+<h3><?php echo $this->translate->_('fr0235000250'), ' ', $studies[0]['language'] ?></h3>
+<p>
+	<a class="studyView" href="<?php 
+	echo $this->url(
+			array(
+				'id' =>  $this->id,
+				'searchLang' => $lang,
+			),
+			'domainView'
+		);
+	?>"><?php echo $this->translate->_('fr0235000300');?></a>
+</p>
+<table id="studyListTable_<?php echo $i; ?>" class="display">
+	<thead>
+		<tr>
+			<th style="width:70%!important;" class="title"><?php echo $this->translate->_('fr0235000350') ?></th>
+			<th></th>
+			<th class="title"><?php echo $this->translate->_('fr0235000400') ?></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php 
+	$l2 = count($studies);
+	
+	for ($j = 0 ; $j < $l2; $j++):
+	?>
+		<tr>
+			<td><a href="<?php echo $this->url(array('id' => $studies[$j]['id']), 'ddifileDetails');?>"><?php echo stripslashes($studies[$j]['title']);?></a></td>
+			<td><?php echo normalize(stripslashes($studies[$j]['title'])); ?></td>
+			<td>
+		<?php 
+		if ($studies[$j]['study_serie_title']):
+		?>
+				<a href="<?php echo $this->url(array('id' => $studies[$j]['study_serie_id'],), 'studyserieDetails');?>"><?php echo $studies[$j]['study_serie_title']; ?></a>
+		<?php 
+		endif;
+		?>
+			</td>
+			<td><?php echo normalize($studies[$j]['study_serie_title']); ?></td>
+		</tr>
+	<?php 
+	endfor;
+	?>
+	</tbody>
+</table>
+<div class="clear"></div>
+	<?php
+	$url = $this->url(
+		array(
+			'id' =>  $this->id,
+			'searchLang' => $lang,
+			'queryFilters' => 'wordParam'
+		),
+		'domainView'
+	);
+	$this->placeholder('rightColumn')->captureStart();
+	echo $this->wordCloud(&$this->cloudWords[$lang], $url, 'h3');
+	$this->placeholder('rightColumn')->captureEnd();
+	$i++;
+endwhile;
+
+$this->roundBoxEnd();
+echo $this->partial('studyDataTable.phtml');

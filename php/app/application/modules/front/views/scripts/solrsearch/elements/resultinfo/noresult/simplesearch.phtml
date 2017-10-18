@@ -1,0 +1,47 @@
+<?php 
+$translate = Zend_Registry::get('translateFront');
+$clientSettings = BDQ_Settings_Client::getInstance();
+?>
+<div class="resultInfoBox">
+<?php 
+	$query = $this->search->getRawQuery();
+	echo $translate->_('fr0165000000');
+?>
+	<b><?php echo $query ?></b>
+</div>
+
+<div class="noResultInfoBox">
+	<p>
+		<?php 
+		echo $translate->_('fr0165000050')
+		?>
+	</p>
+	<ul>
+		<li>
+			<?php 
+				echo $translate->_('fr0165000100');
+			?>
+		</li>
+		<?php 
+			if ( ! $clientSettings->stopwords):
+		?>
+		<li>
+			<?php 
+				echo $translate->_('fr0165000150');
+			?>
+		</li>
+		<?php 
+			endif;
+		?>
+		<li>
+			<?php 
+				echo $translate->_('fr0165000200');
+			?>
+		</li>
+		<li>
+			<?php 
+				echo $translate->_('fr0165000250');
+			?>
+		</li>
+	</ul>
+</div>

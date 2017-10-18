@@ -1,0 +1,474 @@
+<?php
+/**
+ * This is a duplicate from the search results loop.
+ * 
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+
+
+$solrDocument = $this->question;
+$solrLangCode = $solrDocument->get_solrLangCode();
+	
+// Question
+$field = 'q' . $solrLangCode;
+$method = "get_$field";
+/**
+ * @var string
+ */
+$question = $solrDocument->$method();
+
+// Items
+$field = 'i' . $solrLangCode;
+$method = "get_$field";
+/**
+ * @var array
+ */
+$items = $solrDocument->$method();
+
+// Modalities
+$field = 'm' . $solrLangCode;
+$method = "get_$field";
+/**
+ * @var array
+ */
+$modalities = $solrDocument->$method();
+
+// Variable label
+$field = 'vl' . $solrLangCode;
+$method = "get_$field";
+
+// Used for the lang attribute
+$solrLangCode = strtolower($solrLangCode);
+
+/**
+ * @var array
+ */
+$variableLabel = $solrDocument->$method();
+
+/**
+ * @var array
+ */
+$variableName = $solrDocument->get_variableName();
+$hasMultipleItems = $solrDocument->get_hasMultipleItems();
+
+$studyUrl = $this->url
+(
+	array(
+		'id' => $solrDocument->get_ddiFileId()
+	),
+	'ddifileDetails'
+);
+
+$l = count($solrDocument->get_variableId());
+$variableIds = $solrDocument->get_variableId();
+$variableUrl = array();
+
+/**
+ * Variable url(s) generation.
+ * In case of a multiple item question, there will be several urls.
+ */
+for ($j = 0; $j < $l; $j++)
+{
+	$variableUrl[] = $this->url
+	(
+		array(
+			'id' => $variableIds[$j]
+		),
+		'variableDetails'
+	);
+}
+
+/**
+ * Questionnaire url(s) generation.
+ */
+if ($solrDocument->get_hasQuestionnaire()):
+	$questionnaireUrl = array();
+	
+	if ($solrDocument->get_questionnaireUrl()) // External url
+	{
+		$questionnaireUrl[] = $solrDocument->get_questionnaireUrl();
+	}
+	
+	else // Internal url
+	{
+		$questionnaireId = $solrDocument->get_questionnaireId();
+		$l = count($questionnaireId);
+		
+		for ($j = 0; $j < $l; $j++)
+		{
+			$questionnaireUrl[] = $this->url
+			(
+				array(
+					'id' => $questionnaireId[$j]
+				),
+				'questionnaireView'
+			);
+		}
+	}
+
+endif;
+?>
+<div class="b1c">
+	<?php
+		if ($this->clientSettings->selectedQuestions && in_array($solrDocument->get_id(), explode(',', $this->clientSettings->selectedQuestions))):
+	?>
+	<span class="cart removeQuestion" id="qid_<?php echo $solrDocument->get_id();?>" title="<?php echo $this->translate->_('fr0295000000'); ?>">&nbsp;</span>
+	<?php 
+		else:
+	?>
+	<span class="cart selectQuestion" id="qid_<?php echo $solrDocument->get_id();?>" title="<?php echo $this->translate->_('fr0295000050'); ?>">&nbsp;</span>
+	<?php 
+		endif;
+	?>
+	<table style="width:100%;padding-right:25px;" cellpadding="0" cellspacing="0">
+	<?php 
+		if
+		(
+			$this->clientSettings->displayNavigationBar
+			&& isset($question) 
+			&& ! empty($question)
+		):
+	?>
+		<tr>
+			<td class="label"><?php echo $this->translate->_('fr0295000100');?></td>
+			<td>
+				<?php 
+				if
+				(
+					$solrDocument->get_questionPosition() != 1
+				):
+				?>
+				<span id="nav_<?php echo $this->from; ?>_<?php echo $solrDocument->get_questionPosition() - 1 ?>_<?php echo $solrDocument->get_ddiFileId() ?>" class="questionNavigation">&lt;<?php echo $this->translate->_('fr0295000150');?></span>	
+				<?php 
+					else:
+				?>
+					<?php echo $this->translate->_('fr0295000200');?>
+				<?php 
+					endif;
+				?> 
+				|
+				<span id="nav_<?php echo $this->from; ?>_<?php echo $this->from ?>_<?php echo $solrDocument->get_ddiFileId() ?>" class="questionNavigation"><?php echo $this->translate->_('fr0295000250');?></span>
+				|
+				<?php 
+					if
+					(
+						$solrDocument->get_questionPosition() != $solrDocument->get_studyQuestionCount()
+					):
+				?>
+				<span id="nav_<?php echo $this->from; ?>_<?php echo $solrDocument->get_questionPosition() + 1 ?>_<?php echo $solrDocument->get_ddiFileId() ?>" class="questionNavigation"><?php echo $this->translate->_('fr0295000300');?>&gt;</span>
+				<?php 
+					else:
+				?>
+					<?php echo $this->translate->_('fr0295000350');?>
+				<?php 
+					endif;
+				?>
+			</td>
+		</tr>
+	<?php 
+		endif;
+	
+	if (isset($question) && ! empty($question)):
+	?>
+		<tr>
+			<td class="label"><?php echo $this->translate->_('fr0295000400'); ?></td>
+			<td lang="<?php echo $solrLangCode;?>"><?php echo nl2br($question); ?></td>
+		</tr>
+		<?php 
+		if ($hasMultipleItems):
+			$l = count($items);
+		?>
+		<tr>
+			<td class="label">
+					(<?php echo $l?>)
+			</td>
+			<td class="items<?php if($l > MAX_ITEMS_OPENED) echo ' mrItem'?>" lang="<?php echo $solrLangCode;?>">
+				<ul>
+			<?php
+			for ($j = 0; $j < $l; $j++):
+			?>
+						<li class="item<?php if (($j > MAX_ITEMS_OPENED - 1) && $l > MAX_ITEMS_OPENED) echo ' hidden';?>">
+							<?php 
+							echo $items[$j];
+							?>
+							-
+							<a href="<?php echo $variableUrl[$j];?>" target="_self">
+							<?php 
+							echo $variableLabel[$j];
+							?>
+							</a>
+						</li>
+			<?php
+			endfor;
+			?>
+				</ul>
+			</td>
+		</tr>
+		<?php 
+		endif;
+		?>
+	<?php 
+	endif;
+	
+	$l = count($modalities);
+	
+	if ($l > 0):
+	?>
+		<tr>
+			<td class="label">
+				<?php echo $this->translate->_('fr0295000450');?>
+					<br/>
+					(<?php echo $l?>)
+			</td>
+			<td class="modalities<?php if($l > MAX_MODALITIES_OPENED) echo ' mrModa'?>" lang="<?php echo $solrLangCode;?>">
+				<ul>
+		<?php
+		for ($j = 0; $j < $l; $j++):
+		?>
+					<li  class="item<?php if (($j > MAX_MODALITIES_OPENED - 1) && $l > MAX_MODALITIES_OPENED) echo ' hidden'?>"><?php echo $modalities[$j];?></li>
+		<?php
+		endfor;
+		?>
+				</ul>
+			</td>
+		</tr>
+			
+	<?php 
+	endif;
+
+	if ( ! $hasMultipleItems):
+	?>
+		<tr>
+			<td class="label">
+				<?php echo $this->translate->_('fr0295000500'); ?>
+			</td>
+			<td lang="<?php echo $solrLangCode;?>">
+				<a href="<?php echo $variableUrl[0]; ?>" target="_self"> <?php echo $variableLabel[0]; ?></a>
+			</td>
+		</tr>
+	<?php 
+	endif;
+	?>
+	
+		<tr class="study">
+			<td class="label"><?php echo $this->translate->_('fr0295000550'); ?></td>
+			<td lang="<?php echo $solrLangCode;?>">
+				<a class="study" href="<?php echo $studyUrl; ?>" target="_self"><?php echo $solrDocument->get_studyTitle(); ?></a>
+				<?php
+				if (($domainIds = $solrDocument->get_domainId()) != array(SOLR_NULL)):
+				?>
+					-
+				<?php 
+				endif;
+
+					$l = count($domainIds);
+
+				for ($k = 0; $k < $l; $k++)
+				{
+					$domain = binarySearch($domainIds[$k], $this->domainList);
+					echo $domain['title'];
+					
+					if ($k < $l - 1)
+					{
+						echo ', ';
+					}
+
+				}
+				
+				if ($question && ($serieId = $solrDocument->get_studySerieId())):
+					$_question = getQuestionQueryFilters($question);
+					$url = $this->url(
+						array(
+							'id' => $serieId,
+							'searchLang' => strtoupper($solrLangCode),
+							'queryFilters' => rawurlencode(implode(URL_PARAM_SEPARATOR, $_question))
+						),
+						'serieView'
+					);	
+				
+				?>
+				- <a href="<?php echo $url; ?>" target="_blank"><img class="serieMore" alt="<?php echo $this->translate->_('fr0295000600') ?>" title="<?php echo $this->translate->_('fr0295000650') ?>" src="/img/icons/more.png"/></a>
+				<?php endif;?>
+			</td>
+			
+		</tr>
+		<?php
+		if
+		(
+			$this->clientSettings->displayConcept
+			&& (($conceptId = $solrDocument->get_conceptId()) !== array('0'))
+		):
+		
+			$conceptId = array_unique($conceptId);
+			$l = count($conceptId);
+		?>
+		<tr>
+			<td class="label">
+				<?php echo $l > 1 ? $this->translate->_('fr0295000700'): $this->translate->_('fr0295000750');?>
+			</td>
+			<td lang="<?php echo $solrLangCode;?>">
+			<?php
+			reset($conceptId);
+			
+			$j = 0;
+
+			while (($c = current($conceptId)) !== false):
+			
+				$c = binarySearch($c, $this->conceptTitles);
+				$c = ($c !== -1) ? $c['title'] : $this->translate->_('fr0295000800');
+				echo  nl2br($c);
+			 
+				if ($j < $l - 1):
+			?>
+				-
+				<?php 
+				endif;
+				next($conceptId);
+				$j++;
+			endwhile;
+			?>
+			</td>
+		</tr>
+		<?php
+		endif;
+
+		if 
+		(
+			$this->clientSettings->displayUniverse 
+			&& $solrDocument->get_universe()
+		):
+		?>
+		<tr>
+			<td class="label">
+					<?php echo $this->translate->_('fr0295000850');?>
+			</td>
+			<td lang="<?php echo $solrLangCode;?>">
+				<?php echo nl2br($solrDocument->get_universe()); ?>
+			</td>
+		</tr>
+		<?php
+		endif;
+
+		if
+		(
+			$this->clientSettings->displayInterviewerInstructions
+			&& $solrDocument->get_interviewerInstructions()
+		):
+		?>
+		<tr>
+			<td class="label">
+					<?php echo $this->translate->_('fr0295000900');?>
+			</td>
+			<td lang="<?php echo $solrLangCode;?>">
+				<?php echo nl2br($solrDocument->get_interviewerInstructions()); ?>
+			</td>
+		</tr>
+		<?php
+		endif;
+
+		if (
+			$this->clientSettings->displayPreQuestionText
+			&& $solrDocument->get_preQuestionText()
+		):
+		?>
+		<tr>
+			<td class="label">
+					<?php echo $this->translate->_('fr0295000950');?>
+			</td>
+			<td lang="<?php echo $solrLangCode;?>"><?php echo nl2br($solrDocument->get_preQuestionText()); ?></td>
+		</tr>
+		<?php
+		endif;
+		?>
+		<?php
+		if (
+			$this->clientSettings->displayPostQuestionText
+			&& $solrDocument->get_postQuestionText()
+		):
+		?>
+		<tr>
+			<td class="label">
+					<?php echo $this->translate->_('fr0295001000');?>
+			</td>
+			<td lang="<?php echo $solrLangCode;?>">
+				<?php echo nl2br($solrDocument->get_postQuestionText()); ?>
+			</td>
+		</tr>
+		<?php
+		endif;
+		?>
+	<?php
+	if 
+	(
+		! $hasMultipleItems
+		&& $this->clientSettings->displayNotes
+		&& $solrDocument->get_notes()
+	):
+	?>
+		<tr>
+			<td class="label">
+				<?php echo $this->translate->_('fr0295001050');?>
+			</td>
+			<td lang="<?php echo $solrLangCode;?>">
+				<?php echo nl2br($solrDocument->get_notes()); ?>
+			</td>
+		</tr>
+	<?php
+	endif;
+	?>
+		
+	<?php 
+	if (
+		$this->clientSettings->displayQuestionPositionDecile
+		&& isset($question) 
+		&& ! empty($question)
+	):
+	?>
+		<tr>
+			<td class="label"><?php echo $this->translate->_('fr0295001100');?></td>
+			<td class="position">					
+	         	<img alt="Position : <?php echo ceil(($solrDocument->get_questionPosition() / $solrDocument->get_studyQuestionCount() * 10));  ?> décile" src="/img/pos/<?php echo ceil(($solrDocument->get_questionPosition() / $solrDocument->get_studyQuestionCount() * 10));  ?>.png"/>
+			</td>
+		</tr>
+         <?php 
+         endif;
+         ?>
+	<?php 
+	if ($this->clientSettings->displayQuestionnairePdfLink && $solrDocument->get_hasQuestionnaire()):
+	?>
+		<tr>
+			<td class="label">
+				<?php echo $this->translate->_('fr0295001150')?>
+			</td>
+			<td>
+			<?php 
+			$l = count($questionnaireUrl);
+			?>
+				<?php
+				$questionnaireTitle = $solrDocument->get_questionnaireTitle();
+
+				for ($j = 0; $j < $l; $j++):
+				?>
+					<a class="questionnaire" href="<?php echo htmlspecialchars($questionnaireUrl[$j]); ?>" target="_blank">
+						<?php
+						echo ( ! $questionnaireTitle || ! $questionnaireTitle[$j]) ? $this->translate->_('fr0295001200') : $questionnaireTitle[$j];
+						?>
+					</a>
+					<?php 
+					if ($j < $l - 1):
+					?>
+					|
+					<?php 
+					endif;
+					?>
+				<?php 
+				endfor;
+				?>
+			</td> 
+		</tr>
+	<?php 
+	endif;
+	?>
+	</table>
+</div>

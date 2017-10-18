@@ -1,0 +1,22 @@
+<h2><?php echo $this->translate->_('fr0210000000') ?></h2>
+
+<p><?php echo $this->translate->_('fr0210000010') ?> "<?php echo stripslashes($this->studyserie['title']) ?>" ?</p>
+<p><?php echo $this->translate->_('fr0210000020') ?></p>
+<form method="post" action="<?php echo $this->url(
+	array(
+		'controller' => 'studyserie',
+		'action' => 'delete',
+		'id' => $this->studyserie['id']
+	),
+	'studyserieDelete'
+)
+?>" class="confirm_delete">
+	<input type="submit" name="" value="<?php echo $this->translate->_('fr0210000030') ?>"/>
+</form>
+<form method="post" action="<?php echo $this->url(
+	array(
+	),
+	'studyserieIndex'
+)?>" class="confirm_delete">
+	<input type="submit" name="" id="submit_cancel" value="<?php echo $this->translate->_('fr0210000040') ?>"/>
+</form>

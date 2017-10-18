@@ -1,0 +1,173 @@
+<?php 
+$translate = Zend_Registry::get('translateFront');
+?>
+<div class="resultInfoBox">
+<?php 
+	$numFound = $this->response->response['response']['numFound'];
+	$select = $this->search->getSelect();
+	$start = $select->getStart();
+	$rows = $select->getRows();
+	$from = $start + 1;
+	$to = ($_to = $start + $rows) > $numFound ? $numFound : $_to;
+	echo $translate->_('fr0120000000');
+?> 
+		<b><?php echo $from ?></b> <?php echo $translate->_('fr0120000050'); ?> <b><?php echo $to ?></b> <?php echo $translate->_('fr0120000100'); ?> <b><?php echo $numFound ?></b>
+		<?php 
+			$l = count($this->advancedSearchConditions);
+		?>
+		<ul id="advancedSearchFilters">
+	<?php
+	
+		for ($i = 0; $i < $l; $i++):
+	?>
+			<li>
+			<?php 
+				switch ($this->advancedSearchConditions[$i]['target'])
+				{
+					
+					case SEARCH_QUESTION:
+						echo $translate->_('fr0120000150');
+						break;
+						
+					case SEARCH_MODALITIES:
+						echo $translate->_('fr0120000200');
+						break;
+						
+					case SEARCH_VARIABLE:
+						echo $translate->_('fr0120000250');
+						break;
+					
+					case SEARCH_QUESTION | SEARCH_MODALITIES | SEARCH_VARIABLE:
+						echo $translate->_('fr0120000300');
+						break;
+		
+				}
+				
+				echo ' ';
+				
+				switch ($this->advancedSearchConditions[$i]['operator'])
+				{
+					
+					case ADVANCED_SEARCH_AND_OPERATOR:
+						echo $translate->_('fr0120000350');
+						break;
+						
+					case ADVANCED_SEARCH_OR_OPERATOR:
+						echo $translate->_('fr0120000400');
+						break;
+						
+					case ADVANCED_SEARCH_NOT_OPERATOR:
+						echo $translate->_('fr0120000450');
+						break;
+						
+				}
+				
+				echo ' ';
+				
+				switch ($this->advancedSearchConditions[$i]['analysis'])
+				{
+					
+					case ADVANCED_SEARCH_ANALYSIS_ALL_TERMS_REQUIRED_TRUE:
+						echo $translate->_('fr0120000500');
+						break;
+						
+					case ADVANCED_SEARCH_ANALYSIS_ALL_TERMS_REQUIRED_FALSE:
+						echo $translate->_('fr0120000550');
+						break;
+						
+					case ADVANCED_SEARCH_ANALYSIS_PHRASE_TRUE:
+						echo $translate->_('fr0120000600');
+						break;
+						
+					case ADVANCED_SEARCH_ANALYSIS_STARTS_WITH:
+						echo $translate->_('fr0120000650');
+						break;
+						
+					case ADVANCED_SEARCH_ANALYSIS_LEVENSHTEIN:
+						echo 	$translate->_('fr0120000700'),
+								', ',
+								$translate->_('fr0120000750'),
+								'0.',
+								$this->advancedSearchConditions[$i]['levenshtein'];
+						
+						break;
+						
+					case ADVANCED_SEARCH_ANALYSIS_DISTANCE:
+						echo 	$translate->_('fr0120000800'),
+								' ',
+								$this->advancedSearchConditions[$i]['distanceValue'],
+								' ',
+								$translate->_('fr0120000850');
+						break;
+		
+				}
+				
+				echo	' : ',
+						'<b>', $this->advancedSearchConditions[$i]['keyword'], '</b>';
+			?>
+			
+			</li>
+	<?php 
+		endfor;
+	?>
+		</ul>
+		<a class="yellowAnchor" href="<?php 	
+		echo $this->url
+		(
+			array
+			(
+				'searchLang' => $this->searchLang,
+				'domainId' => $this->domainId,
+				'targets' => $this->targetsParam,
+				'nots' => $this->notsParam,
+				'analysis' => $this->analysisParam,
+				'distanceValues' => $this->distanceValuesParam,
+				'keywords' => rawurlencode($this->keywordsParam),
+				'levenshteins' => $this->levenshteinsParam,
+				'operators' => $this->operatorsParam
+			),
+			'solradvancedSearch'
+		); ?>"><?php echo $translate->_('fr0120000900'); ?></a>
+		<div style="height:4px;"></div>
+		<?php 
+			echo $this->partial('solrsearch/elements/resultinfo/result/details.phtml');
+		?>
+		<?php
+		if (
+			! empty($this->conceptFilters)
+			|| ! empty($this->domainFilters)
+			|| ! empty($this->studySerieFilters)
+			|| ! empty($this->decadeFilters)
+			|| ! empty($this->queryFilters)
+			|| ! empty($this->studyFilters)
+		):
+		?>
+		<?php 
+		echo $this->partial('solrsearch/elements/resultinfo/facetsfilters.phtml',
+			array(
+				'conceptFacets' => $this->conceptFacets,
+				'domainFacets' => $this->domainFacets,
+				'studySerieFacets' => $this->studySerieFacets,
+				'decadeFacets' => $this->decadeFacets,
+				'studyFacets' => $this->studyFacets,
+				'conceptFilters' => $this->conceptFilters,
+				'domainFilters' => $this->domainFilters,
+				'studySerieFilters' => $this->studySerieFilters,
+				'decadeFilters' => $this->decadeFilters,
+				'queryFilters' => $this->queryFilters,
+				'studyFilters' => $this->studyFilters,
+			)
+		);
+		?>
+		<?php 
+		endif;
+		?>
+		<?php 
+		echo $this->partial('solrsearch/elements/resultinfo/sort.phtml', array(
+			'sortOrdersLabels' => $this->sortOrdersLabels, 
+			'search' => $this->search,
+			'sort' => $this->sort
+				)
+			);
+		?>
+</div>

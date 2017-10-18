@@ -1,0 +1,408 @@
+<?php
+/**
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+
+$this->layout()->title = $this->translate->_('fr0060000000') . $this->variable->get_label() . ' - ' . $this->variable->get_name() . ' - ' . $this->studyDescription['title'] . ' - ' . $this->translate->_('fr0060000050');
+$this->placeholder('fixedRightColumn')->set(true);
+$lang = $this->solrDocument->get_solrLangCode();
+$lang = strtolower($lang);
+
+if (! $this->isAjax):
+	$this->placeholder('topSection')->set( 
+		'<h1>' . $this->translate->_('fr0060000100') . '</h1>'
+	);
+	$this->roundBoxStart(array('infoBox'));
+else:
+?>
+<div class="b1c">
+<?php
+endif;
+
+$this->resultsLink();
+if ($nesstarServerId = $this->ddifile->get_nesstar_server_id()):
+		$variableUrl = getVariableNesstarUrl($nesstarServerId, $this->studyDescription['nesstar_id'], $this->variable->get_nesstar_id());
+?>
+<a target="_blank" class="goldAnchor nesstar" href="<?php echo $variableUrl ?>" title="<?php echo $this->translate->_('fr0060000150');?>"><?php echo $this->translate->_('fr0060000200');?></a>
+<?php 
+else:
+?>
+<a class="unavailable goldAnchor nesstar"><?php echo $this->translate->_('fr0060000250');?></a>
+<?php 
+endif;
+
+if ($this->question[0]['litteral'] && ($serieId = $this->solrDocument->get_studySerieId())):
+	$_question = getQuestionQueryFilters($this->question[0]['litteral']);
+	$url = $this->url(
+		array(
+			'id' => $serieId,
+			'searchLang' => $this->solrDocument->get_solrLangCode(),
+			'queryFilters' => rawurlencode(implode(URL_PARAM_SEPARATOR, $_question))
+		),
+		'serieView'
+	);	
+
+?>
+|
+<a class="serie" href="<?php echo $url; ?>" target="_blank"><?php echo $this->translate->_('fr0060000251');?></a>
+<?php 
+endif;
+?>
+|
+<?php
+if ($this->clientSettings->selectedQuestions && in_array($this->solrDocument->get_id(), explode(',', $this->clientSettings->selectedQuestions))):
+?>
+<span style="position:static!important;" class="cart removeQuestion" id="qid_<?php echo $this->solrDocument->get_id();?>" title="<?php echo $this->translate->_('fr0060000300'); ?>">&nbsp;</span>
+<?php 
+else:
+?>
+<span style="position:static!important;" class="cart selectQuestion" id="qid_<?php echo $this->solrDocument->get_id();?>" title="<?php echo $this->translate->_('fr0060000350'); ?>">&nbsp;</span>	
+<?php 
+endif;
+?>
+<span id="cartVariable"></span>
+
+<h2><?php echo $this->translate->_('fr0060000400');?></h2>
+<?php echo $this->variable->get_name();?>
+<h2><?php echo $this->translate->_('fr0060000450');?></h2>
+<span lang="<?php echo $lang; ?>"><?php echo $this->variable->get_label();?></span>
+<?php 
+if (isset($this->question[0]['litteral']) && ! empty($this->question[0]['litteral'])):
+?>
+<h3 class="label"><?php echo $this->translate->_('fr0060000750');?></h3>
+	<?php 
+	if ($this->solrDocument->get_questionPosition() != 1):
+?>
+<span id="nav_<?php echo $this->solrDocument->get_questionPosition(); ?>_<?php echo $this->solrDocument->get_questionPosition() - 1 ?>_<?php echo $this->solrDocument->get_ddiFileId() ?>" class="questionNavigation">&lt;<?php echo $this->translate->_('fr0060000800');?></span>	
+	<?php 
+	else:
+		echo $this->translate->_('fr0060000850');
+
+	endif;
+ 
+	if ($this->isAjax && $this->solrDocument->get_questionPosition() != $this->from):
+	?>
+|
+<span id="nav_<?php echo $this->from; ?>_<?php echo $this->from ?>_<?php echo $this->solrDocument->get_ddiFileId() ?>" class="questionNavigation"><?php echo $this->translate->_('fr0060000900');?></span>
+	<?php 
+	endif;
+	?>
+|
+	<?php 
+	if($this->solrDocument->get_questionPosition() != $this->solrDocument->get_studyQuestionCount()):
+	?>
+<span id="nav_<?php echo $this->solrDocument->get_questionPosition(); ?>_<?php echo $this->solrDocument->get_questionPosition() + 1 ?>_<?php echo $this->solrDocument->get_ddiFileId() ?>" class="questionNavigation"><?php echo $this->translate->_('fr0060000950');?>&gt;</span>
+	<?php
+	else:
+		echo $this->translate->_('fr0060001000');
+
+	endif;
+
+endif;
+?>
+<?php
+if ( ! empty($this->question[0]['interviewer_instructions'])):
+?>
+<h2><?php echo $this->translate->_('fr0060001050');?></h2>
+<span lang="<?php echo $lang; ?>"><?php echo nl2br($this->question[0]['interviewer_instructions']); ?></span>
+<?php
+endif;
+?>
+<?php
+if ($this->variable->get_universe()):
+?>
+<h2><?php echo $this->translate->_('fr0060001100');?></h2>
+<span lang="<?php echo $lang; ?>"><?php echo nl2br($this->variable->get_universe()); ?></span>
+<?php
+endif;
+?>
+<?php
+if ( ! empty($this->question[0]['pre_question_text'])):
+?>
+<h2><?php echo $this->translate->_('fr0060001150');?></h2>
+<span lang="<?php echo $lang; ?>"><?php echo nl2br($this->question[0]['pre_question_text']); ?></span>
+<?php
+endif;
+
+if ( ! empty($this->question[0]['litteral'])):
+?>
+<h2><?php echo $this->translate->_('fr0060001200');?></h2>
+<span lang="<?php echo $lang; ?>"><?php	echo $this->question[0]['litteral']; ?></span>
+	<?php
+	if ( ! empty($this->question[0]['item'])):
+	?>
+<ul class="items more" lang="<?php echo $lang; ?>">
+		<?php 
+		$lang = $this->solrDocument->get_solrLangCode();
+		$meth = "get_i$lang";
+		$items = $this->solrDocument->$meth();
+		$meth = "get_vl$lang";
+		$variableLabel = $this->solrDocument->$meth();
+		$variableName = $this->solrDocument->get_variableName();
+		$l2 = count($this->solrDocument->get_variableId());
+		$variableIds = $this->solrDocument->get_variableId();
+		$variableUrl = array();
+		$_vn = $this->variable->get_name();
+
+		for ($j = 0; $j < $l2; $j++)
+		{
+			$variableUrl[] = $this->url
+			(
+				array(
+					'id' => $variableIds[$j],
+					'to' => URL_PARAM_NULL,
+					'from' => URL_PARAM_NULL,
+					'ddiFileId' => URL_PARAM_NULL,
+				),
+				'variableDetails'
+			);
+		}
+
+		if ($l2 <= MAX_ITEMS_OPENED):
+
+			for ($j = 0; $j < $l2; $j++):
+		?>
+			<li class="item<?php if ($_vn != $variableName[$j]) echo ' hidden'; else $itemPos = $j;?>">
+				<?php 
+				echo $items[$j];
+				?>
+				-
+				<a title="<?php echo htmlspecialchars($variableLabel[$j]); ?>" href="<?php echo $variableUrl[$j];?>" target="_self">
+					<?php 
+					echo $variableName[$j];
+					?>
+					</a>
+		</li>
+		<?php
+			endfor;
+
+		else:
+			$openedItems = 0;
+			$fnd = false;
+
+			for ($j = 0; $j < $l2; $j++):
+		?>
+	<li class="item<?php if ($_vn != $variableName[$j]) echo ' hidden'; else $itemPos = $j;?>">
+		<?php 
+			echo $items[$j];
+		?>
+		-
+		<a title="<?php echo htmlspecialchars($variableLabel[$j]); ?>" class="variable" href="<?php echo $variableUrl[$j];?>" target="_self">
+		<?php
+			echo $variableName[$j];
+		?>
+		</a>
+	</li>
+				<?php
+
+					if ($fnd)
+					{
+						$openedItems++;
+					}
+		
+				endfor;
+
+			endif;
+			?>
+</ul>
+	<?php
+	endif;
+
+endif; 
+?>
+<?php if ( ! empty($this->question[0]['post_question_text'])):?>
+<h2><?php echo $this->translate->_('fr0060001250');?></h2>
+<span lang="<?php echo $lang; ?>">
+	<?php echo nl2br($this->question[0]['post_question_text']); ?>
+</span>
+<?php endif;?>
+<?php 
+$l = count($this->categories);
+
+if ($l > 0):
+?>
+<h2><?php echo $this->translate->_('fr0060001300');?></h2>
+<?php if ($l > MAX_MODALITIES_VARIABLE_PAGE): ?>
+<span id="showModalities"><?php  echo $this->translate->_('fr0060001350'), ' ', MAX_MODALITIES_VARIABLE_PAGE, " catégories ($l)."; ?></span>
+<?php endif;?>
+<table class="display results<?php if ($l > MAX_MODALITIES_VARIABLE_PAGE):?> more<?php endif;?>" summary="<?php echo $this->translate->_('fr0060001400');?>">
+	<thead>
+		<tr>
+			<th class="value"><?php echo $this->translate->_('fr0060001450');?></th>
+			<th class="category"><?php echo $this->translate->_('fr0060001500');?></th>
+			<th class="frequency"><?php echo $this->translate->_('fr0060001550');?></th>
+			<th class="percent" colspan="2"><?php echo $this->translate->_('fr0060001600');?></th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php 
+		
+		
+		for ($i = 0; $i < $l; $i ++):
+	?>
+		<tr class="<?php echo $i & 1 ? 'odd' : 'even';?>" <?php if ($i > MAX_MODALITIES_VARIABLE_PAGE):?> style="display:none;"<?php endif;?>>
+			<td><?php echo $this->categories[$i]['value']; ?></td>
+			<td lang="<?php echo $lang; ?>"><?php echo $this->categories[$i]['label']; ?></td>
+			<td><?php echo $this->categories[$i]['stats']; ?></td>
+			<td class="percent">
+				<?php
+				if ( ! $this->categories[$i]['missing'] && $this->categories[$i]['missing'] != 'Y' && $this->categories[$i]['stats']):
+					echo round($percent = ($this->categories[$i]['stats'] / ($this->variable->get_valid()) * 100), 1); ?>&nbsp;%
+				<?php
+				endif;
+				?>
+			</td>
+			<td class="graph">
+				<?php
+				if ( ! $this->categories[$i]['missing'] && $this->categories[$i]['missing'] != 'Y' && $this->categories[$i]['stats']):
+				?>
+				<div style="width:<?php echo $percent?>px;"></div>
+				<?php 
+				endif;
+				?>
+			</td>
+		</tr>
+	<?php 
+		endfor;
+	?>
+	</tbody>
+</table>
+
+<em><?php echo $this->translate->_('fr0060001650');?></em>
+<?php 
+endif;
+?>
+<h2><?php echo $this->translate->_('fr0060001700');?></h2>
+<ul>
+	<li><?php echo $this->translate->_('fr0060001750'), ($this->variable->get_valid() + $this->variable->get_invalid());?></li>
+	<li><?php echo $this->translate->_('fr0060001800'), $this->variable->get_valid();?></li>
+	<li><?php echo $this->translate->_('fr0060001850'), $this->variable->get_invalid();?></li>
+</ul>
+<?php if ($this->variable->get_notes()):?>
+<h2><?php echo $this->translate->_('fr0060001900');?></h2>
+<span lang="<?php echo $lang; ?>"><?php echo nl2br($this->variable->get_notes()); ?></span>
+<?php endif;?>
+<?php if ($this->clientSettings->displayConcept && ($conceptId = $this->solrDocument->get_conceptId()) != array('0')):?>
+<h2><?php echo $this->translate->_('fr0060001950');?></h2>
+<span lang="<?php echo $lang; ?>">
+<?php
+$l = count($conceptId);
+$i = ($l == 1 )? 0 : $itemPos;
+$concept = binarySearch($conceptId[$i], $this->conceptTitles);
+echo $concept['title'];
+?>
+</span>
+<?php 
+endif;
+
+if (isset($this->question[0]['litteral']) && ! empty($this->question[0]['litteral'])):
+?>
+<h2><?php echo $this->translate->_('fr0060002000');?></h2>
+<img alt="Position : <?php echo ceil(($this->solrDocument->get_questionPosition() / $this->solrDocument->get_studyQuestionCount() * 10));  ?> décile" src="/img/pos/<?php echo ceil(($this->solrDocument->get_questionPosition() / $this->solrDocument->get_studyQuestionCount() * 10));  ?>.png"/>
+<?php 
+endif;
+
+if ( ! $this->isAjax):
+	$this->roundBoxEnd();
+
+else:
+?>
+</div>
+<?php 
+endif;
+
+if ( ! $this->isAjax):
+	$this->placeholder('rightColumn')->captureStart();
+?>
+<h3><?php echo 'Enquête'; ?></h3>
+<ul class="menu">
+	<li><a class="yellowAnchor studyTitle" href="<?php 
+			echo $this->url(
+				array(
+					'id' => $this->variable->get_ddi_file_id()
+				),
+				'ddifileDetails'
+			);
+			?>"><?php echo $this->studyDescription['title']; ?></a></li>
+	<li><a class="studyView yellowAnchor" target="_blank" href="<?php 
+		echo $this->url(
+			array(
+				'id' => $this->solrDocument->get_studyDescriptionId(),
+				'searchLang' => $this->solrDocument->get_solrLangCode()
+			),
+			'studyView'
+		);
+	?>"><?php echo $this->translate->_('fr0060000550');?></a></li>
+<?php 
+$questionnaireUrl = array();
+
+if ($this->ddifile->get_questionnaire_url() || $this->questionnaires):
+
+	if ($this->ddifile->get_questionnaire_url()):
+	
+		$questionnaireUrl[] = $this->ddifile->get_questionnaire_url();
+
+	else:
+		$l = count($this->questionnaires);
+
+		for ($j = 0; $j < $l; $j++)
+		{
+			$questionnaireUrl[] = $this->url
+			(
+				array(
+					'id' => $this->questionnaires[$j]['questionnaire_id']
+				),
+				'questionnaireView'
+			);
+		}
+
+	endif;
+
+	$l = count($questionnaireUrl);
+
+	for ($j = 0; $j < $l; $j++):
+	?>
+		<li><a class="questionnaire yellowAnchor" href="<?php echo htmlspecialchars($questionnaireUrl[$j]); ?>" target="_blank"><?php
+			echo ( ! $this->questionnaires || ! $this->questionnaires[$j]['questionnaire_title']) ? $this->translate->_('fr0060000600') : $this->questionnaires[$j]['questionnaire_title'];
+		?></a></li>
+	<?php 
+	endfor;
+	?>
+<?php 
+else:
+?>
+	<li><a class="unavailable yellowAnchor questionnaire" target="#"><?php echo $this->translate->_('fr0060000650'); ?></a></li>
+<?php 
+endif;
+?>
+	<li><a class="orderData yellowAnchor" target="_blank" href="http://www.reseau-quetelet.cnrs.fr/quetelet"><?php echo $this->translate->_('fr0060000700'); ?></a></li>
+</ul>
+<?php
+$this->placeholder('rightColumn')->captureEnd();
+echo $this->partial('basketScript.phtml');
+?>
+<script type="text/javascript" src="/scripts/variableView.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+	variableView.init({
+		'emptyQuestionLitteral': <?php echo (int) empty($this->question[0]['litteral']);?>,
+		'questionNavigationUrl': "<?php 
+			echo $this->url(
+					array
+					(
+						'from' => $this->solrDocument->get_questionPosition(),
+						'to' => 'vTo',
+						'ddiFileId' => $this->ddifile->get_id()
+					),
+					'variableDetails'
+				);
+		?>"
+	});
+});
+//]]>
+</script>
+<?php
+endif;
+?>

@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+.ui-resizable-e{
+height: expression(document.body.clientHeight - 350);
+}
+div.facets .dataTables_wrapper{
+height:auto!important;
+}
+#leftColumn{
+height:100%;
+}
+table.toggled tr{
+display:block!important;
+}

@@ -1,0 +1,343 @@
+<?php
+/**
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+
+$this->layout()->title = $this->translate->_('fr0245000000') . $this->studyDescription['title'] . ' - ' . $this->translate->_('fr0245000050');
+$this->placeholder('topSection')->set(
+	'<h1>' . $this->translate->_('fr0245000100') . ' ' . $this->studyDescription['title'] . '</h1>'
+);
+$this->placeholder('fixedRightColumn')->set(true);
+$lang = strtolower($this->translationLanguage->get_code_solr()); //The DB fields contents' lang
+$this->roundBoxStart(array('infoBox'));
+$this->resultsLink();
+
+if ( ! empty($this->serie)):
+?>
+<h2><?php echo $this->translate->_('fr0245000450')?></h2>
+<a href="<?php 
+		echo $this->url(
+			array(
+				'id' => $this->serie[0]['id']
+			),
+			'studyserieDetails'
+		);
+?>" lang="<?php echo $lang;?>"><?php 
+	echo $this->serie[0]['title'];
+?></a>
+<?php 
+endif;
+?>
+<?php 
+if (($l = count($this->producers)) || count($this->domains) > 0):
+	$l2 = count($this->domains);
+	$domainLinks = array();
+?>
+<h2><?php echo ($l == 1) ? $this->translate->_('fr0245000500') : $this->translate->_('fr0245000550');?></h2>
+	<?php 
+	if ($l2 > 0):
+
+		for ($i = 0; $i < $l2; $i++):
+			$domainLinks[$this->domains[$i]['title']] = '<a href="' . $this->url(array('id' => $this->domains[$i]['id']), 'domainDetails') .'">' . $this->domains[$i]['title'] . '</a>';
+
+		endfor;
+
+	endif;
+
+	if ($l > 0):
+	?>
+<ul lang="<?php echo $lang;?>">
+		<?php
+		for($i = 0; $i < $l; $i++):
+			reset($domainLinks);
+			$found = false;
+
+			while (list($name, $link) = each($domainLinks)):
+
+				if (stripos($this->producers[$i]['abbreviation'], $name) !== false)
+				{
+					$this->producers[$i]['abbreviation'] = str_ireplace($name, $link, $this->producers[$i]['abbreviation']);
+					$found = true;
+				}
+
+				if (stripos($this->producers[$i]['title'], $name) !== false)
+				{
+					$this->producers[$i]['title'] = str_ireplace($name, $link, $this->producers[$i]['title']);
+					$found = true;
+				}
+
+				if ($found)
+				{
+					break;
+				}
+
+			endwhile;
+		?>
+	<li>
+			<?php 
+			echo $this->producers[$i]['abbreviation'];
+	
+			if ($this->producers[$i]['abbreviation']): ?>
+		- 
+			<?php 
+			endif;
+			
+			echo $this->producers[$i]['title'];
+			 ?>
+	 </li>
+		<?php 
+		endfor;
+		?>
+</ul>
+	<?php 
+	endif;
+
+endif;
+
+if (($l = count($this->fundingAgencies)) > 0):
+?>
+<h2><?php echo $this->translate->_('fr0245000600');?></h2>
+<ul lang="<?php echo $lang;?>">
+<?php
+for($i = 0; $i < $l; $i++):
+?>
+	<li>
+		<?php echo $this->fundingAgencies[$i]['abbreviation'] ?>
+		<?php if ($this->fundingAgencies[$i]['abbreviation']): ?> - <?php endif;?>
+		<?php echo $this->fundingAgencies[$i]['title'] ?>
+	</li>
+<?php 
+endfor;
+?>
+</ul>
+<?php 
+endif;
+?>
+<?php 
+if (($l = count($this->distributors)) > 0):
+?>
+<h2><?php echo $this->translate->_('fr0245000650');?></h2>
+<ul lang="<?php echo $lang;?>">
+<?php
+for($i = 0; $i < $l; $i++):
+?>
+	<li>
+		<?php echo $this->distributors[$i]['abbreviation'];?>
+		<?php if ($this->distributors[$i]['abbreviation']): ?> -  <?php endif;?>
+		<?php echo $this->distributors[$i]['title'] ?>
+	</li>
+<?php 
+endfor;
+?>
+</ul>
+<?php 
+endif;
+?>
+<?php 
+if ($this->studyDescription['abstract']):
+?>
+<h2><?php echo $this->translate->_('fr0245000700');?></h2>
+<span lang="<?php echo $lang;?>">
+	<?php echo nl2br($this->studyDescription['abstract']);?>
+</span>
+<?php 
+endif;
+
+if (($l = count($this->collectDates)) > 0):
+?>
+<h2><?php echo $this->translate->_('fr0245000750');?></h2>
+<ul lang="<?php echo $lang;?>">
+<?php
+for ($i = 0; $i < $l; $i++):
+?>
+	<li>
+	<?php 
+	echo $this->collectDates[$i]['cycle'], ' - ',
+		str_replace(
+			array(
+				'start',
+				'end',
+			),
+			array(
+				$this->translate->_('fr0245000800'),
+				$this->translate->_('fr0245000850'),
+			),
+			$this->collectDates[$i]['event']
+	);
+	echo ' : ';
+	$date = preg_split('/\D/', $this->collectDates[$i]['date'], -1,  PREG_SPLIT_NO_EMPTY);
+	$date = array_reverse($date);
+	echo implode('/', $date);
+	?>
+	</li>
+<?php 
+endfor;
+?>
+</ul>
+<?php 
+endif;
+?>
+<?php 
+if ($this->studyDescription['nation']):
+?>
+<h2><?php echo $this->translate->_('fr0245000900');?></h2>
+<span lang="<?php echo $lang;?>"><?php echo nl2br($this->studyDescription['nation']);?></span>
+<?php 
+endif;
+
+if ($this->studyDescription['geographic_coverage']):
+?>
+<h2><?php echo $this->translate->_('fr0245000950');?></h2>
+<span lang="<?php echo $lang;?>"><?php echo nl2br($this->studyDescription['geographic_coverage']);?></span>
+<?php 
+endif;
+
+if ($this->studyDescription['analysis_unit']):
+?>
+<h2><?php echo $this->translate->_('fr0245001000');?></h2>
+<span lang="<?php echo $lang;?>"><?php echo nl2br($this->studyDescription['analysis_unit']);?></span>
+<?php 
+endif;
+
+if ($this->studyDescription['universe']):
+?>
+<h2><?php echo $this->translate->_('fr0245001050');?></h2>
+<span lang="<?php echo $lang;?>"><?php echo nl2br($this->studyDescription['universe']);?></span>
+<?php 
+endif;
+
+if ($this->studyDescription['sample_procedure']):
+?>
+<h2><?php echo $this->translate->_('fr0245001100');?></h2>
+<span lang="<?php echo $lang;?>"><?php echo nl2br($this->studyDescription['sample_procedure']);?></span>
+<?php 
+endif;
+
+if ($this->studyDescription['case_quantity']):
+?>
+<h2><?php echo $this->translate->_('fr0245001150');?></h2>
+<span lang="<?php echo $lang;?>"><?php echo nl2br($this->studyDescription['case_quantity']);?></span>
+<?php 
+endif;
+
+if ($this->studyDescription['collect_mode']):
+?>
+<h2><?php echo $this->translate->_('fr0245001200');?></h2>
+<span lang="<?php echo $lang;?>"><?php echo nl2br($this->studyDescription['collect_mode']);?></span>
+<?php 
+endif;
+
+$this->roundBoxEnd();
+$this->placeholder('rightColumn')->captureStart();
+?>
+<ul class="menu">
+	<li>
+		<a class="studyView yellowAnchor" href="<?php 
+			echo $this->url(
+				array(
+					'id' => $this->studyDescription['id'],
+					'searchLang' => $this->translationLanguage->get_code_solr()
+				),
+				'studyView'
+			);
+		?>"><?php echo $this->translate->_('fr0245000150');?></a>
+	</li>
+<?php 
+$questionnaireUrl = array();
+
+if ($this->ddifile->get_questionnaire_url() || $this->questionnaires):
+
+	if ($this->ddifile->get_questionnaire_url()):
+		$questionnaireUrl[] = $this->ddifile->get_questionnaire_url();
+	
+	else:
+		$l = count($this->questionnaires);
+
+		for ($j = 0; $j < $l; $j++):
+			$questionnaireUrl[] = $this->url
+			(
+				array(
+					'id' => $this->questionnaires[$j]['questionnaire_id']
+				),
+				'questionnaireView'
+			);
+		endfor;
+
+	endif;
+
+	$l = count($questionnaireUrl);
+?>
+	
+<?php
+
+	for ($j = 0; $j < $l; $j++):
+?>
+	<li><a class="questionnaire yellowAnchor" href="<?php echo htmlspecialchars($questionnaireUrl[$j]); ?>" target="_blank"><?php
+			echo ( ! $this->questionnaires || ! $this->questionnaires[$j]['questionnaire_title']) ? $this->translate->_('fr0245000200') : $this->questionnaires[$j]['questionnaire_title'];?></a></li>
+<?php
+	endfor;
+
+else:
+?>
+	<li><a class="unavailable yellowAnchor questionnaire"><?php echo $this->translate->_('fr0245000250'); ?></a></li>
+<?php 
+endif;
+?>
+<?php 
+if ($nesstarServerId = $this->ddifile->get_nesstar_server_id()):
+	$studyUrl = getStudyNesstarUrl($nesstarServerId, $this->studyDescription['nesstar_id']);
+?>
+	<li><a target="_blank" class="yellowAnchor nesstar" href="<?php echo $studyUrl ?>"><?php echo $this->translate->_('fr0245000300');?></a></li>
+<?php 
+else:
+?>
+	<li><a class="unavailable yellowAnchor nesstar"><?php echo $this->translate->_('fr0245000350');?></a></li>
+<?php 
+endif;
+?>
+	<li>
+		<a class="orderData yellowAnchor" target="_blank" href="http://www.reseau-quetelet.cnrs.fr/quetelet"><?php echo $this->translate->_('fr0245000400'); ?></a>
+	</li>
+</ul>
+<?php 
+
+if ($this->conceptList):
+?>
+<h3><?php echo $this->translate->_('fr0245001250'), $this->conceptList['title'];?></h3>
+<ul class="concept">
+	<?php
+	$l = count($this->concepts);
+
+	for ($i = 0; $i < $l; $i++):
+	?>
+	<li>
+		<a href="<?php echo $this->url(
+			array(
+				'id' => $this->concepts[$i]['id'],
+				'searchLang' => $this->translationLanguage->get_code_solr(),
+				'studyIds' => $this->studyDescription['id']
+			), 
+			'conceptView'); ?>" class="yellowAnchor">
+		<?php echo $this->concepts[$i]['title'], ' (', $this->concepts[$i]['count'], ')'; ?></a>
+	</li>
+	<?php 
+	endfor;
+	?>
+</ul>
+<?php
+endif;
+
+$this->wordCloud(
+	& $this->cloudWords,
+	$this->url(
+		array(
+			'id' =>  $this->studyDescription['id'],
+			'searchLang' => $this->translationLanguage->get_code_solr(),
+			'queryFilters' => 'wordParam'
+		),
+		'studyView'		
+	),
+	'h3'
+);
+$this->placeholder('rightColumn')->captureEnd();

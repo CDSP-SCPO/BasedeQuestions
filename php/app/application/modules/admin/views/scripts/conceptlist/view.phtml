@@ -1,0 +1,99 @@
+<?php 
+$date = new Zend_Date;
+?>
+<h2><?php echo $this->translate->_('fr0075000000') ?></h2>
+<ul>
+	<li>
+		<a href="<?php echo $this->url(array(), 'adminconceptlistIndex');?>" class="index">
+			<?php echo $this->translate->_('fr0075000010') ?>
+		</a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array(), 'adminconceptlistEdit');?>" class="edit">
+			<?php echo $this->translate->_('fr0075000020') ?>
+		</a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array(), 'adminconceptlistConfirmdelete');?>" class="modal delete">
+			<?php echo $this->translate->_('fr0075000030') ?>
+		</a>
+	</li>
+</ul>
+<dl class="view">
+<?php 
+
+
+	foreach($this->conceptlist as $conceptlist):
+?>
+	<dt>
+	<?php 
+		echo $this->translate->_('fr0075000040') . ' - ' . $conceptlist['lang_label'];
+	?>
+	</dt>
+	<dd>
+	<?php 
+	 	echo stripslashes($conceptlist['title'])
+	 ?>
+	</dd>
+	<dt>
+	<?php 
+		echo $this->translate->_('fr0075000050') . ' - ' . $conceptlist['lang_label']
+	?>
+	</dt>
+	<dd>
+	<?php 
+	 	echo (isset($conceptlist['description']) && ! empty($conceptlist['description'])) ? 
+	 		stripslashes($conceptlist['description'])
+	 		:
+	 		$this->translate->_('fr0075000060');
+	 ?>
+	</dd>
+<?php 
+	endforeach;
+?>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0075000070')
+		?>
+	</dt>
+	<dd>
+	<?php 
+	 	$date->set($conceptlist['created'], Zend_Date::ISO_8601);
+		echo $date->get('dd/MM/YYYY HH:mm');
+	 	
+	 ?>
+	</dd>
+	<?php 
+	if (isset($conceptlist['modified'])):
+	?>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0075000080')
+		?>
+	</dt>
+	<dd>
+	<?php 
+	 	$date->set($conceptlist['modified'], Zend_Date::ISO_8601);
+		echo $date->get('dd/MM/YYYY HH:mm');
+	 ?>
+	</dd>
+	<?php 
+	endif;
+	?>
+</dl>
+<?php 
+	if (count($this->concepts) > 0):
+?>
+<h3><?php echo $this->translate->_('fr0075000090')?></h3>
+<ul>
+	<?php
+		foreach($this->concepts as $concept):
+	?>
+	<li><?php echo stripslashes($concept['concept_title']); ?></li>
+	<?php 
+		endforeach;
+	?>
+</ul>
+<?php 
+	endif;
+?>

@@ -1,0 +1,68 @@
+<?php 
+$translate = Zend_Registry::get('translateFront');
+?>
+<div class="resultInfoBox">
+	<div>
+<?php 
+	if (count($this->validQueries) > 0)
+	{
+		echo $this->partial('solrsearch/elements/resultinfo/spellcheckSuggestions.phtml', array(
+					'validQueries' => $this->validQueries,
+			)
+		);
+	}
+?>
+<?php 
+	$numFound = $this->response->response['response']['numFound'];
+	$query = $this->search->getRawQuery();
+	$select = $this->search->getSelect();
+	$start = $select->getStart();
+	$rows = $select->getRows();
+	$from = $start + 1;
+	$to = ($_to = $start + $rows) > $numFound ? $numFound : $_to;
+	echo $translate->_('fr0130000000');
+?> 
+		<b><?php echo $from ?></b> <?php echo $translate->_('fr0130000050'); ?> <b><?php echo $to ?></b> <?php echo $translate->_('fr0130000100'); ?> <b><?php echo $numFound ?></b> <?php echo $translate->_('fr0130000150'); ?> <b><?php echo $query ?></b>
+	</div>
+		<?php
+		if (
+			! empty($this->conceptFilters)
+			|| ! empty($this->domainFilters)
+			|| ! empty($this->studySerieFilters)
+			|| ! empty($this->decadeFilters)
+			|| ! empty($this->queryFilters)
+			|| ! empty($this->studyFilters)
+		):
+		?>
+		<?php 
+		echo $this->partial('solrsearch/elements/resultinfo/facetsfilters.phtml',
+			array(
+				'conceptFacets' => $this->conceptFacets,
+				'domainFacets' => $this->domainFacets,
+				'studySerieFacets' => $this->studySerieFacets,
+				'decadeFacets' => $this->decadeFacets,
+				'studyFacets' => $this->studyFacets,
+				'conceptFilters' => $this->conceptFilters,
+				'domainFilters' => $this->domainFilters,
+				'studySerieFilters' => $this->studySerieFilters,
+				'decadeFilters' => $this->decadeFilters,
+				'queryFilters' => $this->queryFilters,
+				'studyFilters' => $this->studyFilters,
+			)
+		);
+		?>
+		<?php 
+		endif;
+		?>
+		<?php 
+			echo $this->partial('solrsearch/elements/resultinfo/sort.phtml', array(
+					'sortOrdersLabels' => $this->sortOrdersLabels,
+					'search' => $this->search,
+					'sort' => $this->sort
+				)
+			);
+		?>
+		<?php 
+			echo $this->partial('solrsearch/elements/resultinfo/result/details.phtml');
+		?>
+</div>

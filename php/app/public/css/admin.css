@@ -1,0 +1,398 @@
+body{
+margin:0;
+padding:0;
+font-family:Arial,Verdana,Helvetica,sans-serif;
+font-size:0.9em;
+width:980px;
+}
+input, select {
+font-size:0.9em;	
+}
+input[type=text]{
+width:500px;
+}
+#adminBody, #header{
+padding:0 15px;
+}
+a, a.visited{
+color:blue;
+}
+a:hover{
+text-decoration:none;
+}
+
+/* begin table */
+th.action.view{
+width:180px;
+}
+th.action.edit{
+width:180px;
+}
+th.action.delete{
+width:180px;
+}
+/* end table */
+
+
+
+/* begin css tabs */
+
+ul#tabnav { /* general settings */
+text-align: left; /* set to left, right or center */
+margin: 1em 0 1em 0; /* set margins as desired */
+font: bold 11px verdana, arial, sans-serif; /* set font as desired */
+border-bottom: 1px solid #6c6; /* set border COLOR as desired */
+list-style-type: none;
+padding: 3px 10px 3px 10px; /* THIRD number must change with respect to padding-top (X) below */
+}
+
+ul#tabnav li { /* do not change */
+display: inline;
+}
+
+ul#tabnav li.selected { /* settings for selected tab */
+border-bottom: 1px solid #fff; /* set border color to page background color */
+background-color: #fff; /* set background color to match above border color */
+}
+
+ul#tabnav li.selected a { /* settings for selected tab link */
+background-color: #fff; /* set selected tab background color as desired */
+color: #000; /* set selected tab link color as desired */
+position: relative;
+top: 1px;
+padding-top: 4px; /* must change with respect to padding (X) above and below */
+}
+
+ul#tabnav li a { /* settings for all tab links */
+padding: 3px 4px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
+border: 1px solid #6c6; /* set border COLOR as desired; usually matches border color specified in #tabnav */
+background-color: #cfc; /* set unselected tab background color as desired */
+color: #666; /* set unselected tab link color as desired */
+margin-right: 6px; /* set additional spacing between tabs as desired */
+text-decoration: none;
+border-bottom: none;
+}
+
+ul#tabnav a:hover { /* settings for hover effect */
+background: #fff; /* set desired hover color */
+}
+ul#tabnav li.no_bg {
+	
+}
+ul#tabnav li.no_bg a {
+border: none; /* set border COLOR as desired; usually matches border color specified in #tabnav */
+background-color: transparent; /* set unselected tab background color as desired */
+color: #666; /* set unselected tab link color as desired */
+margin-right: 0px; /* set additional spacing between tabs as desired */
+text-decoration: none;
+border-bottom: none;	
+}
+#pager{
+margin-top:5px;	
+}
+/* end css tabs */
+
+/* start forms */
+.hidden {
+display:none;
+}
+
+dl.zend_form dd {
+margin-bottom:10px;
+}
+
+form.confirm_delete {
+display:inline;
+}
+/* end forms */
+
+/* start fancybox */
+#fancybox-outer {
+border:solid #ccc 1px;
+}
+#fancybox-inner {
+text-align:center;	
+}
+/* end fancybox */
+
+dl.view dt {
+color:#666;
+}
+/* start icons */
+ul.menu{
+padding:0;
+margin:15px 0;
+}
+ul.menu li {
+list-style-type:none;
+}
+a.add {
+background:transparent url(/img/icons/add.png) no-repeat scroll 0 0;
+padding-left:20px;
+}
+a img{
+border:none;
+}
+table.display{
+font-size:12px;
+}
+.dataTables_filter input{
+width:auto!important;
+}
+th.view, th.edit, th.delete{
+width:1%!important
+}
+ul.battery li {
+margin-bottom:20px
+}
+ul.battery li li {
+margin-bottom:0;
+}
+li.firstLevel{
+cursor:pointer;
+}
+.dataTables_wrapper {
+	margin-top:10px;
+	clear: both;
+	zoom: 1; /* Feeling sorry for IE */
+}
+
+.dataTables_processing {
+	background:url(/img/icons/loading.gif);
+	background-position:center center;
+}
+
+table.display td, table.display th{
+border:1px solid #BFBFBF;
+padding:3px;
+}
+
+.dataTables_length {
+	width: 40%;
+	float: left;
+}
+
+.dataTables_filter {
+	width: 50%;
+	float: right;
+	text-align: right;
+}
+
+.dataTables_info {
+	width: 60%;
+	float: left;
+}
+.dataTables_length, 
+.dataTables_length select, 
+.dataTables_info, 
+.dataTables_filter, 
+.dataTables_filter input,
+.dataTables_paginate
+{
+	font-family:Trebuchet MS,Verdana,Arial,Helvetica,sans-serif;
+	font-size:12px;
+}
+
+.dataTables_paginate {
+	/*width: 44px;*/
+	/** width: 50px;*/
+	float: right;
+	text-align: right;
+}
+.dataTables_paginate span.paginate_button{
+	cursor:pointer;
+}
+.userGuideMenu{
+padding:5px;	
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables display
+ */
+table.display {
+	margin: 0 auto;
+	clear: both;
+	width: 100%!important;
+	border-collapse:collapse;
+}
+
+table.display thead th {
+	padding: 1px 18px 1px 10px;
+	font-weight: bold;
+	cursor: pointer;
+	* cursor: hand;
+}
+
+table.display tfoot th {
+	padding: 3px 18px 3px 10px;
+	border-top: 1px solid black;
+	font-weight: bold;
+}
+
+table.display tr.heading2 td {
+	border-bottom: 1px solid #aaa;
+}
+
+table.display td {
+	padding: 3px 6px;
+}
+
+table.display td.center {
+	text-align: center;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables sorting
+ */
+
+table .sorting_asc {
+	background: url('/img/datatable/sort_asc.png') no-repeat right center;
+}
+
+table .sorting_desc {
+	background: url('/img/datatable/sort_desc.png') no-repeat right center;
+}
+
+table .sorting {
+	background: url("/img/datatable/sort_both.png") no-repeat right center;
+}
+
+table.filter tr.odd {
+	background-color: #555555;
+}
+
+table.filter tr.even, table.filter tr th {
+	background-color: #4d4d4d;
+}
+
+table.display tr.odd{
+	background-color: #F2F2F2;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Misc
+ */
+.dataTables_scroll {
+	clear: both;
+}
+
+.dataTables_scrollBody {
+	*margin-top: -1px;
+}
+
+.top, .bottom {
+	padding: 15px;
+	background-color: #F5F5F5;
+	border: 1px solid #CCCCCC;
+}
+
+.top .dataTables_info {
+	float: none;
+}
+
+.clear {
+	clear: both;
+}
+
+.dataTables_empty {
+	text-align: center;
+}
+
+tfoot input {
+	margin: 0.5em 0;
+	width: 100%;
+	color: #444;
+}
+
+tfoot input.search_init {
+	color: #999;
+}
+
+td.group {
+	background-color: #d1cfd0;
+	border-bottom: 2px solid #A19B9E;
+	border-top: 2px solid #A19B9E;
+}
+
+td.details {
+	background-color: #d1cfd0;
+	border: 2px solid #A19B9E;
+}
+
+
+.example_alt_pagination div.dataTables_info {
+	width: 40%;
+}
+
+.paging_full_numbers {
+	width: 400px;
+	height: 22px;
+	line-height: 22px;
+}
+
+.paging_full_numbers span.paginate_button,
+ 	.paging_full_numbers span.paginate_active {
+	border: 1px solid #aaa;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	padding: 2px 5px;
+	margin: 0 3px;
+	cursor: pointer;
+	*cursor: hand;
+}
+
+.paging_full_numbers span.paginate_button {
+	background-color: #ddd;
+}
+
+.paging_full_numbers span.paginate_button:hover {
+	background-color: #ccc;
+}
+
+.paging_full_numbers span.paginate_active {
+	background-color: #99B3FF;
+}
+
+table.display tr.even.row_selected td {
+	background-color: #B0BED9;
+}
+
+table.display tr.odd.row_selected td {
+	background-color: #9FAFD1;
+}
+
+.dataTables_filter input, .dataTables_length select, .paging_input input{
+border:1px inset #CCCCCC;	
+}
+
+#adminBody tbody tr:hover
+{
+background:#ddd;
+}
+#questionnaireAdd, div.questionnaireRemove{
+padding-left:20px;
+color:#CC9900;
+cursor:pointer;
+font-size:14px;
+}
+#questionnaireAdd{
+background:url("/img/icons/add.png") no-repeat scroll 0 0 transparent;
+margin-top:5px;
+}
+div.questionnaireRemove{
+background:url("/img/icons/delete.png") no-repeat scroll 0 0 transparent;
+}
+div.fileInput{
+border:1px solid #CCCCCC;
+margin:5px 0;
+padding:5px;
+width:507px;
+}
+span.clearFileInput{
+cursor:pointer;
+color:#CC9900;
+padding-left:5px;
+}
+span.toReset{
+border:1px solid red;
+}

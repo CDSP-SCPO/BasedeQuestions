@@ -1,0 +1,44 @@
+<?php
+$translate = Zend_Registry::get('translateFront'); 
+?>
+<script type="text/javascript" src="/scripts/dataTable.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+	//Datatable initialization
+	$('table.display').each(function(){
+		var id = $(this).attr('id');
+		$(this).dataTable({
+			"aaSorting": [[2, "asc"], [0, "asc"]],
+			"oLanguage": {
+				"sLengthMenu": "<?php echo $translate->_('fr0065000000'); ?>",
+				"sZeroRecords": "<?php echo $translate->_('fr0065000050'); ?>",
+				"sInfo": "<?php echo $translate->_('fr0065000100'); ?>",
+				"sInfoEmpty": "<?php echo $translate->_('fr0065000150'); ?>",
+				"sInfoFiltered": "<?php echo $translate->_('fr0065000200'); ?>",
+				"sSearch" : "<?php echo $translate->_('fr0065000250'); ?>",
+				"oPaginate":{
+					"sPrevious": "&lt;<?php echo $translate->_('fr0065000300'); ?>",
+					"sNext": "<?php echo $translate->_('fr0065000350'); ?>&gt;"
+				}
+			},
+			"iDisplayLength":<?php echo MAX_STUDY_DISPLAY ?>,
+			"sPaginationType": "input",
+			"aoColumns": [
+							{ sType: 'html'},
+							{"bVisible": false},
+							{ sType: 'html'},
+							{"bVisible": false}
+                		],
+			"fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull)
+			{
+				$(nRow).css("display", "");
+				return nRow;
+			},
+        	"bStateSave": true,
+        	"iCookieDuration": 36000000
+		});
+	});
+});
+//]]>
+</script>

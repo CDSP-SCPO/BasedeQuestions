@@ -1,0 +1,27 @@
+<h2><?php echo $this->translate->_('fr0120000000')?></h2>
+<ul>
+	<li>
+		<a href="<?php echo $this->url(
+				array(
+				),
+				'domainIndex'
+			) ?>" class="index"><?php echo $this->translate->_('fr0120000010')?></a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(
+				array(
+				),
+				'admindomainView'
+			) ?>" class="view"><?php echo $this->translate->_('fr0120000020')?></a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(
+				array(
+				),
+				'domainConfirmdelete'
+			) ?>" class="modal delete"><?php echo $this->translate->_('fr0120000030')?></a>
+	</li>
+</ul>
+<?php
+echo $this->form;
+?>

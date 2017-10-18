@@ -1,0 +1,130 @@
+<?php 
+$this->layout()->title = $this->translate->_('fr0220000000');
+$this->placeholder('mainContainerClass')->set('oneColumn');
+$this->placeholder('topSection')->set(
+	'<h1>' . $this->translate->_('fr0220000050') . '</h1>'
+);
+?>
+<form id="advancedSearchForm" action="<?php echo $this->url(array(), 'solradvancedsearchHandler'); ?>" method="get">
+<?php 
+$this->roundBoxStart(array('advancedSearchDiv'));
+$this->resultsLink();
+$ls = count($this->solrDocumentLanguages);
+
+if ($ls > 1):
+	$select = '<select id="searchLang" name="searchLang" class="searchLang">';
+	
+	for ($i = 0; $i < $ls; $i++)
+	{
+		$select .= '<option value="' . $this->solrDocumentLanguages[$i]['code_solr'] .'">' . stripslashes($this->solrDocumentLanguages[$i]['label']) . '</option>';
+	}
+
+	$select .= '</select>';
+
+else:
+?>
+	<input type="hidden" class="searchLang" id="searchLang" name="searchLang" value="<?php echo $ls > 0 ? $this->solrDocumentLanguages[0]['code_solr'] : DEFAULT_SOLR_DOCUMENT_LANGUAGE; ?>"/>
+<?php
+endif;
+?>
+	<p>
+	<?php
+	if ($ls == 0 || $ls == 1)
+	{
+		echo $this->translate->_('fr0220000100');
+	}
+
+	else
+	{
+ 		echo $this->translate->_('fr0220000150') . ' ' . $select . ' ' ;
+	}
+
+	echo 	$this->translate->_('fr0220000200');
+	?>
+	</p>
+	<div id="filters">
+	<?php 
+	$l = count($this->advancedSearchConditions);
+	
+	for ($i = - 1; $i < $l; $i++):
+	?>
+		<div class="filter"<?php if ($l > 0 && $i == - 1): ?> style="display:none;"<?php endif;?>>
+			<p class="errorMessage" style="display:none;"></p>
+			<select class="field" name="targets[]">
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['target'] == (SEARCH_QUESTION | SEARCH_MODALITIES | SEARCH_VARIABLE)): ?> selected="selected"<?php endif; ?>  value="<?php echo SEARCH_QUESTION | SEARCH_MODALITIES | SEARCH_VARIABLE; ?>"><?php echo $this->translate->_('fr0220000250');?></option>
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['target'] == SEARCH_QUESTION): ?> selected="selected"<?php endif; ?> value="<?php echo SEARCH_QUESTION; ?>"><?php echo $this->translate->_('fr0220000300');?></option>
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['target'] == SEARCH_MODALITIES): ?> selected="selected"<?php endif; ?>  value="<?php echo SEARCH_MODALITIES; ?>"><?php echo $this->translate->_('fr0220000350');?></option>
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['target'] == SEARCH_VARIABLE): ?> selected="selected"<?php endif; ?>  value="<?php echo SEARCH_VARIABLE; ?>"><?php echo $this->translate->_('fr0220000400');?></option>
+			</select>
+			<select class="operators" name="operators[]"<?php if ($i > -1 && $this->advancedSearchConditions[$i]['target'] == SEARCH_MODALITIES): ?> disabled="disabled" style="display:none"<?php endif; ?>>
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['operator'] == ADVANCED_SEARCH_AND_OPERATOR): ?> selected="selected"<?php endif; ?> value="<?php echo ADVANCED_SEARCH_AND_OPERATOR; ?>"><?php echo $this->translate->_('fr0220000450');?></option>
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['operator'] == ADVANCED_SEARCH_OR_OPERATOR): ?> selected="selected"<?php endif; ?> value="<?php echo ADVANCED_SEARCH_OR_OPERATOR; ?>"><?php echo $this->translate->_('fr0220000500');?></option>
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['operator'] == ADVANCED_SEARCH_NOT_OPERATOR): ?> selected="selected"<?php endif; ?> value="<?php echo ADVANCED_SEARCH_NOT_OPERATOR; ?>"><?php echo $this->translate->_('fr0220000550');?></option>
+			</select>
+			<select class="operators" name="operators[]"<?php if (($i > -1 && ! ($this->advancedSearchConditions[$i]['target'] == SEARCH_MODALITIES)) || $i == -1): ?> disabled="disabled" style="display:none"<?php endif; ?>>
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['operator'] == ADVANCED_SEARCH_AND_OPERATOR): ?> selected="selected"<?php endif; ?> value="<?php echo ADVANCED_SEARCH_AND_OPERATOR; ?>"><?php echo $this->translate->_('fr0220000600');?></option>
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['operator'] == ADVANCED_SEARCH_OR_OPERATOR): ?> selected="selected"<?php endif; ?> value="<?php echo ADVANCED_SEARCH_OR_OPERATOR; ?>"><?php echo $this->translate->_('fr0220000650');?></option>
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['operator'] == ADVANCED_SEARCH_NOT_OPERATOR): ?> selected="selected"<?php endif; ?> value="<?php echo ADVANCED_SEARCH_NOT_OPERATOR; ?>"><?php echo $this->translate->_('fr0220000700');?></option>
+			</select>
+			<select class="analysis" name="analysis[]">
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['analysis'] == ADVANCED_SEARCH_ANALYSIS_ALL_TERMS_REQUIRED_TRUE): ?> selected="selected"<?php endif; ?> value="<?php echo ADVANCED_SEARCH_ANALYSIS_ALL_TERMS_REQUIRED_TRUE; ?>"><?php echo $this->translate->_('fr0220000750');?></option>
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['analysis'] == ADVANCED_SEARCH_ANALYSIS_ALL_TERMS_REQUIRED_FALSE): ?> selected="selected"<?php endif; ?> value="<?php echo ADVANCED_SEARCH_ANALYSIS_ALL_TERMS_REQUIRED_FALSE; ?>"><?php echo $this->translate->_('fr0220000800');?></option>
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['analysis'] == ADVANCED_SEARCH_ANALYSIS_PHRASE_TRUE): ?> selected="selected"<?php endif; ?> value="<?php echo ADVANCED_SEARCH_ANALYSIS_PHRASE_TRUE; ?>"><?php echo $this->translate->_('fr0220000850');?></option>
+				
+				<?php
+					if ( ! $this->clientSettings->stemming):
+				?>
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['analysis'] == ADVANCED_SEARCH_ANALYSIS_STARTS_WITH): ?> selected="selected"<?php endif; ?> value="<?php echo ADVANCED_SEARCH_ANALYSIS_STARTS_WITH;?>"><?php echo $this->translate->_('fr0220000900');?></option>
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['analysis'] == ADVANCED_SEARCH_ANALYSIS_LEVENSHTEIN): ?> selected="selected"<?php endif; ?> value="<?php echo ADVANCED_SEARCH_ANALYSIS_LEVENSHTEIN;?>"><?php echo $this->translate->_('fr0220000950');?></option>
+				<?php
+					endif;
+				?>
+				<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['analysis'] == ADVANCED_SEARCH_ANALYSIS_DISTANCE): ?> selected="selected"<?php endif; ?> value="<?php echo ADVANCED_SEARCH_ANALYSIS_DISTANCE;?>"><?php echo $this->translate->_('fr0220001000');?></option>
+			</select>
+			<span class="levenshtein" <?php if ($i == -1 || ! ($this->advancedSearchConditions[$i]['analysis'] == ADVANCED_SEARCH_ANALYSIS_LEVENSHTEIN)): ?>style="display:none;"<?php endif;?>>
+				<?php echo $this->translate->_('fr0220001050');?>
+				<select name="levenshteins[]" >
+					<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['levenshtein'] == 5): ?> selected="selected"<?php endif; ?> value="5">0.5</option>
+					<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['levenshtein'] == 6): ?> selected="selected"<?php endif; ?> value="6">0.6</option>
+					<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['levenshtein'] == 7): ?> selected="selected"<?php endif; ?> value="7">0.7</option>
+					<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['levenshtein'] == 8): ?> selected="selected"<?php endif; ?> value="8">0.8</option>
+					<option<?php if ($i > -1 && $this->advancedSearchConditions[$i]['levenshtein'] == 9): ?> selected="selected"<?php endif; ?> value="9">0.9</option>
+				</select>
+			</span>
+			<span class="distanceValue" <?php if ($i == -1 || ! ($this->advancedSearchConditions[$i]['analysis'] == ADVANCED_SEARCH_ANALYSIS_DISTANCE)): ?>style="display:none;"<?php endif;?>><input type="text" name="distanceValues[]" class="distanceValue" value="<?php echo ($i > -1) ? $this->advancedSearchConditions[$i]['distanceValue'] : 5;?>" /> <?php echo $this->translate->_('fr0220001100'); ?> </span>
+				<input type="text" class="text" name="keywords[]" value="<?php if ($i > -1) echo $this->advancedSearchConditions[$i]['keyword'];?>"></input>
+			<span class="removeCondition"><?php echo $this->translate->_('fr0220001150');?></span>
+		</div>
+	<?php 
+	endfor;
+	?>
+	</div>
+	<span id="addConditionSpan"><?php echo $this->translate->_('fr0220001200');?></span>
+	<?php 
+	$this->roundBoxEnd();
+	?>
+	<span class="submit">
+		<input type="submit" value="<?php echo $this->translate->_('fr0220001250');?>" class="submit"/>
+	</span>
+</form>
+<script type="text/javascript" src="/scripts/advancedSearch.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function() {
+	advancedSearch.init({
+		'searchModalities':<?php echo SEARCH_MODALITIES ?>,
+		'analysisDistance':<?php echo ADVANCED_SEARCH_ANALYSIS_DISTANCE; ?>,
+		'analysisLevenshtein':<?php echo ADVANCED_SEARCH_ANALYSIS_LEVENSHTEIN; ?>,
+		'analysisStartsWith':<?php echo ADVANCED_SEARCH_ANALYSIS_STARTS_WITH;?>,
+		'translate': {
+			'distanceTip':"<?php echo addslashes($this->translate->_('fr0220001300'));?>",
+			'errorAlnum':"<?php echo addslashes($this->translate->_('fr0220001350'));?>",
+			'errorOperator':"<?php echo addslashes($this->translate->_('fr0220001400'));?>",
+			'errorStart':"<?php echo addslashes($this->translate->_('fr0220001450'));?>",
+			'errorLevenshtein':"<?php echo addslashes($this->translate->_('fr0220001500'));?>",
+			'errorDistance':"<?php echo addslashes($this->translate->_('fr0220001550'));?>"
+		}
+	});
+});
+//]]>
+</script>

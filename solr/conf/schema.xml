@@ -1,0 +1,2670 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+  Author: Xavier Schepler
+  Copyright : Reseau Quetelet
+  
+  This is the Solr's schema from the QDB software.
+  It is linked to a database and optionnaly to several Nesstar servers. 
+  
+-->
+
+<schema name="BDQ" version="1.2">
+  <types>
+
+    <!-- Base types : START -->
+
+    <fieldType name="string" class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true" omitNorms="true"/>
+    <fieldtype name="binary" class="solr.BinaryField"/>
+    <fieldType name="sint" class="solr.SortableIntField"/>
+    <fieldType name="int" class="solr.TrieIntField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+    <fieldType name="float" class="solr.TrieFloatField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+    <fieldType name="long" class="solr.TrieLongField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+    <fieldType name="double" class="solr.TrieDoubleField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+    <fieldType name="tint" class="solr.TrieIntField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+    <fieldType name="tfloat" class="solr.TrieFloatField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+    <fieldType name="tlong" class="solr.TrieLongField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+    <fieldType name="tdouble" class="solr.TrieDoubleField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+    <fieldType name="date" class="solr.TrieDateField" omitNorms="true" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="tdate" class="solr.TrieDateField" omitNorms="true" precisionStep="6" positionIncrementGap="0"/>
+    <fieldType name="random" class="solr.RandomSortField" indexed="true" />
+    <fieldtype name="ignored" stored="false" indexed="false" multiValued="true" class="solr.StrField" />
+
+    <!-- Base types : END -->
+
+    <!-- 
+		All text types include case insensitivity, accents deletion, acronyms and abbreviations expansion.
+
+		The specific analysis are :
+		   - stop words deletion
+		   - stemming
+
+		For questions, modalities, variable labels, there are 4 different text analysis :
+		   - stop words deletion + stemming
+		   - stemming
+		   - stop words deletion
+		   - none
+
+		The end user can choose from those analysis the one he wants to perform search in this database.
+	-->
+
+	<!-- French types : START -->
+
+    <!-- Exact search -->
+    <fieldtype name="FR" class="solr.TextField" positionIncrementGap="0"> 
+      <analyzer type="index">
+      	<charFilter class="solr.HTMLStripCharFilterFactory" />
+        <!-- Creates typed tokens. Deletes ponctuation -->
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+	    <!-- Dots from acronyms deletion, etc. -->
+		<filter class="solr.StandardFilterFactory"/>
+		<!-- Case deletion -->
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <!-- Accents deletion -->
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+     </analyzer>
+     
+     <analyzer type="query">
+	    <!-- Creates typed tokens. Deletes ponctuation -->
+		<tokenizer class="solr.StandardTokenizerFactory"/> 
+		<!-- Dots from acronyms deletion, etc. -->
+        <filter class="solr.StandardFilterFactory"/> 
+        <!-- Case deletion -->
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<!-- Accents deletion -->
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/> 
+     </analyzer>
+     
+    </fieldtype>
+
+    <!-- Stop words -->
+	<fieldtype name="SwFR" class="solr.TextField" positionIncrementGap="0"> 
+      <analyzer type="index">
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+		<tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <!-- Stop words -->
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<filter class="solr.StopFilterFactory" words="stopwords-fr.txt" ignoreCase="true"/> 
+     </analyzer>
+	 <analyzer type="query">
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<!-- Stop words -->
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<filter class="solr.StopFilterFactory" words="stopwords-fr.txt" ignoreCase="true"/> 
+     </analyzer>
+    </fieldtype>
+
+    <!-- Stemming -->
+    <fieldtype name="StFR" class="solr.TextField"> 
+      <analyzer type="index">
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <!-- Stemming -->
+        <filter class="solr.SnowballPorterFilterFactory" language="French" protected="protwords-fr.txt"/> 
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+     </analyzer>
+	 <analyzer type="query">
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<filter class="solr.LowerCaseFilterFactory"/>
+        <!-- Stemming -->
+		<filter class="solr.SnowballPorterFilterFactory" language="French" protected="protwords-fr.txt"/> 
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+     </analyzer>
+    </fieldtype>
+
+    <!-- Stop words and stemming -->
+    <fieldtype name="SwStFR" class="solr.TextField">
+      <analyzer type="index">
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		 <!-- Stop words -->
+		<filter class="solr.StopFilterFactory" words="stopwords-fr.txt" ignoreCase="true"/>
+        <!-- Stemming -->        
+        <filter class="solr.SnowballPorterFilterFactory" language="French" protected="protwords-fr.txt"/>
+     </analyzer>
+	 <analyzer type="query">
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		 <!-- Stop words -->
+		<filter class="solr.StopFilterFactory" words="stopwords-fr.txt" ignoreCase="true"/>
+		<!-- Stemming -->
+        <filter class="solr.SnowballPorterFilterFactory" language="French" protected="protwords-fr.txt"/> 
+     </analyzer>
+    </fieldtype>
+
+	<!-- French types : END -->
+
+    <!-- English types : START -->
+
+    <!-- Exact search -->
+    <fieldtype name="EN" class="solr.TextField"> 
+      <analyzer type="index">
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+        <!-- Creates typed tokens. Deletes ponctuation -->
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+	    <!-- Dots from acronyms deletion, etc. -->
+		<filter class="solr.StandardFilterFactory"/>
+		<!-- Case deletion -->
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <!-- Accents deletion -->
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+     </analyzer>
+	 <analyzer type="query">
+	    <!-- Creates typed tokens. Deletes ponctuation -->
+		<tokenizer class="solr.StandardTokenizerFactory"/> 
+		<!-- Dots from acronyms deletion, etc. -->
+        <filter class="solr.StandardFilterFactory"/> 
+        <!-- Case deletion -->
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<!-- Accents deletion -->
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/> 
+     </analyzer>
+    </fieldtype>
+
+    <!-- Stop words -->
+	<fieldtype name="SwEN" class="solr.TextField"> 
+      <analyzer type="index">
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+		<tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<!-- Stop words -->
+		<filter class="solr.StopFilterFactory" words="stopwords-en.txt" ignoreCase="true"/> 
+     </analyzer>
+	 <analyzer type="query">
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<!-- Stop words -->
+		<filter class="solr.StopFilterFactory" words="stopwords-en.txt" ignoreCase="true"/>
+     </analyzer>
+    </fieldtype>
+
+    <!-- Stemming -->
+    <fieldtype name="StEN" class="solr.TextField"> 
+      <analyzer type="index">
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<filter class="solr.LowerCaseFilterFactory"/>
+        <!-- Stemming -->
+        <filter class="solr.SnowballPorterFilterFactory" language="English"/> 
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+     </analyzer>
+	 <analyzer type="query">
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<filter class="solr.LowerCaseFilterFactory"/>
+        <!-- Stemming -->
+		<filter class="solr.SnowballPorterFilterFactory" language="English"/> 
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+     </analyzer>
+    </fieldtype>
+
+    <!-- Stop words and stemming -->
+    <fieldtype name="SwStEN" class="solr.TextField">
+      <analyzer type="index">
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<!-- Stop words -->
+		<filter class="solr.StopFilterFactory" words="stopwords-en.txt" ignoreCase="true"/>
+        <!-- Stemming -->        
+        <filter class="solr.SnowballPorterFilterFactory" language="English"/>
+     </analyzer>
+	 <analyzer type="query">
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<!-- Stop words -->
+		<filter class="solr.StopFilterFactory" words="stopwords-en.txt" ignoreCase="true"/>
+		<!-- Stemming -->
+        <filter class="solr.SnowballPorterFilterFactory" language="English"/> 
+     </analyzer>
+    </fieldtype>
+
+    <!-- English types : END -->
+    
+    <!-- FRENCH HIGHLIGHTING TYPES : START  -->
+    
+    <!-- Exact search -->
+    <fieldtype name="HLFR" class="solr.TextField" positionIncrementGap="0"> 
+      <analyzer type="index">
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+        <!-- Creates typed tokens. Deletes ponctuation -->
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+	    <!-- Dots from acronyms deletion, etc. -->
+		<filter class="solr.StandardFilterFactory"/>
+		<!-- Case deletion -->
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <!-- Accents deletion -->
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<filter class="solr.PatternReplaceFilterFactory" pattern="^[0-9]{5}" replacement="" replace="first"/>
+		<filter class="solr.LengthFilterFactory" min="1" max="1000"/>
+     </analyzer>
+     
+     <analyzer type="query">
+	    <!-- Creates typed tokens. Deletes ponctuation -->
+		<tokenizer class="solr.StandardTokenizerFactory"/> 
+		<!-- Dots from acronyms deletion, etc. -->
+        <filter class="solr.StandardFilterFactory"/> 
+        <!-- Case deletion -->
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<!-- Accents deletion -->
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/> 
+     </analyzer>
+     
+    </fieldtype>
+
+    <!-- Stop words -->
+	<fieldtype name="HLSwFR" class="solr.TextField" positionIncrementGap="0"> 
+      <analyzer type="index">
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+		<tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <!-- Stop words -->
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<filter class="solr.StopFilterFactory" words="stopwords-fr.txt" ignoreCase="true"/>
+		<filter class="solr.PatternReplaceFilterFactory" pattern="^[0-9]{5}" replacement="" replace="first"/>
+		<filter class="solr.LengthFilterFactory" min="1" max="1000"/>
+     </analyzer>
+	 <analyzer type="query">
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<!-- Stop words -->
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<filter class="solr.StopFilterFactory" words="stopwords-fr.txt" ignoreCase="true"/> 
+     </analyzer>
+    </fieldtype>
+
+    <!-- Stemming -->
+    <fieldtype name="HLStFR" class="solr.TextField"> 
+      <analyzer type="index">
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <!-- Stemming -->
+        <filter class="solr.SnowballPorterFilterFactory" language="French" protected="protwords-fr.txt"/> 
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<filter class="solr.PatternReplaceFilterFactory" pattern="^[0-9]{5}" replacement="" replace="first"/>
+		<filter class="solr.LengthFilterFactory" min="1" max="1000"/>
+     </analyzer>
+	 <analyzer type="query">
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<filter class="solr.LowerCaseFilterFactory"/>
+        <!-- Stemming -->
+		<filter class="solr.SnowballPorterFilterFactory" language="French" protected="protwords-fr.txt"/> 
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+     </analyzer>
+    </fieldtype>
+
+    <!-- Stop words and stemming -->
+    <fieldtype name="HLSwStFR" class="solr.TextField">
+      <analyzer type="index">
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		 <!-- Stop words -->
+		<filter class="solr.StopFilterFactory" words="stopwords-fr.txt" ignoreCase="true"/>
+        <!-- Stemming -->        
+        <filter class="solr.SnowballPorterFilterFactory" language="French" protected="protwords-fr.txt"/>
+        <filter class="solr.PatternReplaceFilterFactory" pattern="^[0-9]{5}" replacement="" replace="first"/>
+        <filter class="solr.LengthFilterFactory" min="1" max="1000"/>
+     </analyzer>
+	 <analyzer type="query">
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		 <!-- Stop words -->
+		<filter class="solr.StopFilterFactory" words="stopwords-fr.txt" ignoreCase="true"/>
+		<!-- Stemming -->
+        <filter class="solr.SnowballPorterFilterFactory" language="French" protected="protwords-fr.txt"/> 
+     </analyzer>
+    </fieldtype>
+
+    <!-- FRENCH HIGHLIGHTING TYPES : END -->
+
+   <!-- ENGLISH HIGHLIGHTING TYPES : START -->
+
+    <!-- Exact search -->
+    <fieldtype name="HLEN" class="solr.TextField"> 
+      <analyzer type="index">
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+        <!-- Creates typed tokens. Deletes ponctuation -->
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+	    <!-- Dots from acronyms deletion, etc. -->
+		<filter class="solr.StandardFilterFactory"/>
+		<!-- Case deletion -->
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <!-- Accents deletion -->
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<filter class="solr.PatternReplaceFilterFactory" pattern="^[0-9]{5}" replacement="" replace="first"/>
+		<filter class="solr.LengthFilterFactory" min="1" max="1000"/>
+     </analyzer>
+	 <analyzer type="query">
+	    <!-- Creates typed tokens. Deletes ponctuation -->
+		<tokenizer class="solr.StandardTokenizerFactory"/> 
+		<!-- Dots from acronyms deletion, etc. -->
+        <filter class="solr.StandardFilterFactory"/> 
+        <!-- Case deletion -->
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<!-- Accents deletion -->
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/> 
+     </analyzer>
+    </fieldtype>
+
+    <!-- Stop words -->
+	<fieldtype name="HLSwEN" class="solr.TextField"> 
+      <analyzer type="index">
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+		<tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<!-- Stop words -->
+		<filter class="solr.StopFilterFactory" words="stopwords-en.txt" ignoreCase="true"/> 
+		<filter class="solr.PatternReplaceFilterFactory" pattern="^[0-9]{5}" replacement="" replace="first"/>
+		<filter class="solr.LengthFilterFactory" min="1" max="1000"/>
+     </analyzer>
+	 <analyzer type="query">
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<!-- Stop words -->
+		<filter class="solr.StopFilterFactory" words="stopwords-en.txt" ignoreCase="true"/>
+     </analyzer>
+    </fieldtype>
+
+    <!-- Stemming -->
+    <fieldtype name="HLStEN" class="solr.TextField"> 
+      <analyzer type="index">
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<filter class="solr.LowerCaseFilterFactory"/>
+        <!-- Stemming -->
+        <filter class="solr.SnowballPorterFilterFactory" language="English"/> 
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<filter class="solr.PatternReplaceFilterFactory" pattern="^[0-9]{5}" replacement="" replace="first"/>
+		<filter class="solr.LengthFilterFactory" min="1" max="1000"/>
+     </analyzer>
+	 <analyzer type="query">
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<filter class="solr.LowerCaseFilterFactory"/>
+        <!-- Stemming -->
+		<filter class="solr.SnowballPorterFilterFactory" language="English"/> 
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+     </analyzer>
+    </fieldtype>
+
+    <!-- Stop words and stemming -->
+    <fieldtype name="HLSwStEN" class="solr.TextField">
+      <analyzer type="index">
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<!-- Stop words -->
+		<filter class="solr.StopFilterFactory" words="stopwords-en.txt" ignoreCase="true"/>
+        <!-- Stemming -->        
+        <filter class="solr.SnowballPorterFilterFactory" language="English"/>
+        <filter class="solr.PatternReplaceFilterFactory" pattern="^[0-9]{5}" replacement="" replace="first"/>
+        <filter class="solr.LengthFilterFactory" min="1" max="1000"/>
+     </analyzer>
+	 <analyzer type="query">
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+		<filter class="solr.LowerCaseFilterFactory"/>
+		<charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+		<!-- Stop words -->
+		<filter class="solr.StopFilterFactory" words="stopwords-en.txt" ignoreCase="true"/>
+		<!-- Stemming -->
+        <filter class="solr.SnowballPorterFilterFactory" language="English"/> 
+     </analyzer>
+    </fieldtype>
+    
+    <!-- ENGLISH HIGHLIGHTING TYPES : END -->
+    
+    <!-- Spell checking -->
+    <fieldtype name="SC" class="solr.TextField" positionIncrementGap="100" stored="false" multiValued="true">
+      <analyzer>
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+      </analyzer>
+    </fieldtype>
+
+    <!-- Autocompletion -->
+    <fieldtype name="AC" class="solr.TextField">
+      <analyzer>
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.PatternReplaceFilterFactory" pattern="^[0-9]{1,5}" replacement="" replace="first"/>
+		<filter class="solr.LengthFilterFactory" min="1" max="1000"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+        <filter class="solr.ShingleFilterFactory" maxShingleSize="2" outputUnigrams="true"/>
+        <filter class="solr.PatternReplaceFilterFactory" pattern="([\s])$" replacement="" replace="all" />
+        <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+        <filter class="solr.LengthFilterFactory" min="2" max="1000"/>
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+      </analyzer>
+    </fieldtype>
+    
+    <fieldtype name="SwACFR" class="solr.TextField">
+      <analyzer>
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+        <filter class="solr.StopFilterFactory" words="stopwords-fr.txt" ignoreCase="true"/>
+        <filter class="solr.ShingleFilterFactory" maxShingleSize="2" outputUnigrams="true"/>
+        <filter class="solr.PatternReplaceFilterFactory" pattern="([\s])$" replacement="" replace="all" />
+        <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+        <filter class="solr.LengthFilterFactory" min="2" max="1000"/>
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+      </analyzer>
+    </fieldtype>
+    
+    <fieldtype name="SwACEN" class="solr.TextField">
+      <analyzer>
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <charFilter class="solr.MappingCharFilterFactory" mapping="mapping-ISOLatin1Accent.txt"/>
+        <filter class="solr.StopFilterFactory" words="stopwords-en.txt" ignoreCase="true"/>
+        <filter class="solr.ShingleFilterFactory" maxShingleSize="2" outputUnigrams="true"/>
+        <filter class="solr.PatternReplaceFilterFactory" pattern="([\s])$" replacement="" replace="all" />
+        <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+        <filter class="solr.LengthFilterFactory" min="2" max="1000"/>
+        <charFilter class="solr.HTMLStripCharFilterFactory" />
+      </analyzer>
+    </fieldtype>
+    
+  </types>
+
+  <uniqueKey>id</uniqueKey>
+
+  <solrQueryParser defaultOperator="AND"/>
+
+  <fields>
+  	
+  	<!-- Document's unique id -->
+ 	<field name="id"
+           required="false"
+           type="string"
+           multiValued="false"
+           default="NEW"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <!-- Database references : START -->
+    
+     <!-- This field is a reference to the QDB's database langs table primary key -->
+    <field name="langId"
+           required="true"
+           type="string"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <field name="solrLangCode"
+           required="true"
+           type="string"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- This field is a reference to the QDB's database domains table primary key -->
+    <field name="domainId"
+           required="false"
+           type="string"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- This field is a reference to the QDB's database study_labels table primary key -->
+    <field name="studySerieId"
+           required="false"
+           type="string"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- This field is a reference to the QDB's database ddi_files table primary key -->
+    <field name="ddiFileId"
+           required="true"
+           type="string"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+   <!-- This field is a reference to the QDB's database studies table primary key -->
+    <field name="studyDescriptionId"
+           required="true"
+           type="string"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <!-- This field is a reference to the QDB's database variables table primary key -->
+    <field name="variableId"
+           required="true"
+           type="string"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- This field is a reference to the QDB's database variable_groups table primary key -->
+    <field name="variableGroupId"
+           required="false"
+           type="string"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+	<!-- This field is a reference to the QDB's database questions table primary key -->
+    <field name="questionId"
+           required="true"
+           type="string"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+   
+    <!-- This field is a reference to the QDB's database concept_lists table primary key -->
+    <field name="conceptListId"
+           required="false"
+           type="string"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+   
+    <!-- This field is a reference to the QDB's database concepts table primary key -->
+    <field name="conceptId"
+           required="false"
+           type="string"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <!-- This field is a reference to the QDB's database nesstar_servers table primary key -->
+    <field name="nesstarServerId"
+           required="false"
+           type="string"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <!-- 
+    	This field is a reference to the study identifier in the Nesstar DDI file 
+    	/codeBook/stdyDscr/citation/titlStmt/IDNo
+    -->
+    <field name="studyNesstarId"
+           required="false"
+           type="string"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- 
+    	This field is a reference to the variable identifier in the Nesstar DDI file 
+    	/codeBook/stdyDscr/citation/titlStmt/IDNo
+    	/codeBook/dataDscr/var/@ID
+    -->
+    <field name="variableNesstarId"
+           required="false"
+           type="string"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="studyYear"
+           required="true"
+           type="string"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <field name="studyDecade"
+           required="true"
+           type="string"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <field name="hasQuestionnaire"
+           required="true"
+           type="boolean"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <field name="questionnaireUrl"
+           required="false"
+           type="string"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <field name="questionnaireId"
+           required="false"
+           type="string"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <field name="questionnaireTitle"
+           required="false"
+           type="string"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+       
+    <field name="studyDescriptionUrl"
+           required="false"
+           type="string"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="universe"
+           required="false"
+           type="string"
+           multiValued="false"
+           indexed="false" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <field name="notes"
+           required="false"
+           type="string"
+           multiValued="false"
+           indexed="false" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+	<field name="preQuestionText"
+           required="false"
+           type="string"
+           multiValued="false"
+           indexed="false" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <field name="postQuestionText"
+           required="false"
+           type="string"
+           multiValued="false"
+           indexed="false" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <field name="interviewerInstructions"
+           required="false"
+           type="string"
+           multiValued="false"
+           indexed="false" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="filters"
+           required="false"
+           type="string"
+           multiValued="true"
+           indexed="false" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="studyQuestionCount"
+           required="false"
+           type="int"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="questionPosition"
+           required="false"
+           type="sint"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+           sortMissingLast="true"
+    />
+
+    <field name="variableName"
+           required="true"
+           type="string"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="studyTitle"
+           required="true"
+           type="string"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="hasMultipleItems"
+           required="false"
+           type="boolean"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="false" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+	<!-- Question text (French) -->
+    <field name="qFR"
+           required="false"
+           type="FR"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="true"
+           termPositions="true"
+           termOffsets="true"
+    />
+    <!--
+      Question items (French)
+      This field is stored because its contents are retrieved. 
+    -->
+    <field name="iFR"
+           required="false"
+           type="FR"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Question and items (French) -->
+    <field name="qiFR"
+           required="false"
+           type="FR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!--
+      Modalities (French)
+      This field is stored because its contents are retrieved.
+     -->
+    <field name="mFR"
+           required="false"
+           type="FR"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!--
+      Variable label (French)
+      This field is stored because its contents are retrieved.
+    -->
+    <field name="vlFR"
+           required="false"
+           type="FR"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+   
+    <!-- 
+        The fields below are the declinations of question, items, modalities, variable label contents
+        and the textual analysis for french.
+        
+        Querying a field gathering contents from other is much faster.
+    -->
+    
+    <!-- Question, items, stop words analysis, french -->
+    <field name="qiSwFR"
+           required="false"
+           type="SwFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Question, items, stemming analysis, french -->
+    <field name="qiStFR"
+           required="false"
+           type="StFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Question, items, stop word and stemming analysis, french -->
+    <field name="qiSwStFR"
+           required="false"
+           type="SwStFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Question stop words analysis, french -->
+    <field name="qSwFR"
+           required="false"
+           type="SwFR"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="true"
+           termPositions="true"
+           termOffsets="true"
+    />
+    
+    <!--
+      Question, stemming analysis, french 
+      This field is stored because it is used for highlighting. 
+    -->
+    <field name="qStFR"
+           required="false"
+           type="StFR"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="true"
+           termPositions="true"
+           termOffsets="true"
+    />
+    
+    <!--
+      Question, stop word and stemming analysis, french. 
+      This field is stored because it is used for highlighting.
+    -->
+    <field name="qSwStFR"
+           required="false"
+           type="SwStFR"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="true"
+           termPositions="true"
+           termOffsets="true"
+    />
+    
+    <!-- Items, stop words analysis, french -->
+    <field name="iSwFR"
+           required="false"
+           type="SwFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Items, stemming analysis, french -->
+    <field name="iStFR"
+           required="false"
+           type="StFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Items, stop word and stemming analysis, french -->
+    <field name="iSwStFR"
+           required="false"
+           type="SwStFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Modalities, stop words analysis, french -->
+    <field name="mSwFR"
+           required="false"
+           type="SwFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Modalities, stemming analysis, french -->
+    <field name="mStFR"
+           required="false"
+           type="StFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Modalities, stop words and stemming analysis, french -->
+    <field name="mSwStFR"
+           required="false"
+           type="SwStFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Variable labels, stop words analysis, french -->
+    <field name="vlSwFR"
+           required="false"
+           type="SwFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Variable labels, stemming analysis, french -->
+    <field name="vlStFR"
+           required="false"
+           type="StFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Variable labels, stop words and stemming analysis, french -->
+    <field name="vlSwStFR"
+           required="false"
+           type="SwStFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Question, items, modalities and variable label, french -->
+    <field name="qiAndMAndVlFR"
+           required="false"
+           type="FR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Question, items, modalities and variable label, stop words analysis, french -->
+    <field name="qiAndMAndVlSwFR"
+           required="false"
+           type="SwFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Question, items, modalities and variable label, stemming analysis, french -->
+    <field name="qiAndMAndVlStFR"
+           required="false"
+           type="StFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Question, items, modalities and variable label, stop words and stemming analysis, french -->
+    <field name="qiAndMAndVlSwStFR"
+           required="false"
+           type="SwStFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+     <field name="qiAndMFR"
+           required="false"
+           type="FR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="qiAndMSwFR"
+           required="false"
+           type="SwFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="qiAndMStFR"
+           required="false"
+           type="StFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="qiAndMSwStFR"
+           required="false"
+           type="SwStFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+     <field name="qiAndVlFR"
+           required="false"
+           type="FR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="qiAndVlSwFR"
+           required="false"
+           type="SwFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="qiAndVlStFR"
+           required="false"
+           type="StFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="qiAndVlSwStFR"
+           required="false"
+           type="SwStFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="mAndVlFR"
+           required="false"
+           type="FR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="mAndVlSwFR"
+           required="false"
+           type="SwFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="mAndVlStFR"
+           required="false"
+           type="StFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="mAndVlSwStFR"
+           required="false"
+           type="SwStFR"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <!-- Question items (Highlighting - French) -->
+    <field name="iHLFR"
+           required="false"
+           type="HLFR"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="iHLSwFR"
+           required="false"
+           type="HLSwFR"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="iHLStFR"
+           required="false"
+           type="HLStFR"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="iHLSwStFR"
+           required="false"
+           type="HLSwStFR"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Modalities (Highlighting - French) -->
+    <field name="mHLFR"
+           required="false"
+           type="HLFR"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="mHLSwFR"
+           required="false"
+           type="HLSwFR"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="mHLStFR"
+           required="false"
+           type="HLStFR"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="mHLSwStFR"
+           required="false"
+           type="HLSwStFR"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <!-- Variable label (Highlighting - French) -->
+    <field name="vlHLFR"
+           required="false"
+           type="HLFR"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="vlHLStFR"
+           required="false"
+           type="HLStFR"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="vlHLSwFR"
+           required="false"
+           type="HLSwFR"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="vlHLSwStFR"
+           required="false"
+           type="HLSwStFR"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    
+    <!-- Question text (English) -->
+    <field name="qEN"
+           required="false"
+           type="EN"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="true"
+           termPositions="true"
+           termOffsets="true"
+    />
+    <!-- Question items (English) -->
+    <field name="iEN"
+           required="false"
+           type="EN"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Question and items (English) -->
+    <field name="qiEN"
+           required="false"
+           type="EN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Modalities (English) -->
+    <field name="mEN"
+           required="false"
+           type="EN"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Variable label (English) -->
+    <field name="vlEN"
+           required="false"
+           type="EN"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- 
+        The fields below are the declinations of question, items, modalities, variable label contents
+        and the textual analysis for french.
+        
+        Querying a field gathering contents from other is much faster.
+    -->
+    
+    <!-- Question, items, stop words analysis, English -->
+    <field name="qiSwEN"
+           required="false"
+           type="SwEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Question, items, stemming analysis, English -->
+    <field name="qiStEN"
+           required="false"
+           type="StEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Question, items, stop word and stemming analysis, English -->
+    <field name="qiSwStEN"
+           required="false"
+           type="SwStEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Question, stop words analysis, English -->
+    <field name="qSwEN"
+           required="false"
+           type="SwEN"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="true"
+           termPositions="true"
+           termOffsets="true"
+    />
+    
+    <!-- Question, stemming analysis, English -->
+    <field name="qStEN"
+           required="false"
+           type="StEN"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="true"
+           termPositions="true"
+           termOffsets="true"
+    />
+    
+    <!-- Question, stop word and stemming analysis, English -->
+    <field name="qSwStEN"
+           required="false"
+           type="SwStEN"
+           multiValued="false"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="true"
+           termPositions="true"
+           termOffsets="true"
+    />
+    
+    <!-- Items, stop words analysis, English -->
+    <field name="iSwEN"
+           required="false"
+           type="SwEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Items, stemming analysis, english -->
+    <field name="iStEN"
+           required="false"
+           type="StEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!--Items, stop word and stemming analysis, english -->
+    <field name="iSwStEN"
+           required="false"
+           type="SwStEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <!-- Modalities, stop words analysis, english -->
+    <field name="mSwEN"
+           required="false"
+           type="SwEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Modalities, stemming analysis, english -->
+    <field name="mStEN"
+           required="false"
+           type="StEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Modalities, stop words and stemming analysis, english -->
+    <field name="mSwStEN"
+           required="false"
+           type="SwStEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Variable labels, stop words analysis, english -->
+    <field name="vlSwEN"
+           required="false"
+           type="SwEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Variable labels, stemming analysis, english -->
+    <field name="vlStEN"
+           required="false"
+           type="StEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Variable labels, stop words and stemming analysis, english -->
+    <field name="vlSwStEN"
+           required="false"
+           type="SwStEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <!-- Question, items, modalities and variable label, english -->
+    <field name="qiAndMAndVlEN"
+           required="false"
+           type="EN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Question, items, modalities and variable label, stop words analysis, english -->
+    <field name="qiAndMAndVlSwEN"
+           required="false"
+           type="SwEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <!-- Question, items, modalities and variable label, stemming analysis, english -->
+    <field name="qiAndMAndVlStEN"
+           required="false"
+           type="StEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Question, items, modalities and variable label, stop words and stemming analysis, english -->
+    <field name="qiAndMAndVlSwStEN"
+           required="false"
+           type="SwStEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+     <field name="qiAndMEN"
+           required="false"
+           type="EN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="qiAndMSwEN"
+           required="false"
+           type="SwEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="qiAndMStEN"
+           required="false"
+           type="StEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="qiAndMSwStEN"
+           required="false"
+           type="SwStEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+     <field name="qiAndVlEN"
+           required="false"
+           type="EN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="qiAndVlSwEN"
+           required="false"
+           type="SwEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="qiAndVlStEN"
+           required="false"
+           type="StEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="qiAndVlSwStEN"
+           required="false"
+           type="SwStEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="mAndVlEN"
+           required="false"
+           type="EN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="mAndVlSwEN"
+           required="false"
+           type="SwEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="mAndVlStEN"
+           required="false"
+           type="StEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+    <field name="mAndVlSwStEN"
+           required="false"
+           type="SwStEN"
+           multiValued="true"
+           indexed="true" 
+           stored="false"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Question items (Highlighting - English) -->
+    <field name="iHLEN"
+           required="false"
+           type="HLEN"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="iHLSwEN"
+           required="false"
+           type="HLSwEN"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="iHLStEN"
+           required="false"
+           type="HLStEN"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="iHLSwStEN"
+           required="false"
+           type="HLSwStEN"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    
+    <!-- Modalities (Highlighting - English) -->
+    <field name="mHLEN"
+           required="false"
+           type="HLEN"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="mHLSwEN"
+           required="false"
+           type="HLSwEN"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="mHLStEN"
+           required="false"
+           type="HLStEN"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="mHLSwStEN"
+           required="false"
+           type="HLSwStEN"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <!-- Variable label (Highlighting - English) -->
+    <field name="vlHLEN"
+           required="false"
+           type="HLEN"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="vlHLStEN"
+           required="false"
+           type="HLStEN"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="vlHLSwEN"
+           required="false"
+           type="HLSwEN"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+    <field name="vlHLSwStEN"
+           required="false"
+           type="HLSwStEN"
+           multiValued="true"
+           indexed="true" 
+           stored="true"
+           compressed="false"
+           omitNorms="true" 
+           termVectors="false"
+           termPositions="false"
+           termOffsets="false"
+    />
+
+	<!-- Those fields are used for french spell checking  -->
+    <field name="qiSCFR" type="SC"/>
+    <field name="mSCFR" type="SC"/>
+    <field name="vlSCFR" type="SC"/>
+    <field name="qiAndMSCFR" type="SC"/>
+    <field name="qiAndVlSCFR" type="SC"/>
+    <field name="mAndVlSCFR" type="SC"/>
+    <field name="qiAndMAndVlSCFR" type="SC"/>
+
+    <!-- Those fields are used for french auto complete -->
+    <field multiValued="true" name="qiACFR" type="AC"/>
+    <field multiValued="true" name="mACFR" type="AC"/>
+    <field multiValued="true" name="vlACFR" type="AC"/>
+    <field multiValued="true" name="qiAndMACFR" type="AC"/>
+    <field multiValued="true" name="qiAndVlACFR" type="AC"/>
+    <field multiValued="true" name="mAndVlACFR" type="AC"/>
+    <field multiValued="true" name="qiAndMAndVlACFR" type="AC"/>
+    
+    <field multiValued="true" name="qiSwACFR" type="SwACFR"/>
+    <field multiValued="true" name="mSwACFR" type="SwACFR"/>
+    <field multiValued="true" name="vlSwACFR" type="SwACFR"/>
+    <field multiValued="true" name="qiAndMSwACFR" type="SwACFR"/>
+    <field multiValued="true" name="qiAndVlSwACFR" type="SwACFR"/>
+    <field multiValued="true" name="mAndVlSwACFR" type="SwACFR"/>
+    <field multiValued="true" name="qiAndMAndVlSwACFR" type="SwACFR"/>
+    
+
+    <!-- Those fields are used for english spell checking  -->
+    <field name="qiSCEN" type="SC"/>
+    <field name="mSCEN" type="SC"/>
+    <field name="vlSCEN" type="SC"/>
+    <field name="qiAndMSCEN" type="SC"/>
+    <field name="qiAndVlSCEN" type="SC"/>
+    <field name="mAndVlSCEN" type="SC"/>
+    <field name="qiAndMAndVlSCEN" type="SC"/>
+
+    <!-- Those fields are used for english auto complete -->
+    <field multiValued="true" name="qiACEN" type="AC"/>
+    <field multiValued="true" name="mACEN" type="AC"/>
+    <field multiValued="true" name="vlACEN" type="AC"/>
+    <field multiValued="true" name="qiAndMACEN" type="AC"/>
+    <field multiValued="true" name="qiAndVlACEN" type="AC"/>
+    <field multiValued="true" name="mAndVlACEN" type="AC"/>
+    <field multiValued="true" name="qiAndMAndVlACEN" type="AC"/>
+    
+    <field multiValued="true" name="qiSwACEN" type="SwACEN"/>
+    <field multiValued="true" name="mSwACEN" type="SwACEN"/>
+    <field multiValued="true" name="vlSwACEN" type="SwACEN"/>
+    <field multiValued="true" name="qiAndMSwACEN" type="SwACEN"/>
+    <field multiValued="true" name="qiAndVlSwACEN" type="SwACEN"/>
+    <field multiValued="true" name="mAndVlSwACEN" type="SwACEN"/>
+    <field multiValued="true" name="qiAndMAndVlSwACEN" type="SwACEN"/>
+
+  </fields>
+
+  <defaultSearchField>qiAndMAndVlFR</defaultSearchField>
+
+  <copyField source="qFR" dest="qiFR"/>
+  <copyField source="qFR" dest="qiSwFR"/>
+  <copyField source="qFR" dest="qiStFR"/>
+  <copyField source="qFR" dest="qiSwStFR"/>
+  
+  <copyField source="qFR" dest="qiSCFR"/>
+  <copyField source="qFR" dest="qiACFR"/>
+  <copyField source="qFR" dest="qiSwACFR"/>
+  
+  <copyField source="qFR" dest="qSwFR"/>
+  <copyField source="qFR" dest="qStFR"/>
+  <copyField source="qFR" dest="qSwStFR"/>
+  
+  <copyField source="iFR" dest="qiFR"/>
+  <copyField source="iFR" dest="qiSwFR"/>
+  <copyField source="iFR" dest="qiStFR"/>
+  <copyField source="iFR" dest="qiSwStFR"/>
+  
+  <copyField source="iFR" dest="qiSCFR"/>
+  <copyField source="iFR" dest="qiACFR"/>
+  <copyField source="iFR" dest="qiSwACFR"/>
+  
+  <copyField source="iFR" dest="iSwFR"/>
+  <copyField source="iFR" dest="iStFR"/>
+  <copyField source="iFR" dest="iSwStFR"/>
+
+  <copyField source="qFR" dest="qiAndMFR"/>
+  <copyField source="qFR" dest="qiAndMSwFR"/>
+  <copyField source="qFR" dest="qiAndMStFR"/>
+  <copyField source="qFR" dest="qiAndMSwStFR"/>
+  
+  <copyField source="qFR" dest="qiAndMSCFR"/>
+  <copyField source="qFR" dest="qiAndMACFR"/>
+  <copyField source="qFR" dest="qiAndMSwACFR"/>
+  
+  <copyField source="iFR" dest="qiAndMFR"/>
+  <copyField source="iFR" dest="qiAndMSwFR"/>
+  <copyField source="iFR" dest="qiAndMStFR"/>
+  <copyField source="iFR" dest="qiAndMSwStFR"/>
+  
+  <copyField source="iFR" dest="qiAndMSCFR"/>
+  <copyField source="iFR" dest="qiAndMACFR"/>
+  <copyField source="iFR" dest="qiAndMSwACFR"/>
+  
+  <copyField source="qFR" dest="qiAndVlFR"/>
+  <copyField source="qFR" dest="qiAndVlSwFR"/>
+  <copyField source="qFR" dest="qiAndVlStFR"/>
+  <copyField source="qFR" dest="qiAndVlSwStFR"/>
+  
+  <copyField source="qFR" dest="qiAndVlSCFR"/>
+  <copyField source="qFR" dest="qiAndVlACFR"/>
+  <copyField source="qFR" dest="qiAndVlSwACFR"/>
+  
+  <copyField source="iFR" dest="qiAndVlFR"/>
+  <copyField source="iFR" dest="qiAndVlSwFR"/>
+  <copyField source="iFR" dest="qiAndVlStFR"/>
+  <copyField source="iFR" dest="qiAndVlSwStFR"/>
+  
+  <copyField source="iFR" dest="qiAndVlSCFR"/>
+  <copyField source="iFR" dest="qiAndVlACFR"/>
+  <copyField source="iFR" dest="qiAndVlSwACFR"/>
+  
+  <copyField source="qFR" dest="qiAndMAndVlFR"/>
+  <copyField source="qFR" dest="qiAndMAndVlSwFR"/>
+  <copyField source="qFR" dest="qiAndMAndVlStFR"/>
+  <copyField source="qFR" dest="qiAndMAndVlSwStFR"/>
+  
+  <copyField source="qFR" dest="qiAndMAndVlSCFR"/>
+  <copyField source="qFR" dest="qiAndMAndVlACFR"/>
+  <copyField source="qFR" dest="qiAndMAndVlSwACFR"/>
+  
+  <copyField source="iFR" dest="qiAndMAndVlFR"/>
+  <copyField source="iFR" dest="qiAndMAndVlSwFR"/>
+  <copyField source="iFR" dest="qiAndMAndVlStFR"/>
+  <copyField source="iFR" dest="qiAndMAndVlSwStFR"/>
+  
+  <copyField source="iFR" dest="qiAndMAndVlSCFR"/>
+  <copyField source="iFR" dest="qiAndMAndVlACFR"/>
+  <copyField source="iFR" dest="qiAndMAndVlSwACFR"/>
+
+  <copyField source="mFR" dest="mSwFR"/>
+  <copyField source="mFR" dest="mStFR"/>
+  <copyField source="mFR" dest="mSwStFR"/>
+  
+  <copyField source="mFR" dest="mSCFR"/>
+  <copyField source="mFR" dest="mACFR"/>
+  <copyField source="mFR" dest="mSwACFR"/>
+
+  <copyField source="mFR" dest="qiAndMFR"/>
+  <copyField source="mFR" dest="qiAndMSwFR"/>
+  <copyField source="mFR" dest="qiAndMStFR"/>
+  <copyField source="mFR" dest="qiAndMSwStFR"/>
+  
+  <copyField source="mFR" dest="qiAndMSCFR"/>
+  <copyField source="mFR" dest="qiAndMACFR"/>
+  <copyField source="mFR" dest="qiAndMSwACFR"/>
+
+  <copyField source="mFR" dest="mAndVlFR"/>
+  <copyField source="mFR" dest="mAndVlSwFR"/>
+  <copyField source="mFR" dest="mAndVlStFR"/>
+  <copyField source="mFR" dest="mAndVlSwStFR"/>
+  
+  <copyField source="mFR" dest="mAndVlSCFR"/>
+  <copyField source="mFR" dest="mAndVlACFR"/>
+  <copyField source="mFR" dest="mAndVlSwACFR"/>
+
+  <copyField source="mFR" dest="qiAndMAndVlFR"/>
+  <copyField source="mFR" dest="qiAndMAndVlSwFR"/>
+  <copyField source="mFR" dest="qiAndMAndVlStFR"/>
+  <copyField source="mFR" dest="qiAndMAndVlSwStFR"/>
+  
+  <copyField source="mFR" dest="qiAndMAndVlSCFR"/>
+  <copyField source="mFR" dest="qiAndMAndVlACFR"/>
+  <copyField source="mFR" dest="qiAndMAndVlSwACFR"/>
+
+  <copyField source="vlFR" dest="vlSwFR"/>
+  <copyField source="vlFR" dest="vlStFR"/>
+  <copyField source="vlFR" dest="vlSwStFR"/>
+  
+  <copyField source="vlFR" dest="vlSCFR"/>
+  <copyField source="vlFR" dest="vlACFR"/>
+  <copyField source="vlFR" dest="vlSwACFR"/>
+
+  <copyField source="vlFR" dest="qiAndVlFR"/>
+  <copyField source="vlFR" dest="qiAndVlSwFR"/>
+  <copyField source="vlFR" dest="qiAndVlStFR"/>
+  <copyField source="vlFR" dest="qiAndVlSwStFR"/>
+  
+  <copyField source="vlFR" dest="qiAndVlSCFR"/>
+  <copyField source="vlFR" dest="qiAndVlACFR"/>
+  <copyField source="vlFR" dest="qiAndVlSwACFR"/>
+
+  <copyField source="vlFR" dest="mAndVlFR"/>
+  <copyField source="vlFR" dest="mAndVlSwFR"/>
+  <copyField source="vlFR" dest="mAndVlStFR"/>
+  <copyField source="vlFR" dest="mAndVlSwStFR"/>
+  
+  <copyField source="vlFR" dest="mAndVlSCFR"/>
+  <copyField source="vlFR" dest="mAndVlACFR"/>
+  <copyField source="vlFR" dest="mAndVlSwACFR"/>
+
+  <copyField source="vlFR" dest="qiAndMAndVlFR"/>
+  <copyField source="vlFR" dest="qiAndMAndVlSwFR"/>
+  <copyField source="vlFR" dest="qiAndMAndVlStFR"/>
+  <copyField source="vlFR" dest="qiAndMAndVlSwStFR"/>
+  
+  <copyField source="vlFR" dest="qiAndMAndVlSCFR"/>
+  <copyField source="vlFR" dest="qiAndMAndVlACFR"/>
+  <copyField source="vlFR" dest="qiAndMAndVlSwACFR"/>
+  
+  <copyField source="iHLFR" dest="iHLSwFR"/>
+  <copyField source="iHLFR" dest="iHLStFR"/>
+  <copyField source="iHLFR" dest="iHLSwStFR"/>
+  
+  <copyField source="mHLFR" dest="mHLSwFR"/>
+  <copyField source="mHLFR" dest="mHLStFR"/>
+  <copyField source="mHLFR" dest="mHLSwStFR"/>
+  
+  <copyField source="vlHLFR" dest="vlHLSwFR"/>
+  <copyField source="vlHLFR" dest="vlHLStFR"/>
+  <copyField source="vlHLFR" dest="vlHLSwStFR"/>
+
+  <copyField source="qEN" dest="qiEN"/>
+  <copyField source="qEN" dest="qiSwEN"/>
+  <copyField source="qEN" dest="qiStEN"/>
+  <copyField source="qEN" dest="qiSwStEN"/>
+  
+  <copyField source="qEN" dest="qiSCEN"/>
+  <copyField source="qEN" dest="qiACEN"/>
+  <copyField source="qEN" dest="qiSwACEN"/>
+  
+  <copyField source="qEN" dest="qSwEN"/>
+  <copyField source="qEN" dest="qStEN"/>
+  <copyField source="qEN" dest="qSwStEN"/>
+  
+  <copyField source="iEN" dest="qiEN"/>
+  <copyField source="iEN" dest="qiSwEN"/>
+  <copyField source="iEN" dest="qiStEN"/>
+  <copyField source="iEN" dest="qiSwStEN"/>
+  
+  <copyField source="iEN" dest="qiSCEN"/>
+  <copyField source="iEN" dest="qiACEN"/>
+  <copyField source="iEN" dest="qiSwACEN"/>
+  
+  <copyField source="iEN" dest="iSwEN"/>
+  <copyField source="iEN" dest="iStEN"/>
+  <copyField source="iEN" dest="iSwStEN"/>
+
+  <copyField source="qEN" dest="qiAndMEN"/>
+  <copyField source="qEN" dest="qiAndMSwEN"/>
+  <copyField source="qEN" dest="qiAndMStEN"/>
+  <copyField source="qEN" dest="qiAndMSwStEN"/>
+  
+  <copyField source="qEN" dest="qiAndMSCEN"/>
+  <copyField source="qEN" dest="qiAndMACEN"/>
+  <copyField source="qEN" dest="qiAndMSwACEN"/>
+  
+  <copyField source="iEN" dest="qiAndMEN"/>
+  <copyField source="iEN" dest="qiAndMSwEN"/>
+  <copyField source="iEN" dest="qiAndMStEN"/>
+  <copyField source="iEN" dest="qiAndMSwStEN"/>
+  
+  <copyField source="iEN" dest="qiAndMSCEN"/>
+  <copyField source="iEN" dest="qiAndMACEN"/>
+  <copyField source="iEN" dest="qiAndMSwACEN"/>
+  
+  <copyField source="qEN" dest="qiAndVlEN"/>
+  <copyField source="qEN" dest="qiAndVlSwEN"/>
+  <copyField source="qEN" dest="qiAndVlStEN"/>
+  <copyField source="qEN" dest="qiAndVlSwStEN"/>
+  
+  <copyField source="qEN" dest="qiAndVlSCEN"/>
+  <copyField source="qEN" dest="qiAndVlACEN"/>
+  <copyField source="qEN" dest="qiAndVlSwACEN"/>
+  
+  <copyField source="iEN" dest="qiAndVlEN"/>
+  <copyField source="iEN" dest="qiAndVlSwEN"/>
+  <copyField source="iEN" dest="qiAndVlStEN"/>
+  <copyField source="iEN" dest="qiAndVlSwStEN"/>
+  
+  <copyField source="iEN" dest="qiAndVlSCEN"/>
+  <copyField source="iEN" dest="qiAndVlACEN"/>
+  <copyField source="iEN" dest="qiAndVlSwACEN"/>
+  
+  <copyField source="qEN" dest="qiAndMAndVlEN"/>
+  <copyField source="qEN" dest="qiAndMAndVlSwEN"/>
+  <copyField source="qEN" dest="qiAndMAndVlStEN"/>
+  <copyField source="qEN" dest="qiAndMAndVlSwStEN"/>
+  
+  <copyField source="qEN" dest="qiAndMAndVlSCEN"/>
+  <copyField source="qEN" dest="qiAndMAndVlACEN"/>
+  <copyField source="qEN" dest="qiAndMAndVlSwACEN"/>
+  
+  <copyField source="iEN" dest="qiAndMAndVlEN"/>
+  <copyField source="iEN" dest="qiAndMAndVlSwEN"/>
+  <copyField source="iEN" dest="qiAndMAndVlStEN"/>
+  <copyField source="iEN" dest="qiAndMAndVlSwStEN"/>
+  
+  <copyField source="iEN" dest="qiAndMAndVlSCEN"/>
+  <copyField source="iEN" dest="qiAndMAndVlACEN"/>
+  <copyField source="iEN" dest="qiAndMAndVlSwACEN"/>
+
+  <copyField source="mEN" dest="mSwEN"/>
+  <copyField source="mEN" dest="mStEN"/>
+  <copyField source="mEN" dest="mSwStEN"/>
+  
+  <copyField source="mEN" dest="mSCEN"/>
+  <copyField source="mEN" dest="mACEN"/>
+  <copyField source="mEN" dest="mSwACEN"/>
+
+  <copyField source="mEN" dest="qiAndMEN"/>
+  <copyField source="mEN" dest="qiAndMSwEN"/>
+  <copyField source="mEN" dest="qiAndMStEN"/>
+  <copyField source="mEN" dest="qiAndMSwStEN"/>
+  
+  <copyField source="mEN" dest="qiAndMSCEN"/>
+  <copyField source="mEN" dest="qiAndMACEN"/>
+  <copyField source="mEN" dest="qiAndMSwACEN"/>
+
+  <copyField source="mEN" dest="mAndVlEN"/>
+  <copyField source="mEN" dest="mAndVlSwEN"/>
+  <copyField source="mEN" dest="mAndVlStEN"/>
+  <copyField source="mEN" dest="mAndVlSwStEN"/>
+  
+  <copyField source="mEN" dest="mAndVlSCEN"/>
+  <copyField source="mEN" dest="mAndVlACEN"/>
+  <copyField source="mEN" dest="mAndVlSwACEN"/>
+
+  <copyField source="mEN" dest="qiAndMAndVlEN"/>
+  <copyField source="mEN" dest="qiAndMAndVlSwEN"/>
+  <copyField source="mEN" dest="qiAndMAndVlStEN"/>
+  <copyField source="mEN" dest="qiAndMAndVlSwStEN"/>
+  
+  <copyField source="mEN" dest="qiAndMAndVlSCEN"/>
+  <copyField source="mEN" dest="qiAndMAndVlACEN"/>
+  <copyField source="mEN" dest="qiAndMAndVlSwACEN"/>
+
+  <copyField source="vlEN" dest="vlSwEN"/>
+  <copyField source="vlEN" dest="vlStEN"/>
+  <copyField source="vlEN" dest="vlSwStEN"/>
+  
+  <copyField source="vlEN" dest="vlSCEN"/>
+  <copyField source="vlEN" dest="vlACEN"/>
+  <copyField source="vlEN" dest="vlSwACEN"/>
+
+  <copyField source="vlEN" dest="qiAndVlEN"/>
+  <copyField source="vlEN" dest="qiAndVlSwEN"/>
+  <copyField source="vlEN" dest="qiAndVlStEN"/>
+  <copyField source="vlEN" dest="qiAndVlSwStEN"/>
+  
+  <copyField source="vlEN" dest="qiAndVlSCEN"/>
+  <copyField source="vlEN" dest="qiAndVlACEN"/>
+  <copyField source="vlEN" dest="qiAndVlSwACEN"/>
+
+  <copyField source="vlEN" dest="mAndVlEN"/>
+  <copyField source="vlEN" dest="mAndVlSwEN"/>
+  <copyField source="vlEN" dest="mAndVlStEN"/>
+  <copyField source="vlEN" dest="mAndVlSwStEN"/>
+  
+  <copyField source="vlEN" dest="mAndVlSCEN"/>
+  <copyField source="vlEN" dest="mAndVlACEN"/>
+  <copyField source="vlEN" dest="mAndVlSwACEN"/>
+
+  <copyField source="vlEN" dest="qiAndMAndVlEN"/>
+  <copyField source="vlEN" dest="qiAndMAndVlSwEN"/>
+  <copyField source="vlEN" dest="qiAndMAndVlStEN"/>
+  <copyField source="vlEN" dest="qiAndMAndVlSwStEN"/>
+  
+  <copyField source="vlEN" dest="qiAndMAndVlSCEN"/>
+  <copyField source="vlEN" dest="qiAndMAndVlACEN"/>
+  <copyField source="vlEN" dest="qiAndMAndVlSwACEN"/>
+
+  <copyField source="iHLEN" dest="iHLSwEN"/>
+  <copyField source="iHLEN" dest="iHLStEN"/>
+  <copyField source="iHLEN" dest="iHLSwStEN"/>
+  
+  <copyField source="mHLEN" dest="mHLSwEN"/>
+  <copyField source="mHLEN" dest="mHLStEN"/>
+  <copyField source="mHLEN" dest="mHLSwStEN"/>
+  
+  <copyField source="vlHLEN" dest="vlHLSwEN"/>
+  <copyField source="vlHLEN" dest="vlHLStEN"/>
+  <copyField source="vlHLEN" dest="vlHLSwStEN"/>
+ 
+
+</schema>

@@ -1,0 +1,72 @@
+<?php
+/**
+ * Concept facets
+ * 
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+$translate = Zend_Registry::get('translateFront');
+$clientSettings = BDQ_Settings_Client::getInstance();
+if ($clientSettings->displayConcept):
+?>	
+<li id="conceptFacet">
+	<?php 
+	$this->facetGripStart();
+	?>
+	<span class="toggler<?php if ($clientSettings->conceptFacetDisplay): ?> down<?php endif;?>">&nbsp;</span>
+	<span class="title"><?php echo $translate->_('fr0210000000'); ?></span>
+	<?php 
+	$this->facetGripEnd();
+	?>
+	<div class="toggled<?php if (empty($this->conceptFacets)): ?> noResult<?php endif; ?>"<?php if ( ! $clientSettings->conceptFacetDisplay):?> style="display:none;"<?php endif;?>>
+	<?php 
+		if ( ! empty($this->conceptFacets)):
+	?>
+		<table class="filter" id="conceptFilters" cellpadding="0" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="checkbox" title="<?php echo $translate->_('fr0210000050');
+
+					?>">&nbsp;</th>
+					<th class="title" title="<?php echo $translate->_('fr0210000100');
+
+					?>">&nbsp;</th>
+					<th class="count" title="<?php echo $translate->_('fr0210000150');
+
+					?>">&nbsp;</th>
+					<th class="invisible" title="<?php echo $translate->_('fr0210000200');
+
+					?>">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+			<?php
+			$l = count($this->conceptFacets);
+			$showMore = false;
+			
+			for ($i = 0; $i < $l; $i += 3):
+				$id = $this->conceptFacets[$i];
+				$concept = $this->conceptFacets[$i + 1];
+				$count = $this->conceptFacets[$i + 2];
+				$checked = array_search($id, $this->conceptFilters) !== false;
+			?>
+			<tr<?php if ($i / 3 >= MAX_FACETS_DISPLAY): ?> style="display:none;"<?php endif; ?>>
+				<td class="checkbox"><input type="checkbox" id="conceptCheckBox_<?php echo $id ?>" class="conceptFilter resultFilter" name="conceptFilters[]" value="<?php echo $id; ?>"<?php if ($checked) { echo ' checked="checked"'; }?>/></td>
+				<td class="title"><label for="conceptCheckBox_<?php echo $id ?>"><?php echo $concept;?></label></td>
+				<td class="count"></td>
+				<td class="invisible"><?php echo normalize($concept);?></td>
+			</tr>
+			<?php 
+			endfor;
+			?>
+			</tbody>
+		</table>
+		<?php
+		endif;
+		?>
+	</div>
+	<div class="clear"></div>
+</li>
+<?php 
+endif;
+?>

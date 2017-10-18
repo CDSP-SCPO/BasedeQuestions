@@ -1,0 +1,22 @@
+<?php 
+$translate = Zend_Registry::get('translateAdmin');
+echo $this->doctype(); 
+?> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>R&eacute;seau Quetelet - Base de question</title>
+		<!--
+		<?php echo $this->headLink()->appendStylesheet('/css/global.css') ?>
+		 -->
+		<?php echo $this->headScript()->appendFile('/scripts/jqueryAndPlugins.js') ?>
+	</head>
+	<body>
+		<div id="header">
+			<h1><?php echo $translate->_('Connexion')?></h1>
+		</div>
+		<div id="adminBody">
+			<?php echo $this->layout()->content ?>
+		</div>
+	</body>
+</html>

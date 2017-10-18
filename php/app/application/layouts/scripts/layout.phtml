@@ -1,0 +1,163 @@
+<?php
+/**
+ * Front layout
+ * 
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+$clientSettings = BDQ_Settings_Client::getInstance();
+$translationLanguage = Zend_Registry::get('translationLanguageGuiCurrent');
+echo $this->doctype();
+?> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $translationLanguage->get_code(); ?>">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<meta http-equiv="Content-Style-Type" content="text/css"/>
+      	<?php echo $this->headMeta() ?>
+		<title><?php echo isset($this->layout()->title) ? $this->layout()->title : 'Réseau Quetelet - Base de question'; ?></title>
+		<?php 
+      	echo $this->headLink()->appendStylesheet('/css/global.css');
+      	?>
+      	<style type="text/css">
+			body{width:<?php echo $clientSettings->bodySize; ?>;}
+		<?php 
+		if ( ! $this->placeholder('fixedRightColumn')->getValue()):
+		?>
+			#contentColumn{margin-left: <?php echo $clientSettings->refineMenuSize; ?>;}
+			#leftColumn{width: <?php echo $clientSettings->refineMenuSize; ?>;}
+		<?php 
+		else:
+		?>
+			#contentColumn{margin-right: <?php echo $rcWidth = round($clientSettings->bodySize / 3); ?>px;}
+			#rightColumn{
+				width: <?php echo $rcWidth - 7; ?>px;
+				margin-left: -<?php echo $rcWidth + 7; ?>px;
+			}
+		<?php 
+		endif;
+		?>
+		</style>
+		<!--[if IE]><link href="/css/ie.css" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
+		<!--[if lt IE 8]><link href="/css/ielt8.css" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
+		<!--[if lt IE 7]><link href="/css/ielt7.css" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
+		<?php
+			$this->headScript()->prependFile('/scripts/jqueryAndPlugins.min.js'); 
+			echo $this->headScript();
+		?>
+		<script type="text/javascript" src="/scripts/BDQGrips.min.js"></script>
+		<?php
+		$route = Zend_Controller_Front::getInstance()->getRouter()->getCurrentRouteName();
+		$alertedRoutes = array(
+			'solrsearchHome',
+			'solradvancedSearch',
+			'solrsearchResults',
+		);
+
+		if ($studyLangAlert = in_array($route, $alertedRoutes))
+		{
+			echo $this->partial(
+				'solrsearch/elements/studyLangAlert.phtml',
+				array(
+					'route' => $route,
+				)
+			);
+		}
+		?>
+		<script type="text/javascript">
+		//<![CDATA[
+		$(document).ready(function(){
+
+			if ( ! $.support.borderRadius)
+			{
+				var style = '<style type="text/css">';
+				//Round box
+				style += '.b1t div{background:url(/img/css/box/tl.png) no-repeat top left;}.b1t{background:url(/img/css/box/tr.png) no-repeat top right;}.b1b div {background:url(/img/css/box/bl.png) no-repeat bottom left;}.b1b{background:url(/img/css/box/br.png) no-repeat bottom right;}';
+				//Facet grip 
+				style += '.facetHeader .b1t div{background:url(/img/css/box2/tl.png) no-repeat top left;}.facetHeader .b1t{background:url(/img/css/box2/tr.png) no-repeat top right;}';
+				style += '</style>';
+				$(style).appendTo('head');
+			}
+
+			<?php 
+			if ( ! $this->placeholder('fixedRightColumn')->getValue()):
+			?>
+			BDQGrips.init();
+			<?php 
+			else:
+			?>
+			BDQGrips.show();
+			BDQGrips.disable();
+			<?php
+			endif;
+			?>
+			BDQGrips.resizeGrips();
+		});
+		//]]>
+		</script>
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://www.reseau-quetelet.cnrs.fr/PIWIK/" : "http://www.reseau-quetelet.cnrs.fr/PIWIK/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+
+} catch( err ) {}
+</script>
+		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="shortcut icon" type="image/png" href="/favicon.png" />
+	</head>
+	<body>
+		<div id="top"></div>
+		<!-- min-width on IE 6 -->
+		<!--[if lt IE 7]><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td><img src="/img/ie6.gif" width="880" height="1" alt="" /><td></tr><tr><td><![endif]-->
+		<div id="mainContainer" class="<?php echo $this->placeholder('mainContainerClass'); ?>">
+			<div id="topSection">
+				<div class="innerTube">
+					<?php 
+						echo $this->partial(
+							'topMenu.phtml',
+							array
+							(
+								'translationLanguages' => $this->translationLanguages
+							)
+						),
+						$this->partial(
+							'layout/logosmall.phtml'
+						),
+						$this->placeholder('topSection');
+					?>
+				</div>
+			</div>
+			<div id="contentWrapper">
+				<div id="contentColumn">
+					<div class="rightTube <?php echo $this->placeholder('rightTubeClass');?>">
+						<?php echo $this->layout()->content; ?>
+					</div>
+				</div>
+			</div>
+			<?php 
+			if ( ! $this->placeholder('fixedRightColumn')->getValue()):
+			?>
+			<div id="leftColumn">
+				<div class="leftTube <?php echo $this->placeholder('leftTubeClass'); ?>">
+					<?php echo $this->placeholder('leftColumn');?>
+				</div>
+			</div>
+			<?php 
+			else:
+			?>
+			<div id="rightColumn">
+				<div class="leftTube <?php echo $this->placeholder('rightTubeClass'); ?>">
+					<?php echo $this->placeholder('rightColumn');?>
+				</div>
+			</div>
+			<?php 
+			endif;
+			?>
+		</div>
+		<!--[if lt IE 7]></td></tr></table><![endif]-->
+	</body>
+</html>

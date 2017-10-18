@@ -1,0 +1,21 @@
+<?php 
+$translate = Zend_Registry::get('translateFront');
+?>
+<div id="topSection">
+	<div class="innerTube">
+		<?php 
+			echo $this->partial
+			(
+				'topMenu.phtml',
+				array
+				(
+					'translationLanguages' => $this->translationLanguages
+				)
+			),
+			$this->partial
+			(
+				'layout/logosmall.phtml'
+			)
+		?>
+	</div>
+</div>

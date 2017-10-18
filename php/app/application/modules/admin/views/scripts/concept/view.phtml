@@ -1,0 +1,84 @@
+<?php 
+$date = new Zend_Date;
+?>
+<h2><?php echo $this->translate->_('fr0230000000') ?></h2>
+<ul>
+	<li>
+		<a href="<?php echo $this->url(array(), 'adminconceptIndex');?>" class="index">
+			<?php echo $this->translate->_('fr0230000010') ?>
+		</a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array(), 'adminconceptEdit');?>" class="edit">
+			<?php echo $this->translate->_('fr0230000020') ?>
+		</a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array(), 'adminconceptConfirmdelete');?>" class="modal delete">
+			<?php echo $this->translate->_('fr0230000030') ?>
+		</a>
+	</li>
+</ul>
+<dl class="view">
+<?php 
+	foreach($this->concept as $concept):
+?>
+	<dt>
+	<?php 
+		echo $this->translate->_('fr0230000040') . ' - ' . $concept['lang_label'];
+	?>
+	</dt>
+	<dd>
+	<?php 
+	 	echo stripslashes($concept['title'])
+	 ?>
+	</dd>
+<?php 
+	endforeach;
+?>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0230000050')
+		?>
+	</dt>
+	<dd>
+	<?php 
+	 	$date->set($concept['created'], Zend_Date::ISO_8601);
+		echo $date->get('dd/MM/YYYY HH:mm');
+	 	
+	 ?>
+	</dd>
+	<?php 
+	if (isset($concept['modified'])):
+	?>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0230000060')
+		?>
+	</dt>
+	<dd>
+	<?php 
+	 	$date->set($concept['modified'], Zend_Date::ISO_8601);
+		echo $date->get('dd/MM/YYYY HH:mm');
+	 ?>
+	</dd>
+	<?php 
+	endif;
+	?>
+	<?php 
+		if (isset($this->conceptlist)):
+	?>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0230000070');
+		?>
+	</dt>
+	<dd>
+		<?php 
+			echo stripslashes($this->conceptlist['title']);
+		?>
+	</dd>
+	<?php 
+		endif;
+	?>
+</dl>

@@ -1,0 +1,16 @@
+<?php 
+$translate = Zend_Registry::get('translateFront');
+?>
+<script type="text/javascript" src="/scripts/basket.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function() {
+	basket.init({
+		'translate': {
+			'add': "<?php echo $translate->_('fr0260000000'); ?>",
+			'remove': "<?php echo $translate->_('fr0260000050'); ?>"
+		}
+	});
+});
+//]]>
+</script>

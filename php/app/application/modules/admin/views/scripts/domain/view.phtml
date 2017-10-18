@@ -1,0 +1,104 @@
+<?php 
+$date = new Zend_Date;
+?>
+<h2><?php echo $this->translate->_('fr0105000000') ?></h2>
+<ul>
+	<li>
+		<a href="<?php echo $this->url(array(), 'domainIndex');?>" class="index">
+			<?php echo $this->translate->_('fr0105000010') ?>
+		</a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array(), 'domainEdit');?>" class="edit">
+			<?php echo $this->translate->_('fr0105000020') ?>
+		</a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array(), 'domainConfirmdelete');?>" class="modal delete">
+			<?php echo $this->translate->_('fr0105000030') ?>
+		</a>
+	</li>
+</ul>
+<dl class="view">
+<?php 
+	foreach($this->domain as $domain):
+?>
+	<dt>
+	<?php 
+		echo $this->translate->_('fr0105000040') . ' - ' . $domain['lang_label'];
+	?>
+	</dt>
+	<dd>
+	<?php 
+	 	echo stripslashes($domain['title']);
+	 ?>
+	</dd>
+	<dt>
+	<?php 
+		echo $this->translate->_('fr0105000050') . ' - ' . $domain['lang_label'];
+	?>
+	</dt>
+	<dd>
+	<?php 
+	 	echo (isset($domain['description']) && ! empty($domain['description'])) ? 
+	 		stripslashes($domain['description'])
+	 		:
+	 		$this->translate->_('fr0105000060');
+	 ?>
+	</dd>
+<?php 
+	endforeach;
+?>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0105000070');
+		?>
+	</dt>
+	<dd>
+	<?php 
+	 	$date->set($domain['created'], Zend_Date::ISO_8601);
+		echo $date->get('dd/MM/YYYY HH:mm');
+	 	
+	 ?>
+	</dd>
+	<?php 
+	if (isset($domain['modified'])):
+	?>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0105000080')
+		?>
+	</dt>
+	<dd>
+	<?php 
+	 	$date->set($domain['modified'], Zend_Date::ISO_8601);
+		echo $date->get('dd/MM/YYYY HH:mm');
+	 ?>
+	</dd>
+	<?php 
+	endif;
+	?>
+</dl>
+<?php 
+	if (count($this->studiesGroupedByLanguages) > 0):
+?>
+<?php
+foreach ($this->studiesGroupedByLanguages as $studyGroup): 
+?>
+<h3><?php echo $this->translate->_('fr0105000090'), ' - ', $studyGroup['language_code']; ?></h3>
+
+<ul>
+<?php
+foreach ($studyGroup['titles'] as $title): 
+?>
+	<li><?php echo stripslashes($title['title']); ?></li>
+<?php 
+endforeach;
+?>
+</ul>
+<?php 
+endforeach;
+?>
+<?php 
+	endif;
+?>

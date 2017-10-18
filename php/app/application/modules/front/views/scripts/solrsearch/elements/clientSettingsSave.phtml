@@ -1,0 +1,12 @@
+<?php 
+$translate = Zend_Registry::get('translateFront');
+?>
+<table>
+	<tr>
+		<td><?php echo $translate->_('fr0170000000');?></td>
+		<td align="right" style="width:320px;">
+			<a href="<?php echo $this->url(array(), 'solrsearchresetclientSettings');?>"><?php echo $translate->_('fr0170000050');?></a>
+			<input type="submit" class="saveSettingsSubmit" value="<?php echo $translate->_('fr0170000100');?>"/>
+		</td>
+	</tr>
+</table>

@@ -1,0 +1,107 @@
+<?php 
+$translate = Zend_Registry::get('translateAdmin');
+?>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#questionnaire_file_name-label').next().find('input[type=file]').wrap('<div class="fileInput"/>');
+	$('#questionnaire_file_name-label').next().find('div.fileInput').each(function(index, element){
+
+		if (index > 0)
+		{
+			$(this).hide();
+		}
+
+	});
+	$('#questionnaire_file_name-label').next().append(
+		"<div id='questionnaireAdd'><?php echo $translate->_('fr0170000000');?></div>"
+	);
+	$('#questionnaire_file_name-label').next().find('div.fileInput').each(function(index, elt){
+		$(this).prepend("<br/>")
+				.prepend("<span><?php echo $translate->_('fr0170000010');?></span>")
+				.prepend("<br/>")
+				.prepend("<input type='text' id='label_" + index + "' name='questionnaire_title[]' class='questionnaire_label' />")
+				.prepend("<br/>")
+				.prepend("<label for='label_" + index + "' /><?php echo $translate->_('fr0170000020');?></label>")
+				.append("<input type=\"hidden\" name=\"questionnaire_id[]\" />")
+				.append("<span class='clearFileInput'><?php echo $translate->_('fr0170000030');?></span>");
+	});
+	$('#questionnaire_file_name-label').next().find('div.fileInput').slice(1).append(
+		"<div class='questionnaireRemove'><?php echo $translate->_('fr0170000040');?></div>"
+	);
+	$('#questionnaireAdd').click(function(){
+		var found = false;
+		$('#questionnaire_file_name-label').next().find('div.fileInput').each(function(index, element)
+				{
+	
+					if ($(this).css('display') == 'none' && ! found)
+					{
+						$(this).show();
+						found = true;
+					}
+	
+		});
+	
+		if ( ! found)
+		{
+			alert("<?php echo $translate->_('fr0170000050');?>");
+		}
+	
+	});
+	$('div.questionnaireRemove').live('click', function(){
+		$(this).closest('div.fileInput').hide().find('input').val('');
+	});
+	$('#questionnaire_url').focus(function(){
+		var error = false;
+
+		$('div.fileInput input.questionnaire_label, div.fileInput input[type=file]').each(function(index, elt){
+
+			if (error)
+			{
+				return;
+			}
+
+			if ($(this).val() != '')
+			{
+
+				if ($(this).hasClass('questionnaire_label'))
+				{
+					$(this).focus();
+				}
+
+				else
+				{
+					$(this).closest('div.fileInput').find('input.questionnaire_label').focus();
+					$(this).closest('div.fileInput').find('span.clearFileInput').addClass('toReset');
+				}
+				
+				error = true;
+			}
+
+		});
+
+		if (error)
+		{
+			alert("<?php echo addslashes($translate->_('fr0170000060'));?>");
+		}
+
+	});
+	$('span.clearFileInput').click(function(){
+		$(this).prev('input[type=file]').val('');
+
+		if ($(this).hasClass('toReset'))
+		{
+			$(this).removeClass('toReset');
+		}
+		
+	});
+	$('div.fileInput input.questionnaire_label, div.fileInput input[type=file]').focus(function(){
+
+		if ($('#questionnaire_url').val() != '')
+		{
+			$('#questionnaire_url').focus().select();
+			alert("<?php echo addslashes($translate->_('fr0170000070'));?>");
+		}
+
+	});
+});
+</script>

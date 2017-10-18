@@ -1,0 +1,196 @@
+<?php
+/**
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+
+$this->layout()->title = $this->translate->_('fr0250000000');
+$this->placeholder('mainContainerClass')->set('oneColumn'); // one column layout
+$this->placeholder('topSection')->set(
+	'<h1>' . $this->translate->_('fr0250000050') . '</h1>'
+);
+$this->roundBoxStart(array('infoBox', 'studyList'));
+$this->resultsLink();
+$l = count($this->studiesByLang);
+$i = 0;
+?>
+<p>
+	<?php
+	echo sprintf(
+		$this->translate->_('fr0250000051'),
+		$this->ddiFileCounts[0]['count'] + $this->ddiFileCounts[1]['count'],
+		$this->ddiFileCounts[0]['count'],
+		strtolower($this->ddiFileCounts[0]['language_label']),
+		$this->ddiFileCounts[1]['count'],
+		strtolower($this->ddiFileCounts[1]['language_label']),
+		$this->variableCount['count']
+	);
+	?>
+</p>
+<?php
+while(list($langLabel, $studies) = each($this->studiesByLang)):
+?>
+<h2><?php echo $this->translate->_('fr0250000100'), ' ', strtolower($langLabel); ?></h2>
+<div>
+	<table id="studyListTable_<?php echo $i; ?>" class="display" cellspacing="0">
+		<thead>
+			<tr>
+				<th class="title study sorting"><?php echo $this->translate->_('fr0250000150');?></th>
+				<th class="invisible"></th>
+				<th class="title producer sorting"><?php echo $this->translate->_('fr0250000200');?></th>
+				<th class="invisible"></th>
+				<th class="title studySerie sorting"><?php echo $this->translate->_('fr0250000250');?></th>
+				<th class="invisible"></th>
+				<th class="title diffuser sorting"><?php echo $this->translate->_('fr0250000300');?></th>
+				<th class="invisible"></th>
+				<th class="title theme sorting"><?php echo $this->translate->_('fr0250000350');?></th>
+				<th class="invisible"></th>
+			</tr>
+		</thead>
+		<tbody>
+	<?php 
+	$l = count($studies);
+	
+	for ($j = 0; $j < $l; $j++):
+	?>
+			<tr<?php if($j >= MAX_STUDY_DISPLAY):?> style="display:none;"<?php endif;?>>
+				<td>
+		<?php
+		$target = '';
+		$url = $this->url(array('id' => $studies[$j]['id']), 'ddifileDetails');
+		?>
+					<a<?php echo $target;?> href="<?php echo $url;?>"><?php  echo $studies[$j]['study_title']; ?></a>
+				</td>
+				<td>
+					<?php echo normalize($studies[$j]['study_title']);?>
+				</td>
+				<td>
+		<?php 
+		$domainIds = explode(GC_MULTIPLE_VALUE_SEPARATOR, $studies[$j]['study_domain_id']);
+		$domainIds = array_unique($domainIds);
+		$domainTitles = explode(GC_MULTIPLE_VALUE_SEPARATOR, $studies[$j]['study_domain']);
+		$domainTitles = array_unique($domainTitles);
+		$l2 = count($domainIds);
+		
+		for ($i = 0; $i < $l2; $i++):
+			$domainId = $domainIds[$i];
+			$domainTitle = $domainTitles[$i];
+		?>
+					<a href="<?php echo $this->url(array('id' => $domainId,),'domainDetails'); ?>"><?php echo $domainTitle; ?></a><br/>
+		<?php
+		endfor;
+		?>
+				</td>
+				<td><?php echo normalize(str_replace(GC_MULTIPLE_VALUE_SEPARATOR, '', $studies[$j]['study_domain']));?></td>
+				<td>
+			<?php 
+			if($studies[$j]['study_study_serie_id']):
+			?>
+					<a href="<?php echo $this->url(array('id' => $studies[$j]['study_study_serie_id']),	'studyserieDetails')?>">
+				<?php 
+				echo $studies[$j]['study_serie_title'];
+				?>
+					</a>
+			<?php 
+			endif;
+			?>
+				</td>
+				<td><?php echo normalize($studies[$j]['study_serie_title']);?></td>
+				<td>
+			<?php 
+			$sDas = explode(GC_MULTIPLE_VALUE_SEPARATOR, $studies[$j]['study_distributor_abbreviation']);
+			$sDas = array_unique($sDas);
+			$l2 = count($sDas);
+			
+			for ($i = 0; $i < $l2; $i++):
+				$sDa = $sDas[$i];
+				echo $sDa, '<br/>';
+			endfor;
+			?>
+				</td>
+				<td><?php echo normalize(str_replace(GC_MULTIPLE_VALUE_SEPARATOR, '', $studies[$j]['study_distributor_abbreviation']));?></td>
+				<td>
+			<?php
+			$cl = $studies[$j]['study_concept_list'];
+				
+			if ($cl):
+			?>
+					<a href="<?php echo $this->url(
+						array(
+							'id' => $studies[$j]['study_concept_list_id'],
+							'searchLang' => $studies[$j]['study_code_solr'],
+						),
+						'conceptlistView');?>"><?php echo $cl; ?></a>
+			<?php 
+			endif;
+			?>
+				</td>
+				<td><?php echo normalize($studies[$j]['study_concept_list']);?></td>
+			</tr>
+	<?php 
+	endfor;
+	?>
+		</tbody>
+	</table>
+</div>
+	<?php 
+	if ($i < $l - 1):
+	?>
+<br/>
+	<?php 
+	endif;
+	?>
+<div style="clear:both"></div>
+<?php
+$i++;
+endwhile;
+
+$this->roundBoxEnd();
+?>
+<script type="text/javascript" src="/scripts/dataTable.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+	//Datatable initialization
+	$('table.display').each(function(){
+		var id = $(this).attr('id');
+		$(this).dataTable({
+			"aaSorting": [[2, "asc"], [4, "asc"], [0, "asc"]],
+			"oLanguage": {
+				"sLengthMenu": "<?php echo $this->translate->_('fr0250000400'); ?>",
+				"sZeroRecords": "<?php echo $this->translate->_('fr0250000450'); ?>",
+				"sInfo": "<?php echo $this->translate->_('fr0250000500'); ?>",
+				"sInfoEmpty": "<?php echo $this->translate->_('fr0250000550'); ?>",
+				"sInfoFiltered": "<?php echo $this->translate->_('fr0250000600'); ?>",
+				"sSearch" : "<?php echo $this->translate->_('fr0250000650'); ?>",
+				"oPaginate":{
+					"sPrevious": "&lt;<?php echo $this->translate->_('fr0250000700'); ?>",
+					"sNext": "<?php echo $this->translate->_('fr0250000750'); ?>&gt;"
+				}
+			},
+			"iDisplayLength":<?php echo MAX_STUDY_DISPLAY ?>,
+			"sPaginationType": "input",
+			"aoColumns": [
+							{ sType: 'html'},
+							{"bVisible": false},
+							{ sType: 'html'},
+							{"bVisible": false},
+							{ sType: 'html'},
+							{"bVisible": false},
+							{ sType: 'string'},
+							{"bVisible": false},
+							{ sType: 'string'},
+							{"bVisible": false}
+                		],
+			"fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull)
+			{
+				$(nRow).css("display", "");
+				return nRow;
+        	},
+        	"bStateSave": true,
+        	"iCookieDuration": 36000000
+		});
+	});
+});
+//]]>
+</script>

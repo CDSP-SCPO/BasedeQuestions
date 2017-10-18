@@ -1,0 +1,61 @@
+﻿<?php
+/**
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+
+$translate = Zend_Registry::get('translateFront');
+$route = Zend_Controller_Front::getInstance()->getRouter()->getCurrentRouteName();
+
+if ($this->pageCount && $this->pageCount > 1):
+
+	if ($this->pageCount):
+?>
+<span class="paginationControl">
+	<?php echo $translate->_('fr0175000000');?> <strong><?php echo $this->firstItemNumber;?> - <?php echo $this->lastItemNumber;?></strong>
+	<?php echo $translate->_('fr0175000050');?> <strong><?php echo $this->totalItemCount;?></strong>
+	-
+		<?php
+		if (isset($this->previous)): 
+		?>
+	<a href="<?php echo $this->url(array('page' => $this->previous,),$route);?>">&lt;<?php echo $translate->_('fr0175000100');?></a>
+		<?php
+		endif;
+		
+		if($this->current > 1 && $this->firstPageInRange > 1):
+		?>
+	<a href="<?php echo $this->url(array('page' => 1,),$route); ?>"><?php echo 1?></a> ...
+		<?php
+		endif;
+
+		foreach ($this->pagesInRange as $page):
+
+			if ($page != $this->current):
+		?>
+		<a href="<?php echo $this->url(array('page' => $page,),$route);?>"><?php echo $page; ?></a>
+		<?php
+			else:
+		?>
+		<span><?php echo $page; ?></span>
+		<?php
+			endif;
+		
+		endforeach;
+
+		if($this->current != $this->last && $this->last > $this->lastPageInRange): ?>
+		... <a href="<?php echo $this->url(array('page' => $this->last),$route);?>"><?php echo $this->last; ?></a>
+	<?php
+		endif;
+
+		if (isset($this->next)):
+	?>
+	<a href="<?php echo $this->url(array('page' => $this->next,),$route);?>"><?php echo $translate->_('fr0175000150');?>&gt;</a>
+		<?php
+		endif;
+		?>
+</span>
+	<?php
+	endif;
+
+endif;
+?>

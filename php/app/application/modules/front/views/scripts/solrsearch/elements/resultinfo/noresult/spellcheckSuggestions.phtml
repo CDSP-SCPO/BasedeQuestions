@@ -1,0 +1,42 @@
+<?php 
+$translate = Zend_Registry::get('translateFront');
+?>
+<div class="resultInfoBox">
+	<?php echo $translate->_('fr0145000000'); ?><b><?php echo $this->query ?></b>
+</div>
+	
+<div class="noResultInfoBox">
+	<p>
+	<?php 
+	$l = count($this->validQueries);
+	echo ($l == 1) ? 
+	$translate->_('fr0145000050')
+	:
+	$translate->_('fr0145000100')
+	?>
+	</p>
+	<ul>
+	<?php 
+	
+	while (list($_, $q) = each($this->validQueries)):
+		$_q = explode(URL_PARAM_SEPARATOR, $q);
+		$q = $_q[0];
+		$c = $_q[1];
+	?>
+		<li>
+			<a class="yellowAnchor" href="<?php echo $this->url(
+				array(
+				'query' => rawurlencode($q)
+				),
+				'solrsearchResults'
+			);?>"><?php 
+			echo $q;
+			?></a>
+			-
+			<?php echo "$c ", ($c > 0 ? $translate->_('fr0145000150') : $translate->_('fr0145000200'));?>
+	<?php 
+	endwhile;
+	?>
+		</li>
+	</ul>
+</div>

@@ -1,0 +1,142 @@
+<?php 
+$translate = Zend_Registry::get('translateFront');
+?>
+<div class="resultInfoBox">
+	<?php 
+		echo $translate->_('fr0160000000');
+	?>
+	<?php 
+	$l = count($this->advancedSearchConditions);
+	?>
+	<ul id="advancedSearchFilters">
+	<?php
+	
+		for ($i = 0; $i < $l; $i++):
+	?>
+		<li>
+		<?php 
+			switch ($this->advancedSearchConditions[$i]['target'])
+			{
+				
+				case SEARCH_QUESTION:
+					echo $translate->_('fr0160000050');
+					break;
+					
+				case SEARCH_MODALITIES:
+					echo $translate->_('fr0160000100');
+					break;
+					
+				case SEARCH_VARIABLE:
+					echo $translate->_('fr0160000150');
+					break;
+				
+				case SEARCH_QUESTION | SEARCH_MODALITIES | SEARCH_VARIABLE:
+					echo $translate->_('fr0160000200');
+					break;
+	
+			}
+			
+			switch ($this->advancedSearchConditions[$i]['operator'])
+			{
+				
+				case ADVANCED_SEARCH_AND_OPERATOR:
+					echo $translate->_('fr0160000250');
+					break;
+					
+				case ADVANCED_SEARCH_OR_OPERATOR:
+					echo $translate->_('fr0160000300');
+					break;
+					
+				case ADVANCED_SEARCH_NOT_OPERATOR:
+					echo $translate->_('fr0160000350');
+					break;
+					
+			}
+			
+			echo ' ';
+			
+			switch ($this->advancedSearchConditions[$i]['analysis'])
+			{
+				
+				case ADVANCED_SEARCH_ANALYSIS_ALL_TERMS_REQUIRED_TRUE:
+					echo $translate->_('fr0160000400');
+					break;
+					
+				case ADVANCED_SEARCH_ANALYSIS_ALL_TERMS_REQUIRED_FALSE:
+					echo $translate->_('fr0160000450');
+					break;
+					
+				case ADVANCED_SEARCH_ANALYSIS_PHRASE_TRUE:
+					echo $translate->_('fr0160000500');
+					break;
+					
+				case ADVANCED_SEARCH_ANALYSIS_STARTS_WITH:
+					echo $translate->_('fr0160000550');
+					break;
+					
+				case ADVANCED_SEARCH_ANALYSIS_LEVENSHTEIN:
+					echo 	$translate->_('fr0160000600'),
+							', ',
+							$translate->_('fr0160000650'),
+							'0.',
+							$this->advancedSearchConditions[$i]['levenshtein'];
+					
+					break;
+					
+				case ADVANCED_SEARCH_ANALYSIS_DISTANCE:
+					echo 	$translate->_('fr0160000700'),
+							' ',
+							$this->advancedSearchConditions[$i]['distanceValue'],
+							' ',
+							$translate->_('fr0160000750');
+					break;
+	
+			}
+			
+			echo	' : ',
+					'<b>', $this->advancedSearchConditions[$i]['keyword'], '</b>';
+		?>
+		
+		</li>
+<?php 
+	endfor;
+?>
+	</ul>
+	<a class="yellowAnchor" href="<?php 	
+		echo $this->url
+		(
+			array
+			(
+				'searchLang' => $this->searchLang,
+				'domainId' => $this->domainId,
+				'targets' => $this->targetsParam,
+				'nots' => $this->notsParam,
+				'analysis' => $this->analysisParam,
+				'distanceValues' => $this->distanceValuesParam,
+				'keywords' => rawurlencode($this->keywordsParam),
+				'levenshteins' => $this->levenshteinsParam,
+				'operators' => $this->operatorsParam
+			),
+			'solradvancedSearch'
+		); ?>"><?php echo $translate->_('fr0160000800'); ?></a>
+</div>
+
+<div class="noResultInfoBox">
+	<p>
+		<?php 
+		echo $translate->_('fr0160000850')
+		?>
+	</p>
+	<ul>
+		<li>
+			<?php 
+				echo $translate->_('fr0160000900');
+			?>
+		</li>
+		<li>
+			<?php 
+				echo $translate->_('fr0160000950');
+			?>
+		</li>
+	</ul>
+</div>

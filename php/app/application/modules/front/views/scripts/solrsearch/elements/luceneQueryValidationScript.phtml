@@ -1,0 +1,29 @@
+<?php
+$translate = Zend_Registry::get('translateFront');
+$settings = BDQ_Settings_Client::getInstance();
+?>
+<script type="text/javascript" src="/scripts/luceneQueryValidator.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+	luceneQueryValidator.init({
+		'translate':{
+			'allowedCharacters': "<?php echo addslashes($translate->_('fr0075000000')); ?>",
+			'asterisk': "<?php echo addslashes($translate->_('fr0075000050')); ?>",
+			'asteriskSt': "<?php echo addslashes($translate->_('fr0075000100')); ?>",
+			'ampersands': "<?php echo addslashes($translate->_('fr0075000150')); ?>",
+			'pipe': "<?php echo addslashes($translate->_('fr0075000200')); ?>",
+			'caret': "<?php echo addslashes($translate->_('fr0075000250'));?>",
+			'squiggle': "<?php echo addslashes($translate->_('fr0075000300'));?>",
+			'questionMark': "<?php echo addslashes($translate->_('fr0075000450'));?>",
+			'questionMarkSt': "<?php echo addslashes($translate->_('fr0075000500')); ?>",
+			'parentheses1': "<?php echo addslashes($translate->_('fr0075000550'));?>",
+			'parentheses2': "<?php echo addslashes($translate->_('fr0075000600'));?>",
+			'plusMinusExclamationMarkNOT': "<?php echo addslashes($translate->_('fr0075000650'));?>",
+			'ANDORNOT':"<?php echo addslashes($translate->_('fr0075000700'));?>",
+			'quotes1':"<?php echo addslashes($translate->_('fr0075000750'));?>",
+			'quotes2':"<?php echo addslashes($translate->_('fr0075000800'));?>"
+		},
+		'stemming':<?php echo $settings->stemming;?>
+	});
+//]]>
+</script>

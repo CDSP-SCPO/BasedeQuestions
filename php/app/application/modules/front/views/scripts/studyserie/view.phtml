@@ -1,0 +1,123 @@
+<?php
+/**
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+$this->layout()->title = $this->translate->_('fr0290000000') . $this->serie[0]['title'] . ' - ' . $this->translate->_('fr0290000050');
+$this->placeholder('fixedRightColumn')->set(true);
+$this->placeholder('topSection')->set(
+	'<h1>' . $this->translate->_('fr0290000100') . $this->serie[0]['title'] .'</h1>'
+);
+$this->roundBoxStart(array('infoBox', 'studyList'));
+$this->resultsLink();
+
+if ($this->serie[0]['description']):
+?>
+<h2><?php echo $this->translate->_('fr0290000150'); ?></h2>
+<div><?php echo $this->serie[0]['description']; ?></div>
+<h2><?php echo $this->translate->_('fr0290000200'); ?></h2>
+<?php 
+endif;
+
+$i = 0;
+while(list($lang, $studies) = each($this->studiesGroupedByLanguages)):
+?>
+<h3><?php echo $this->translate->_('fr0290000250'), ' ', $studies[0]['language']; ?></h3>
+<p>
+	<a class="studyView" href="<?php echo $this->url(array('id' => $this->serie[0]['id'],'searchLang' => $lang,), 'serieView');?>"><?php echo $this->translate->_('fr0290000300');?></a>
+</p>
+<table id="studyListTable_<?php echo $i; ?>" class="display">
+	<thead>
+		<tr>
+			<th style="width:70%!important;" class="title"><?php echo $this->translate->_('fr0290000350') ?></th>
+			<th></th>
+			<th class="title"><?php echo $this->translate->_('fr0290000400') ?></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php 
+	$l2 = count($studies);
+	
+	for ($j = 0 ; $j < $l2; $j++):
+		$url = $this->url
+		(
+			array(
+				'id' => $studies[$j]['id']
+			),
+			'ddifileDetails'
+		);
+	?>
+		<tr>
+			<td><a href="<?php echo $this->url(array('id' => $studies[$j]['id']), 'ddifileDetails');?>"><?php echo stripslashes($studies[$j]['title']);?></a></td>
+			<td><?php echo normalize(stripslashes($studies[$j]['title'])); ?></td>
+			<td>
+			<?php 
+			$domainIds = explode(GC_MULTIPLE_VALUE_SEPARATOR, $studies[$j]['domain_id']);
+			$domainIds = array_unique($domainIds);
+			$domainTitles = explode(GC_MULTIPLE_VALUE_SEPARATOR, $studies[$j]['domain_title']);
+			$domainTitles = array_unique($domainTitles);
+			$l3 = count($domainIds);
+			
+			for ($k = 0; $k < $l3; $k++):
+				$domainId = $domainIds[$k];
+				$domainTitle = $domainTitles[$k];
+			?>
+						<a href="<?php echo $this->url(array('id' => $domainId,),'domainDetails'); ?>"><?php echo $domainTitle; ?></a><br/>
+			<?php
+			endfor;
+			?>
+			</td>
+			<td><?php echo normalize($studies[$j]['domain_title']); ?></td>
+		</tr>
+	<?php 
+	endfor;
+	?>
+	</tbody>
+</table>
+<div class="clear"></div>
+	<?php
+	$this->placeholder('rightColumn')->captureStart();
+
+	if ($this->conceptList && isset($this->conceptList[$lang])):
+	?>
+	<h3><?php echo $this->translate->_('fr0290000450'), ' - ', $this->conceptList[$lang]['title']; ?></h3>
+	<ul class="concept">
+		<?php
+		$l3 = count($this->concepts[$lang]);
+		
+		for ($j = 0; $j < $l3; $j++):
+		?>
+		<li>
+			<a href="<?php echo $this->url(
+				array(
+					'id' => $this->concepts[$lang][$j]['id'],
+					'searchLang' => $lang,
+					'studySerieIds' => $this->id
+				), 
+				'conceptView'); ?>" class="yellowAnchor">
+			<?php echo $this->concepts[$lang][$j]['title'], ' (', $this->concepts[$lang][$j]['count'], ')'; ?></a>
+		</li>
+		<?php 
+		endfor;
+	?>
+	</ul>
+	<?php
+	endif;
+	?>
+	<?php
+	$url = $this->url(
+		array(
+			'id' =>  $this->id,
+			'searchLang' => $lang,
+			'queryFilters' => 'wordParam'
+		),
+		'serieView'
+	);
+	echo $this->wordCloud(&$this->cloudWords[$lang], $url, 'h3');
+	$this->placeholder('rightColumn')->captureEnd();
+	$i++;
+endwhile;
+
+$this->roundBoxEnd();
+echo $this->partial('studyDataTable.phtml');

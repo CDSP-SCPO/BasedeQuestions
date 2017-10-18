@@ -1,0 +1,67 @@
+<?php
+/**
+ * Serie facets
+ * 
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+$translate = Zend_Registry::get('translateFront');
+$clientSettings = BDQ_Settings_Client::getInstance();
+?>
+<li id="studySerieFacet">
+	<?php 
+	$this->facetGripStart();
+	?>
+	<span class="toggler<?php if ($clientSettings->studySerieFacetDisplay):?> down<?php endif;?>">&nbsp;</span>
+	<span class="title"><?php echo $translate->_('fr0205000000');?></span>
+	<?php 
+	$this->facetGripEnd();
+	?>
+	<div class="toggled<?php if (empty($this->studySerieFacets)): ?> noResult<?php endif; ?>" <?php if ( ! $clientSettings->studySerieFacetDisplay):?> style="display:none;"<?php endif;?>>
+		<?php 
+		if ( ! empty($this->studySerieFacets)):
+		?>
+		<table class="filter" id="studySerieFilters" cellpadding="0" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="checkbox" title="<?php echo $translate->_('fr0205000050');
+
+					?>">&nbsp;</th>
+					<th class="title" title="<?php echo $translate->_('fr0205000100');
+
+					?>">&nbsp;</th>
+					<th class="count" title="<?php echo $translate->_('fr0205000150');
+
+					?>">&nbsp;</th>
+					<th class="invisible">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+			<?php
+			$l = count($this->studySerieFacets);
+			$showMore = false;
+			
+			for ($i = 0; $i < $l; $i += 3):
+				$id = $this->studySerieFacets[$i];
+				$serie = $this->studySerieFacets[$i + 1];
+				$count = $this->studySerieFacets[$i + 2];
+				$checked = array_search($id, $this->studySerieFilters) !== false;
+			?>
+				
+				<tr<?php if (($i / 3) >= MAX_FACETS_DISPLAY): ?> style="display:none;"<?php endif; ?>>
+					<td class="checkbox"><input type="checkbox" id="studySerieCheckBox_<?php echo $id ?>" class="studySerieFilter resultFilter" name="studySerieFilters[]" value="<?php echo $id ?>"<?php if ($checked) { echo ' checked="checked"'; }?>/></td>
+					<td class="title"><label for="studySerieCheckBox_<?php echo $id ?>"><?php echo $serie; ?></label></td>
+					<td class="count"></td>
+					<td class="invisible"><?php echo normalize($serie); ?></td>
+				</tr>
+			<?php 
+			endfor;
+			?>
+			</tbody>
+		</table>
+	<?php 
+	endif;
+	?>
+	</div>
+	<div class="clear"></div>
+</li>

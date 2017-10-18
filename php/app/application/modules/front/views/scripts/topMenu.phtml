@@ -1,0 +1,101 @@
+<?php 
+	$translate = Zend_Registry::get('translateFront');
+	$translationLanguageGuiCurrent = Zend_Registry::get('translationLanguageGuiCurrent');
+	$clientSettings = BDQ_Settings_Client::getInstance();
+?>
+<div id="topMenu">
+	<?php 
+	if (($c = count($this->translationLanguages)) >= 2):
+	?>
+	<select id="langSelect">
+	<?php
+		$route = Zend_Controller_Front::getInstance()->getRouter()->getCurrentRouteName();
+		$currentLang = Zend_Registry::get('translationLanguageGui');
+		
+		for ($i = 0; $i < $c; $i++):
+			Zend_Controller_Router_Route::setDefaultLocale($this->translationLanguages[$i]['code']);
+	?>
+		<option<?php if($translationLanguageGuiCurrent->get_id() == $this->translationLanguages[$i]['id']) echo ' selected="selected"'?> value="<?php echo htmlspecialchars($this->url(array('lang' => $this->translationLanguages[$i]['code']), $route));?>"><?php echo $this->translationLanguages[$i]['label']?></option>
+	<?php 
+		endfor;
+		
+		Zend_Controller_Router_Route::setDefaultLocale($currentLang);
+	?>
+	</select>
+	<?php 
+	endif;
+	?>
+	|
+	<a href="<?php 
+		echo $this->url(
+			array(),
+			'solrsearchHome'
+		); 
+	?>" class="yellowAnchor" target="_self"><?php echo 	$translate->_('fr0255000000');
+																	#Enquêtes
+	?></a>
+	|
+	<a href="<?php 
+		echo $this->url(
+			array(),
+			'solradvancedSearch'
+		); 
+	?>" class="yellowAnchor" target="_self"><?php echo 	$translate->_('fr0255000050');
+																	#Enquêtes
+	?></a>
+	|
+	<a href="<?php 
+		echo $this->url(
+			array(),
+			'studyIndex'
+		); 
+	?>" class="yellowAnchor" target="_self"><?php echo 	$translate->_('fr0255000100');
+														#Liste des enquêtes
+	?></a>
+	|
+	<a href="<?php 
+		echo $this->url(
+			array(),
+			'help'
+		); 
+	?>" class="yellowAnchor" target="_self"><?php echo 	$translate->_('fr0255000150');
+																	#Aide
+	?></a>
+	|
+	<a href="<?php 
+	echo $this->url(
+		array(),
+		'solrsearchclientSettings'
+	);
+	?>" class="yellowAnchor" target="_self"><?php echo 	$translate->_('fr0255000200');
+															#Préférences
+	?></a>
+	|
+	<a href="<?php 
+		echo $this->url(
+			array(),
+			'about'
+		); 
+	?>" class="yellowAnchor" target="_self"><?php echo 	$translate->_('fr0255000250');
+														#A propos
+	?></a>
+	|
+	<?php
+		$selectedQuestions = ($clientSettings->selectedQuestions == '') ? array() : explode(',', $clientSettings->selectedQuestions);
+		$c = count($selectedQuestions);
+	?>
+	<a title="<?php echo $translate->_('fr0255000300');
+																	#Aide
+	?>" class="png yellowAnchor questionSelection<?php if ($c > 0): ?> notEmpty<?php endif;?>" href="<?php echo $this->url(array(), 'questionSelection'); ?>"><?php echo 	$translate->_('fr0255000350');
+				#Votre sélection
+	?> (<span class="count"><?php echo $c;?></span>)</a>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+	$(document).ready(function() {
+		$("#langSelect").change(function(){
+			$(location).attr('href',$(this).val());
+		});
+	});
+//]]>
+</script>

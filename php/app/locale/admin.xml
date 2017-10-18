@@ -1,0 +1,2966 @@
+<?xml version="1.0" encoding="utf8"?>
+<tmx>
+  <body>
+    <!--File : application/modules/admin/controllers/IndexController.php-->
+    <tu tuid="fr0000000000">
+      <tuv xml:lang="fr">
+        <seg>login.error</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000000">
+      <tuv xml:lang="fr">
+        <seg>Ajout des documents à l'index de solr &lt;br/&gt;</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000010">
+      <tuv xml:lang="fr">
+        <seg>Validation des changements sur solr &lt;br/&gt;</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000020">
+      <tuv xml:lang="fr">
+        <seg>Optimisation de l'index de solr &lt;br/&gt;</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000030">
+      <tuv xml:lang="fr">
+        <seg>Validation des changements dans la base de données &lt;br/&gt;</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000040">
+      <tuv xml:lang="fr">
+        <seg>Succès&lt;br/&gt;</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000050">
+      <tuv xml:lang="fr">
+        <seg>Erreur lors de l'ajout de l'enquête.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000060">
+      <tuv xml:lang="fr">
+        <seg>Cette erreur a été enregistrée dans les fichiers journaux de l'application.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000070">
+      <tuv xml:lang="fr">
+        <seg>Merci de contacter un administrateur.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000080">
+      <tuv xml:lang="fr">
+        <seg>Retour à la liste des enquêtes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000090">
+      <tuv xml:lang="fr">
+        <seg>Informations sur l'enquête</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000100">
+      <tuv xml:lang="fr">
+        <seg>Producteurs</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000110">
+      <tuv xml:lang="fr">
+        <seg>Traitement des variables</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000120">
+      <tuv xml:lang="fr">
+        <seg>Variable </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000130">
+      <tuv xml:lang="fr">
+        <seg>Variable </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000140">
+      <tuv xml:lang="fr">
+        <seg>Variable </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000150">
+      <tuv xml:lang="fr">
+        <seg>Erreur lors de l'édition de l'enquête.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000160">
+      <tuv xml:lang="fr">
+        <seg>Cette erreur a été enregistrée dans les fichiers journaux de l'application.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000170">
+      <tuv xml:lang="fr">
+        <seg>Merci de contacter un administrateur.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000180">
+      <tuv xml:lang="fr">
+        <seg>Erreur lors de la suppression de l'enquête.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000190">
+      <tuv xml:lang="fr">
+        <seg>Cette erreur a été enregistrée dans les fichiers journaux de l'application.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/controllers/DdifileController.php-->
+    <tu tuid="fr0025000200">
+      <tuv xml:lang="fr">
+        <seg>Merci de contacter un administrateur.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/view.phtml-->
+    <tu tuid="fr0045000000">
+      <tuv xml:lang="fr">
+        <seg>Détails d'un serveur Nesstar</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/view.phtml-->
+    <tu tuid="fr0045000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/view.phtml-->
+    <tu tuid="fr0045000020">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/view.phtml-->
+    <tu tuid="fr0045000030">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/view.phtml-->
+    <tu tuid="fr0045000040">
+      <tuv xml:lang="fr">
+        <seg>Titre :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/view.phtml-->
+    <tu tuid="fr0045000050">
+      <tuv xml:lang="fr">
+        <seg>IP :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/view.phtml-->
+    <tu tuid="fr0045000060">
+      <tuv xml:lang="fr">
+        <seg>Port :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/view.phtml-->
+    <tu tuid="fr0045000070">
+      <tuv xml:lang="fr">
+        <seg>Responsable :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/view.phtml-->
+    <tu tuid="fr0045000080">
+      <tuv xml:lang="fr">
+        <seg>Non renseigné</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/view.phtml-->
+    <tu tuid="fr0045000090">
+      <tuv xml:lang="fr">
+        <seg>Date d'ajout :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/view.phtml-->
+    <tu tuid="fr0045000100">
+      <tuv xml:lang="fr">
+        <seg>Date de modification :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/view.phtml-->
+    <tu tuid="fr0045000110">
+      <tuv xml:lang="fr">
+        <seg>Enquêtes associées - </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/add.phtml-->
+    <tu tuid="fr0050000000">
+      <tuv xml:lang="fr">
+        <seg>Ajout d'un serveur Nesstar</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/add.phtml-->
+    <tu tuid="fr0050000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/confirmdelete.phtml-->
+    <tu tuid="fr0055000000">
+      <tuv xml:lang="fr">
+        <seg>Suppression d'un serveur Nesstar</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/confirmdelete.phtml-->
+    <tu tuid="fr0055000010">
+      <tuv xml:lang="fr">
+        <seg>Supprimer le serveur Nesstar : </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/confirmdelete.phtml-->
+    <tu tuid="fr0055000020">
+      <tuv xml:lang="fr">
+        <seg>Les enquêtes associées ne seront pas supprimées.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/confirmdelete.phtml-->
+    <tu tuid="fr0055000030">
+      <tuv xml:lang="fr">
+        <seg>Oui</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/confirmdelete.phtml-->
+    <tu tuid="fr0055000040">
+      <tuv xml:lang="fr">
+        <seg>Annuler</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/edit.phtml-->
+    <tu tuid="fr0060000000">
+      <tuv xml:lang="fr">
+        <seg>Modifier un serveur Nesstar</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/edit.phtml-->
+    <tu tuid="fr0060000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/edit.phtml-->
+    <tu tuid="fr0060000020">
+      <tuv xml:lang="fr">
+        <seg>Détail du serveur Nesstar</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/edit.phtml-->
+    <tu tuid="fr0060000030">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000000">
+      <tuv xml:lang="fr">
+        <seg>Ajouter un serveur Nesstar</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000010">
+      <tuv xml:lang="fr">
+        <seg>Titre</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000020">
+      <tuv xml:lang="fr">
+        <seg>Nb.&amp;nbsp;enquêtes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000030">
+      <tuv xml:lang="fr">
+        <seg>Détails</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000040">
+      <tuv xml:lang="fr">
+        <seg>Détails</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000050">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000060">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000070">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000080">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000090">
+      <tuv xml:lang="fr">
+        <seg>Afficher _MENU_ serveurs</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000100">
+      <tuv xml:lang="fr">
+        <seg>Pas de résultat</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000110">
+      <tuv xml:lang="fr">
+        <seg>Serveurs _START_ à _END_ sur un total de _TOTAL_</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000120">
+      <tuv xml:lang="fr">
+        <seg>Affiche 0 résultat </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000130">
+      <tuv xml:lang="fr">
+        <seg>filtrés sur un total de _MAX_</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000140">
+      <tuv xml:lang="fr">
+        <seg>Rechercher</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000150">
+      <tuv xml:lang="fr">
+        <seg>précédents</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/nesstarserver/index.phtml-->
+    <tu tuid="fr0065000160">
+      <tuv xml:lang="fr">
+        <seg>suivants</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/view.phtml-->
+    <tu tuid="fr0075000000">
+      <tuv xml:lang="fr">
+        <seg>Liste de concepts</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/view.phtml-->
+    <tu tuid="fr0075000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/view.phtml-->
+    <tu tuid="fr0075000020">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/view.phtml-->
+    <tu tuid="fr0075000030">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/view.phtml-->
+    <tu tuid="fr0075000040">
+      <tuv xml:lang="fr">
+        <seg>Titre</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/view.phtml-->
+    <tu tuid="fr0075000050">
+      <tuv xml:lang="fr">
+        <seg>Description</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/view.phtml-->
+    <tu tuid="fr0075000060">
+      <tuv xml:lang="fr">
+        <seg>Non renseignée</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/view.phtml-->
+    <tu tuid="fr0075000070">
+      <tuv xml:lang="fr">
+        <seg>Date d'ajout :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/view.phtml-->
+    <tu tuid="fr0075000080">
+      <tuv xml:lang="fr">
+        <seg>Date de modification :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/view.phtml-->
+    <tu tuid="fr0075000090">
+      <tuv xml:lang="fr">
+        <seg>Concepts</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/add.phtml-->
+    <tu tuid="fr0080000000">
+      <tuv xml:lang="fr">
+        <seg>Ajouter une liste de concepts</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/add.phtml-->
+    <tu tuid="fr0080000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/confirmdelete.phtml-->
+    <tu tuid="fr0085000000">
+      <tuv xml:lang="fr">
+        <seg>Suppression d'une liste de concepts</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/confirmdelete.phtml-->
+    <tu tuid="fr0085000010">
+      <tuv xml:lang="fr">
+        <seg>Supprimer la liste de concepts : </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/confirmdelete.phtml-->
+    <tu tuid="fr0085000020">
+      <tuv xml:lang="fr">
+        <seg>Oui</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/confirmdelete.phtml-->
+    <tu tuid="fr0085000030">
+      <tuv xml:lang="fr">
+        <seg>Annuler</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/edit.phtml-->
+    <tu tuid="fr0090000000">
+      <tuv xml:lang="fr">
+        <seg>Modifier une liste de concepts</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/edit.phtml-->
+    <tu tuid="fr0090000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/edit.phtml-->
+    <tu tuid="fr0090000020">
+      <tuv xml:lang="fr">
+        <seg>Détail de la liste de concepts</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/edit.phtml-->
+    <tu tuid="fr0090000030">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000000">
+      <tuv xml:lang="fr">
+        <seg>Ajouter une liste de concepts</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000010">
+      <tuv xml:lang="fr">
+        <seg>Titre</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000020">
+      <tuv xml:lang="fr">
+        <seg>Nb.&amp;nbsp;concepts</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000030">
+      <tuv xml:lang="fr">
+        <seg>Détails</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000040">
+      <tuv xml:lang="fr">
+        <seg>Détails</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000050">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000060">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000070">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000080">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000090">
+      <tuv xml:lang="fr">
+        <seg>Afficher _MENU_ listes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000100">
+      <tuv xml:lang="fr">
+        <seg>Pas de résultat</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000110">
+      <tuv xml:lang="fr">
+        <seg>Listes _START_ à _END_ sur un total de _TOTAL_</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000120">
+      <tuv xml:lang="fr">
+        <seg>Affiche 0 résultat </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000130">
+      <tuv xml:lang="fr">
+        <seg>filtrés sur un total de _MAX_</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000140">
+      <tuv xml:lang="fr">
+        <seg>Rechercher</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000150">
+      <tuv xml:lang="fr">
+        <seg>précédentes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/conceptlist/index.phtml-->
+    <tu tuid="fr0095000160">
+      <tuv xml:lang="fr">
+        <seg>suivantes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/view.phtml-->
+    <tu tuid="fr0105000000">
+      <tuv xml:lang="fr">
+        <seg>Producteur</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/view.phtml-->
+    <tu tuid="fr0105000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/view.phtml-->
+    <tu tuid="fr0105000020">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/view.phtml-->
+    <tu tuid="fr0105000030">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/view.phtml-->
+    <tu tuid="fr0105000040">
+      <tuv xml:lang="fr">
+        <seg>Titre</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/view.phtml-->
+    <tu tuid="fr0105000050">
+      <tuv xml:lang="fr">
+        <seg>Description</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/view.phtml-->
+    <tu tuid="fr0105000060">
+      <tuv xml:lang="fr">
+        <seg>Non renseignée</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/view.phtml-->
+    <tu tuid="fr0105000070">
+      <tuv xml:lang="fr">
+        <seg>Date d'ajout :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/view.phtml-->
+    <tu tuid="fr0105000080">
+      <tuv xml:lang="fr">
+        <seg>Date de modification :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/view.phtml-->
+    <tu tuid="fr0105000090">
+      <tuv xml:lang="fr">
+        <seg>Enquêtes associées</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/add.phtml-->
+    <tu tuid="fr0110000000">
+      <tuv xml:lang="fr">
+        <seg>Ajout d'un producteur</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/add.phtml-->
+    <tu tuid="fr0110000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/confirmdelete.phtml-->
+    <tu tuid="fr0115000000">
+      <tuv xml:lang="fr">
+        <seg>Suppression d'un producteur</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/confirmdelete.phtml-->
+    <tu tuid="fr0115000010">
+      <tuv xml:lang="fr">
+        <seg>Supprimer le producteur : </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/confirmdelete.phtml-->
+    <tu tuid="fr0115000020">
+      <tuv xml:lang="fr">
+        <seg>Les enquêtes associées ne seront pas supprimées.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/confirmdelete.phtml-->
+    <tu tuid="fr0115000030">
+      <tuv xml:lang="fr">
+        <seg>Oui</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/confirmdelete.phtml-->
+    <tu tuid="fr0115000040">
+      <tuv xml:lang="fr">
+        <seg>Annuler</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/edit.phtml-->
+    <tu tuid="fr0120000000">
+      <tuv xml:lang="fr">
+        <seg>Modifier un producteur</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/edit.phtml-->
+    <tu tuid="fr0120000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/edit.phtml-->
+    <tu tuid="fr0120000020">
+      <tuv xml:lang="fr">
+        <seg>Détail du producteur</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/edit.phtml-->
+    <tu tuid="fr0120000030">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000000">
+      <tuv xml:lang="fr">
+        <seg>Ajouter un producteur</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000010">
+      <tuv xml:lang="fr">
+        <seg>Titre</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000020">
+      <tuv xml:lang="fr">
+        <seg>Nb.&amp;nbsp;enquêtes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000030">
+      <tuv xml:lang="fr">
+        <seg>Détails</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000040">
+      <tuv xml:lang="fr">
+        <seg>Détails</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000050">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000060">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000070">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000080">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000090">
+      <tuv xml:lang="fr">
+        <seg>Afficher _MENU_ producteurs</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000100">
+      <tuv xml:lang="fr">
+        <seg>Pas de résultat</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000110">
+      <tuv xml:lang="fr">
+        <seg>Producteurs _START_ à _END_ sur un total de _TOTAL_</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000120">
+      <tuv xml:lang="fr">
+        <seg>Affiche 0 résultat </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000130">
+      <tuv xml:lang="fr">
+        <seg>filtrés sur un total de _MAX_</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000140">
+      <tuv xml:lang="fr">
+        <seg>Rechercher</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000150">
+      <tuv xml:lang="fr">
+        <seg>précédents</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/domain/index.phtml-->
+    <tu tuid="fr0125000160">
+      <tuv xml:lang="fr">
+        <seg>suivants</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/multipleitemlist.phtml-->
+    <tu tuid="fr0130000000">
+      <tuv xml:lang="fr">
+        <seg>Batteries de questions identifiées</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/multipleitemlist.phtml-->
+    <tu tuid="fr0130000010">
+      <tuv xml:lang="fr">
+        <seg>Prendre en compte comme batterie de questions</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/multipleitemlist.phtml-->
+    <tu tuid="fr0130000020">
+      <tuv xml:lang="fr">
+        <seg> Ajouter l'enquête ...</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/multipleitemlist.phtml-->
+    <tu tuid="fr0130000030">
+      <tuv xml:lang="fr">
+        <seg>avec prise en compte des batteries de questions sélectionnées</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/multipleitemlist.phtml-->
+    <tu tuid="fr0130000040">
+      <tuv xml:lang="fr">
+        <seg>sans prise en compte des batteries de questions</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/multipleitemlist.phtml-->
+    <tu tuid="fr0130000050">
+      <tuv xml:lang="fr">
+        <seg>Ajouter</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/multipleitemlist.phtml-->
+    <tu tuid="fr0130000060">
+      <tuv xml:lang="fr">
+        <seg> Essayer avec un autre séparateur question item</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/multipleitemlist.phtml-->
+    <tu tuid="fr0130000070">
+      <tuv xml:lang="fr">
+        <seg>Essayer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000000">
+      <tuv xml:lang="fr">
+        <seg>Enquête</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000020">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000030">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000040">
+      <tuv xml:lang="fr">
+        <seg>Titre :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000050">
+      <tuv xml:lang="fr">
+        <seg>Nombre de documents sur le serveur Solr : </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000060">
+      <tuv xml:lang="fr">
+        <seg> documents</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000070">
+      <tuv xml:lang="fr">
+        <seg>Décade :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000080">
+      <tuv xml:lang="fr">
+        <seg>Série :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000090">
+      <tuv xml:lang="fr">
+        <seg>Non renseignée</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000100">
+      <tuv xml:lang="fr">
+        <seg>Fichier :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000110">
+      <tuv xml:lang="fr">
+        <seg>Domaines :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000120">
+      <tuv xml:lang="fr">
+        <seg>Non renseigné</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000130">
+      <tuv xml:lang="fr">
+        <seg>Serveur nesstar :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000140">
+      <tuv xml:lang="fr">
+        <seg>Non renseigné</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000150">
+      <tuv xml:lang="fr">
+        <seg>URL du questionnaire :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000160">
+      <tuv xml:lang="fr">
+        <seg>Non renseignée</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000170">
+      <tuv xml:lang="fr">
+        <seg>Fichier(s) du questionnaire :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000180">
+      <tuv xml:lang="fr">
+        <seg>Non renseigné</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000190">
+      <tuv xml:lang="fr">
+        <seg>Enquête</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000200">
+      <tuv xml:lang="fr">
+        <seg>Analyse questions / items</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000210">
+      <tuv xml:lang="fr">
+        <seg>Oui</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000220">
+      <tuv xml:lang="fr">
+        <seg>Non</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000230">
+      <tuv xml:lang="fr">
+        <seg>Date d'ajout :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/view.phtml-->
+    <tu tuid="fr0140000240">
+      <tuv xml:lang="fr">
+        <seg>Date de modification :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/add.phtml-->
+    <tu tuid="fr0145000000">
+      <tuv xml:lang="fr">
+        <seg>Ajout d'une enquête</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/add.phtml-->
+    <tu tuid="fr0145000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/add.phtml-->
+    <tu tuid="fr0145000020">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/confirmdelete.phtml-->
+    <tu tuid="fr0150000000">
+      <tuv xml:lang="fr">
+        <seg>Suppression d'une enquête</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/confirmdelete.phtml-->
+    <tu tuid="fr0150000010">
+      <tuv xml:lang="fr">
+        <seg>Supprimer l'enquête : </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/confirmdelete.phtml-->
+    <tu tuid="fr0150000020">
+      <tuv xml:lang="fr">
+        <seg>Ok</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/confirmdelete.phtml-->
+    <tu tuid="fr0150000030">
+      <tuv xml:lang="fr">
+        <seg>Annuler</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/edit.phtml-->
+    <tu tuid="fr0155000000">
+      <tuv xml:lang="fr">
+        <seg>Modifier une enquête</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/edit.phtml-->
+    <tu tuid="fr0155000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/edit.phtml-->
+    <tu tuid="fr0155000020">
+      <tuv xml:lang="fr">
+        <seg>Détail de l'enquête</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/edit.phtml-->
+    <tu tuid="fr0155000030">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/edit.phtml-->
+    <tu tuid="fr0155000040">
+      <tuv xml:lang="fr">
+        <seg>Questionnaire(s)</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/edit.phtml-->
+    <tu tuid="fr0155000050">
+      <tuv xml:lang="fr">
+        <seg>Lien externe</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/edit.phtml-->
+    <tu tuid="fr0155000060">
+      <tuv xml:lang="fr">
+        <seg>Fichiers PDF</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/edit.phtml-->
+    <tu tuid="fr0155000070">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/edit.phtml-->
+    <tu tuid="fr0155000080">
+      <tuv xml:lang="fr">
+        <seg>Fichier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000000">
+      <tuv xml:lang="fr">
+        <seg>Ajouter une enquête</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000010">
+      <tuv xml:lang="fr">
+        <seg>Titre</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000020">
+      <tuv xml:lang="fr">
+        <seg>Langue</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000030">
+      <tuv xml:lang="fr">
+        <seg>Producteur</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000040">
+      <tuv xml:lang="fr">
+        <seg>Série</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000050">
+      <tuv xml:lang="fr">
+        <seg>Serveur Nesstar</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000060">
+      <tuv xml:lang="fr">
+        <seg>Détails</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000070">
+      <tuv xml:lang="fr">
+        <seg>Détails</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000080">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000090">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000100">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000110">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000120">
+      <tuv xml:lang="fr">
+        <seg>Afficher _MENU_ enquêtes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000130">
+      <tuv xml:lang="fr">
+        <seg>Pas de résultat</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000140">
+      <tuv xml:lang="fr">
+        <seg>Enquêtes _START_ à _END_ sur un total de _TOTAL_</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000150">
+      <tuv xml:lang="fr">
+        <seg>Affiche 0 résultat </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000160">
+      <tuv xml:lang="fr">
+        <seg>filtrés sur un total de _MAX_</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000170">
+      <tuv xml:lang="fr">
+        <seg>Rechercher</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000180">
+      <tuv xml:lang="fr">
+        <seg>précédentes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifile/index.phtml-->
+    <tu tuid="fr0160000190">
+      <tuv xml:lang="fr">
+        <seg>suivantes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifileform-questionnairescript.phtml-->
+    <tu tuid="fr0170000000">
+      <tuv xml:lang="fr">
+        <seg>Ajouter un fichier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifileform-questionnairescript.phtml-->
+    <tu tuid="fr0170000010">
+      <tuv xml:lang="fr">
+        <seg>Fichier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifileform-questionnairescript.phtml-->
+    <tu tuid="fr0170000020">
+      <tuv xml:lang="fr">
+        <seg>Etiquette</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifileform-questionnairescript.phtml-->
+    <tu tuid="fr0170000030">
+      <tuv xml:lang="fr">
+        <seg>Réinitialiser</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifileform-questionnairescript.phtml-->
+    <tu tuid="fr0170000040">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifileform-questionnairescript.phtml-->
+    <tu tuid="fr0170000050">
+      <tuv xml:lang="fr">
+        <seg>Le nombre de questionnaires est limité à 10.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifileform-questionnairescript.phtml-->
+    <tu tuid="fr0170000060">
+      <tuv xml:lang="fr">
+        <seg>Les champs "Lien vers le questionnaire" et "Fichier(s) du questionnaire" sont mutuellement exclusifs. Pour utiliser un lien externe vers le questionnaire, supprimez les informations concernant les questionnaires PDF.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/ddifileform-questionnairescript.phtml-->
+    <tu tuid="fr0170000070">
+      <tuv xml:lang="fr">
+        <seg>Les champs "Lien vers le questionnaire" et "Fichier(s) du questionnaire" sont mutuellement exclusifs. Pour télécharger des fichiers PDF vers la base de questions, supprimez les informations du champ "Lien vers le questionnaire".</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/admin-menu.phtml-->
+    <tu tuid="fr0175000000">
+      <tuv xml:lang="fr">
+        <seg>Déconnexion</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/admin-menu.phtml-->
+    <tu tuid="fr0175000010">
+      <tuv xml:lang="fr">
+        <seg>Producteurs</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/admin-menu.phtml-->
+    <tu tuid="fr0175000020">
+      <tuv xml:lang="fr">
+        <seg>Séries d'enquêtes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/admin-menu.phtml-->
+    <tu tuid="fr0175000030">
+      <tuv xml:lang="fr">
+        <seg>Enquêtes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/admin-menu.phtml-->
+    <tu tuid="fr0175000040">
+      <tuv xml:lang="fr">
+        <seg>Listes de concepts</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/admin-menu.phtml-->
+    <tu tuid="fr0175000050">
+      <tuv xml:lang="fr">
+        <seg>Concepts</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/admin-menu.phtml-->
+    <tu tuid="fr0175000060">
+      <tuv xml:lang="fr">
+        <seg>Serveurs Nesstar</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/view.phtml-->
+    <tu tuid="fr0200000000">
+      <tuv xml:lang="fr">
+        <seg>Série d'enquêtes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/view.phtml-->
+    <tu tuid="fr0200000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/view.phtml-->
+    <tu tuid="fr0200000020">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/view.phtml-->
+    <tu tuid="fr0200000030">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/view.phtml-->
+    <tu tuid="fr0200000040">
+      <tuv xml:lang="fr">
+        <seg>Titre</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/view.phtml-->
+    <tu tuid="fr0200000050">
+      <tuv xml:lang="fr">
+        <seg>Description</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/view.phtml-->
+    <tu tuid="fr0200000060">
+      <tuv xml:lang="fr">
+        <seg>Non renseignée</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/view.phtml-->
+    <tu tuid="fr0200000070">
+      <tuv xml:lang="fr">
+        <seg>Date d'ajout :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/view.phtml-->
+    <tu tuid="fr0200000080">
+      <tuv xml:lang="fr">
+        <seg>Date de modification :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/view.phtml-->
+    <tu tuid="fr0200000090">
+      <tuv xml:lang="fr">
+        <seg>Enquêtes associées - </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/add.phtml-->
+    <tu tuid="fr0205000000">
+      <tuv xml:lang="fr">
+        <seg>Ajout d'une série d'enquête</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/add.phtml-->
+    <tu tuid="fr0205000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/confirmdelete.phtml-->
+    <tu tuid="fr0210000000">
+      <tuv xml:lang="fr">
+        <seg>Suppression d'une série d'enquêtes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/confirmdelete.phtml-->
+    <tu tuid="fr0210000010">
+      <tuv xml:lang="fr">
+        <seg>Supprimer la série d'enquêtes : </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/confirmdelete.phtml-->
+    <tu tuid="fr0210000020">
+      <tuv xml:lang="fr">
+        <seg>Les enquêtes associées ne seront pas supprimées.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/confirmdelete.phtml-->
+    <tu tuid="fr0210000030">
+      <tuv xml:lang="fr">
+        <seg>Oui</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/confirmdelete.phtml-->
+    <tu tuid="fr0210000040">
+      <tuv xml:lang="fr">
+        <seg>Annuler</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/edit.phtml-->
+    <tu tuid="fr0215000000">
+      <tuv xml:lang="fr">
+        <seg>Modifier une série d'enquêtes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/edit.phtml-->
+    <tu tuid="fr0215000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/edit.phtml-->
+    <tu tuid="fr0215000020">
+      <tuv xml:lang="fr">
+        <seg>Détail de la série d'enquêtes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/edit.phtml-->
+    <tu tuid="fr0215000030">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000000">
+      <tuv xml:lang="fr">
+        <seg>Ajouter une série d'enquêtes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000010">
+      <tuv xml:lang="fr">
+        <seg>Titre</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000020">
+      <tuv xml:lang="fr">
+        <seg>Nb.&amp;nbsp;enquêtes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000030">
+      <tuv xml:lang="fr">
+        <seg>Détails</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000040">
+      <tuv xml:lang="fr">
+        <seg>Détails</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000050">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000060">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000070">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000080">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000090">
+      <tuv xml:lang="fr">
+        <seg>Afficher _MENU_ séries</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000100">
+      <tuv xml:lang="fr">
+        <seg>Pas de résultat</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000110">
+      <tuv xml:lang="fr">
+        <seg>Séries _START_ à _END_ sur un total de _TOTAL_</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000120">
+      <tuv xml:lang="fr">
+        <seg>Affiche 0 résultat </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000130">
+      <tuv xml:lang="fr">
+        <seg>filtrées sur un total de _MAX_</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000140">
+      <tuv xml:lang="fr">
+        <seg>Rechercher</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000150">
+      <tuv xml:lang="fr">
+        <seg>précédentes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/studyserie/index.phtml-->
+    <tu tuid="fr0220000160">
+      <tuv xml:lang="fr">
+        <seg>suivantes</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/view.phtml-->
+    <tu tuid="fr0230000000">
+      <tuv xml:lang="fr">
+        <seg>Concepts</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/view.phtml-->
+    <tu tuid="fr0230000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/view.phtml-->
+    <tu tuid="fr0230000020">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/view.phtml-->
+    <tu tuid="fr0230000030">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/view.phtml-->
+    <tu tuid="fr0230000040">
+      <tuv xml:lang="fr">
+        <seg>Titre</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/view.phtml-->
+    <tu tuid="fr0230000050">
+      <tuv xml:lang="fr">
+        <seg>Date d'ajout :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/view.phtml-->
+    <tu tuid="fr0230000060">
+      <tuv xml:lang="fr">
+        <seg>Date de modification :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/view.phtml-->
+    <tu tuid="fr0230000070">
+      <tuv xml:lang="fr">
+        <seg>Liste de concepts</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/add.phtml-->
+    <tu tuid="fr0235000000">
+      <tuv xml:lang="fr">
+        <seg>Ajouter un concept</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/add.phtml-->
+    <tu tuid="fr0235000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/confirmdelete.phtml-->
+    <tu tuid="fr0240000000">
+      <tuv xml:lang="fr">
+        <seg>Suppression d'un concept</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/confirmdelete.phtml-->
+    <tu tuid="fr0240000010">
+      <tuv xml:lang="fr">
+        <seg>Supprimer le concept : </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/confirmdelete.phtml-->
+    <tu tuid="fr0240000020">
+      <tuv xml:lang="fr">
+        <seg>Oui</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/confirmdelete.phtml-->
+    <tu tuid="fr0240000030">
+      <tuv xml:lang="fr">
+        <seg>Annuler</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/edit.phtml-->
+    <tu tuid="fr0245000000">
+      <tuv xml:lang="fr">
+        <seg>Modifier un concept</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/edit.phtml-->
+    <tu tuid="fr0245000010">
+      <tuv xml:lang="fr">
+        <seg>Retour à l'index</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/edit.phtml-->
+    <tu tuid="fr0245000020">
+      <tuv xml:lang="fr">
+        <seg>Détails du concept</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/edit.phtml-->
+    <tu tuid="fr0245000030">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000000">
+      <tuv xml:lang="fr">
+        <seg>Ajouter un concept</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000010">
+      <tuv xml:lang="fr">
+        <seg>Titre</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000020">
+      <tuv xml:lang="fr">
+        <seg>Liste</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000030">
+      <tuv xml:lang="fr">
+        <seg>Détails</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000040">
+      <tuv xml:lang="fr">
+        <seg>Détails</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000050">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000060">
+      <tuv xml:lang="fr">
+        <seg>Modifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000070">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000080">
+      <tuv xml:lang="fr">
+        <seg>Supprimer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000090">
+      <tuv xml:lang="fr">
+        <seg>Afficher _MENU_ concepts</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000100">
+      <tuv xml:lang="fr">
+        <seg>Pas de résultat</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000110">
+      <tuv xml:lang="fr">
+        <seg>Concepts _START_ à _END_ sur un total de _TOTAL_</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000120">
+      <tuv xml:lang="fr">
+        <seg>Affiche 0 résultat </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000130">
+      <tuv xml:lang="fr">
+        <seg>filtrés sur un total de _MAX_</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000140">
+      <tuv xml:lang="fr">
+        <seg>Rechercher</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000150">
+      <tuv xml:lang="fr">
+        <seg>précédents</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/admin/views/scripts/concept/index.phtml-->
+    <tu tuid="fr0250000160">
+      <tuv xml:lang="fr">
+        <seg>suivants</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg></seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/ConceptList.php-->
+    <tu tuid="li0315000000">
+      <tuv xml:lang="fr">
+        <seg>Titre</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Title</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/ConceptList.php-->
+    <tu tuid="li0315000050">
+      <tuv xml:lang="fr">
+        <seg>Description</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Description</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Concept.php-->
+    <tu tuid="li0325000000">
+      <tuv xml:lang="fr">
+        <seg>Titre</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Title</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Concept.php-->
+    <tu tuid="li0325000050">
+      <tuv xml:lang="fr">
+        <seg>aucun</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>none</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Concept.php-->
+    <tu tuid="li0325000100">
+      <tuv xml:lang="fr">
+        <seg>Liste de concepts :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Concept list:</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/NesstarServer.php-->
+    <tu tuid="li0330000000">
+      <tuv xml:lang="fr">
+        <seg>Titre</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Title</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/NesstarServer.php-->
+    <tu tuid="li0330000050">
+      <tuv xml:lang="fr">
+        <seg>IP</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>IP</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/NesstarServer.php-->
+    <tu tuid="li0330000100">
+      <tuv xml:lang="fr">
+        <seg>Port</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Port</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/NesstarServer.php-->
+    <tu tuid="li0330000150">
+      <tuv xml:lang="fr">
+        <seg>Responsable</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Responsible</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Domain.php-->
+    <tu tuid="li0335000000">
+      <tuv xml:lang="fr">
+        <seg>Titre</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Title</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Domain.php-->
+    <tu tuid="li0335000050">
+      <tuv xml:lang="fr">
+        <seg>Description</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Description</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Domain.php-->
+    <tu tuid="li0335000100">
+      <tuv xml:lang="fr">
+        <seg>Envoyer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Submit</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Login.php-->
+    <tu tuid="li0340000000">
+      <tuv xml:lang="fr">
+        <seg>Identifiant</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Login</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Login.php-->
+    <tu tuid="li0340000050">
+      <tuv xml:lang="fr">
+        <seg>Mot de passe</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Password</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Login.php-->
+    <tu tuid="li0340000100">
+      <tuv xml:lang="fr">
+        <seg>Envoyer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Submit</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000000">
+      <tuv xml:lang="fr">
+        <seg>Langue :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Lang:</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000050">
+      <tuv xml:lang="fr">
+        <seg>Fichier DDI :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>DDI file:</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000100">
+      <tuv xml:lang="fr">
+        <seg>Année :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Year:</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000150">
+      <tuv xml:lang="fr">
+        <seg>Aucune</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>None</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000200">
+      <tuv xml:lang="fr">
+        <seg>Série :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Serie:</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000250">
+      <tuv xml:lang="fr">
+        <seg>Producteur :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Producer:</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000300">
+      <tuv xml:lang="fr">
+        <seg>Aucune</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>None</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000350">
+      <tuv xml:lang="fr">
+        <seg>Liste de concept :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Concept list:</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000400">
+      <tuv xml:lang="fr">
+        <seg>Aucun </seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>None </seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000450">
+      <tuv xml:lang="fr">
+        <seg>Serveur Nesstar :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Nesstar server:</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000500">
+      <tuv xml:lang="fr">
+        <seg>Lien vers le questionnaire :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Questionnaire link:</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000550">
+      <tuv xml:lang="fr">
+        <seg>Fichier(s) du questionnaire :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Questionnaire file(s):</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000600">
+      <tuv xml:lang="fr">
+        <seg>Ne pas identifier</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>No analysis</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000650">
+      <tuv xml:lang="fr">
+        <seg>Analyse textuelle des questions proches</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Nearby question textual analysis</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000700">
+      <tuv xml:lang="fr">
+        <seg>Identification des batteries de questions :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Battery of questions identification</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000750">
+      <tuv xml:lang="fr">
+        <seg>Séparateur de la question et de l'item :</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Question and item separator:</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/Ddifile.php-->
+    <tu tuid="li0345000800">
+      <tuv xml:lang="fr">
+        <seg>Envoyer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Submit</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/StudySerie.php-->
+    <tu tuid="li0350000000">
+      <tuv xml:lang="fr">
+        <seg>Titre</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Title</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/StudySerie.php-->
+    <tu tuid="li0350000050">
+      <tuv xml:lang="fr">
+        <seg>Description</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Description</seg>
+      </tuv>
+    </tu>
+    <!--File : library/BDQ/Form/StudySerie.php-->
+    <tu tuid="li0350000100">
+      <tuv xml:lang="fr">
+        <seg>Envoyer</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Submit</seg>
+      </tuv>
+    </tu>
+  </body>
+</tmx>

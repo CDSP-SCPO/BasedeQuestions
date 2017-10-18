@@ -1,0 +1,233 @@
+<?php
+/**
+ * The dynamic facets.
+ * This partial is used for all search types.
+ * 
+ * @copyright Réseau Quetelet
+ * @author Xavier Schepler
+ */
+
+$translate = Zend_Registry::get('translateFront');
+$clientSettings = BDQ_Settings_Client::getInstance();
+$class = get_class($this->search);
+$route = Zend_Controller_Front::getInstance()->getRouter()->getCurrentRouteName();
+
+switch ($class): /* The facets update URL depends on the search type.
+The facet box order and display too.
+*/
+	case 'Solr_BDQ_Search_StudySearch':
+		$clientSettings->keywordFacetDisplay = true;
+		$clientSettings->keywordFacetPosition = 0;
+		$clientSettings->studyFacetDisplay = false; // no need to display the study facet box
+		$clientSettings->producerFacetPosition = 1;
+		$clientSettings->studySerieFacetPosition = 2;
+		$clientSettings->decadeFacetPosition = 3;
+		$clientSettings->conceptFacetPosition = 4;
+		$clientSettings->studyFacetPosition = 5;
+	break;
+	
+	case 'Solr_BDQ_Search_ConceptSearch':
+		$clientSettings->keywordFacetDisplay = true;
+		$clientSettings->keywordFacetPosition = 0;
+		$clientSettings->producerFacetDisplay = false; // as concept are tied to a producer, its facet box is hidden
+		$clientSettings->conceptFacetDisplay = false; // no need to display the concept facet box
+		$clientSettings->studySerieFacetPosition = 1;
+		$clientSettings->studyFacetPosition = 2;
+		$clientSettings->decadeFacetPosition = 3;
+		$clientSettings->producerFacetPosition = 4;
+		$clientSettings->conceptFacetPosition = 5;
+	break;
+	
+	case 'Solr_BDQ_Search_SerieSearch':
+		$clientSettings->keywordFacetDisplay = true;
+		$clientSettings->keywordFacetPosition = 0;
+		$clientSettings->studySerieFacetDisplay = false; // no need to display the study serie facet box
+		$clientSettings->keywordFacetDisplay = true;
+		$clientSettings->studyFacetPosition = 1;
+		$clientSettings->decadeFacetPosition = 2;
+		$clientSettings->conceptFacetPosition = 3;
+		$clientSettings->producerFacetPosition = 4;
+		$clientSettings->studySerieFacetPosition = 5;
+	break;
+	
+	case 'Solr_BDQ_Search_DomainSearch':
+		$clientSettings->keywordFacetDisplay = true;
+		$clientSettings->keywordFacetPosition = 0;
+		$clientSettings->producerFacetDisplay = false; // no need to display the study serie facet box
+		$clientSettings->keywordFacetDisplay = true;
+		$clientSettings->studySerieFacetPosition = 1;
+		$clientSettings->studyFacetPosition = 2;
+		$clientSettings->decadeFacetPosition = 3;
+		$clientSettings->conceptFacetPosition = 4;
+		$clientSettings->producerFacetPosition = 5;
+	break;
+
+endswitch;
+?>
+<div class="facets">
+	<form method="get" action="" id="facetFilter">
+		<input type="hidden" name="filterResults" value="1" />
+			<?php 
+				$displayReset = ($this->queryFilters != array() || $this->conceptFilters != array() || $this->decadeFilters != array() || $this->domainFilters != array() || $this->studySerieFilters != array() || $this->studyFilters != array());
+			?>
+			<ul id="sortable">			
+<?php
+/**
+ * Stores the code to include the facet box partials, evalued later.
+ * The properties *FacetPosition from the $clientSettings object range from 0 to 5.
+ * It is stored in a cookie that can be modified through the GUI.
+ * @see BDQ_Settings_Client
+ * @var array 
+ */
+$partials = array(
+	$clientSettings->producerFacetPosition => "
+	echo \$this->partial(
+		'solrsearch/elements/facets/producer.phtml',
+		array(
+			'domainFacets' => \$this->domainFacets,
+			'domainFilters' =>  \$this->domainFilters
+		)
+	);",
+	$clientSettings->studySerieFacetPosition => "
+	echo \$this->partial(
+		'solrsearch/elements/facets/serie.phtml',
+		array(
+			'studySerieFacets' =>  \$this->studySerieFacets,
+			'studySerieFilters' =>  \$this->studySerieFilters
+		)
+	);",
+	$clientSettings->studyFacetPosition => "
+	echo \$this->partial(
+		'solrsearch/elements/facets/study.phtml',
+		array(
+			'studyFacets' =>  \$this->studyFacets,
+			'studyFilters' =>  \$this->studyFilters
+		)
+	);",
+	$clientSettings->decadeFacetPosition => "
+	echo \$this->partial(
+		'solrsearch/elements/facets/decade.phtml',
+		array(
+			'decadeFacets' =>  \$this->decadeFacets,
+			'decadeFilters' =>  \$this->decadeFilters
+		)
+	);",
+	$clientSettings->keywordFacetPosition => "
+	echo \$this->partial(
+		'solrsearch/elements/facets/keyword.phtml',
+		array(
+			'queryFilters' =>  \$this->queryFilters,
+			'search' => \$this->search,
+			'response' => \$this->response
+		)
+	);",
+	$clientSettings->conceptFacetPosition => "
+	echo \$this->partial(
+		'solrsearch/elements/facets/concept.phtml',
+		array(
+			'conceptFilters' =>  \$this->conceptFilters,
+			'conceptFacets' =>  \$this->conceptFacets
+		)
+	);",
+);
+$l = count($partials);
+
+for ($i = 0; $i < $l; $i++)
+{
+	eval($partials[$i]);
+}
+?>					
+			</ul>
+<?php
+if ($this->response && $this->response->response['response']['numFound'] > 0):
+?>
+	 		<span class="submit">
+				<input type="submit" class="submit" value="<?php echo 	$translate->_('fr0215000000');
+																			#Affiner la recherche
+					?>" />
+			</span>
+	 		
+			<span class="facetReset"<?php if ( ! $this->displayReset):?> style="display:none;"<?php endif;?> title="<?php echo 	$translate->_('fr0215000050');
+																			#Affiner la recherche
+					?>">
+					<?php 
+						 echo 	$translate->_('fr0215000100');
+								#Réinitialiser
+					?>
+			</span>
+<?php 
+endif;
+?>
+	</form>
+</div>
+<?php 
+if ($class != 'Solr_BDQ_Search_SimpleSearch') // The simple search already include this script.
+{
+	echo $this->partial('solrsearch/elements/luceneQueryValidationScript.phtml');
+}
+?>
+<script type="text/javascript" src="/scripts/dataTable.min.js"></script>
+<script type="text/javascript" src="/scripts/dynamicFacets.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+dynamicFacets.init({
+	'displayConcept':<?php echo $clientSettings->displayConcept; ?>,
+	'numFound': <?php echo $this->response ? $this->response->response['response']['numFound'] : 0; ?>,
+	'keywordFiltersCount':<?php echo count($this->queryFilters);?>,
+	'updateFacetRoute': "<?php echo $this->url(array(), $route);?>?updateFacets=1",
+	'maxFacetDisplay': <?php echo MAX_FACETS_DISPLAY; ?>,
+	'searchQuestion': <?php echo SEARCH_QUESTION; ?>,
+	'searchModalities': <?php echo SEARCH_MODALITIES; ?>,
+	'searchVariable': <?php echo SEARCH_VARIABLE; ?>,
+	'translate': {
+		'keywordFiltersEnter': "<?php echo addslashes($translate->_('fr0215000151')); ?>",
+		'table': {
+			'_common': {
+				'sLengthMenu': "<?php echo addslashes($translate->_('fr0215000150')); ?>",
+				'sSearch' : "<?php echo addslashes($translate->_('fr0215000200')); ?>",
+				'oPaginate':{
+					"sPrevious": "&lt;<?php echo addslashes($translate->_('fr0215000250')); ?>",
+					"sNext": "<?php echo addslashes($translate->_('fr0215000300')); ?>&gt;"
+				}
+			},
+			'domain': {
+				"sZeroRecords": "<?php echo addslashes($translate->_('fr0215000350')); ?>",
+				"sInfo": "<?php echo addslashes($translate->_('fr0215000400')); ?>",
+				"sInfoEmpty": "<?php echo addslashes($translate->_('fr0215000450')); ?>",
+				"sInfoFiltered": "<?php echo addslashes($translate->_('fr0215000500')); ?>"
+			},
+			'studySerie': {
+				"sZeroRecords": "<?php echo addslashes($translate->_('fr0215000550')); ?>",
+				"sInfo": "<?php echo addslashes($translate->_('fr0215000600')); ?>",
+				"sInfoEmpty": "<?php echo addslashes($translate->_('fr0215000650')); ?>",
+				"sInfoFiltered": "<?php echo addslashes($translate->_('fr0215000700')); ?>"
+			},
+			'study': {
+				"sZeroRecords": "<?php echo addslashes($translate->_('fr0215000750')); ?>",
+				"sInfo": "<?php echo addslashes($translate->_('fr0215000800')); ?>",
+				"sInfoEmpty": "<?php echo addslashes($translate->_('fr0215000850')); ?>",
+				"sInfoFiltered": "<?php echo addslashes($translate->_('fr0215000900')); ?>"
+			},
+			'decade': {
+				"sZeroRecords": "<?php echo addslashes($translate->_('fr0215000950')); ?>",
+				"sInfo": "<?php echo addslashes($translate->_('fr0215001000')); ?>",
+				"sInfoEmpty": "<?php echo addslashes($translate->_('fr0215001050')); ?>",
+				"sInfoFiltered": "<?php echo addslashes($translate->_('fr0215001100')); ?>"
+			},
+			'concept': {
+				"sZeroRecords": "<?php echo addslashes($translate->_('fr0215001150')); ?>",
+				"sInfo": "<?php echo addslashes($translate->_('fr0215001200')); ?>",
+				"sInfoEmpty": "<?php echo addslashes($translate->_('fr0215001250')); ?>",
+				"sInfoFiltered": "<?php echo addslashes($translate->_('fr0215001300')); ?>"
+			},
+			'queryFilter': {
+				"sZeroRecords": "<?php echo addslashes($translate->_('fr0215001350')); ?>",
+				"sInfo": "<?php echo addslashes($translate->_('fr0215001400')); ?>",
+				"sInfoEmpty": "<?php echo addslashes($translate->_('fr0215001450')); ?>",
+				"sInfoFiltered": "<?php echo addslashes($translate->_('fr0215001500')); ?>"
+			}
+		}
+	}
+});
+//]]>
+</script>

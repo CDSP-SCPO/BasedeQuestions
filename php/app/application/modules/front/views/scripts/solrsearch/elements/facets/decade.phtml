@@ -1,0 +1,64 @@
+<?php 
+/**
+ * Decade facets
+ * 
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+$translate = Zend_Registry::get('translateFront');
+$clientSettings = BDQ_Settings_Client::getInstance();
+?>
+<li id="decadeFacet">
+	<?php 
+	$this->facetGripStart();
+	?>
+	<span class="toggler<?php if ($clientSettings->decadeFacetDisplay):?> down<?php endif;?>">&nbsp;</span>
+	<span class="title"><?php echo $translate->_('fr0185000000');?></span>
+	<?php 
+	$this->facetGripEnd();
+	?>
+	<div class="toggled<?php if (empty($this->decadeFacets)): ?> noResult<?php endif; ?>" <?php if ( ! $clientSettings->decadeFacetDisplay):?> style="display:none;"<?php endif;?>>
+	<?php
+		if (! empty($this->decadeFacets)):
+	?>
+		<table class="filter" id="decadeFilters" cellpadding="0" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="checkbox" title="<?php echo $translate->_('fr0185000050');
+
+					?>">&nbsp;</th>
+					<th class="title date" title="<?php echo $translate->_('fr0185000100');
+
+					?>">&nbsp;</th>
+					<th class="count" title="<?php echo $translate->_('fr0185000150');
+
+					?>">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+		<?php
+			$l = count($this->decadeFacets);
+			$showMore = false;
+			
+			for ($i = $l - 1; $i >= 0; $i -= 3):
+				$year = $this->decadeFacets[$i - 2];
+				$decade = $this->decadeFacets[$i - 1];
+				$count =  $this->decadeFacets[$i];
+				$checked = array_search($year, $this->decadeFilters) !== false;
+		?>
+			<tr<?php if (($l / 3) >= MAX_FACETS_DISPLAY): ?> style="display:none;"<?php endif; ?>>
+				<td class="checkbox"><input type="checkbox" id="decadeCheckBox_<?php echo $year ?>" class="decadeFilter resultFilter" name="decadeFilters[]" value="<?php echo $year ?>"<?php if ($checked) { echo ' checked="checked"'; }?>/></td>
+				<td class="title"><label for="decadeCheckBox_<?php echo $year ?>"><?php echo $decade;?></label></td>
+				<td class="count"></td>
+			</tr>
+		<?php 
+			endfor;
+		?>
+			</tbody>
+		</table>
+	<?php 
+		endif;
+	?>
+	</div>
+	<div class="clear"></div>
+</li>

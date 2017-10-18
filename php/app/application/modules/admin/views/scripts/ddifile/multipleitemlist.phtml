@@ -1,0 +1,71 @@
+<h2><?php echo $this->translate->_('fr0130000000')?></h2>
+<form method="post" action="<?php echo $this->url(
+	array(
+		'controller' => 'ddifile',
+		'action' => 'multipleitemlist',
+	),
+	'ddifileMultipleitemlist'
+)?>">
+	<ul class="battery">
+	<?php
+		$i = 0;
+		foreach($this->mi_groups as $group):
+	?>
+		<li class="firstLevel">
+		<?php 
+			$var = each($group);
+			echo $var[1]['question']['question_no_item'];
+		?>
+			<ul>
+			<?php
+				foreach($group as $var):
+			?>
+				<li>
+					<?php  echo '<b>', $var['name'], '</b>', ' : ', $var['question']['item'];?>
+				</li>
+			<?php
+				endforeach;
+			?>
+		</ul>
+		<input type="checkbox" name="selected_batteries[]" value="<?php echo $i;?>" id="cb_<?php echo $i; ?>" checked="checked"/><label for="cb_<?php echo $i;?>"><?php echo $this->translate->_('fr0130000010')?></label>
+		</li>
+	<?php
+		$i++;	
+		endforeach;
+	?>
+	</ul>
+	<fieldset>
+		<legend><?php echo $this->translate->_('fr0130000020')?></legend>
+		<input type="radio" name="use_identified_item"  id ="use_identified_item_o" value="1" checked="checked" />
+		<label for="use_identified_item_o"><?php echo $this->translate->_('fr0130000030')?></label><br/>
+		<input type="radio" name="use_identified_item"  id ="use_identified_item_n" value="0" />
+		<label for="use_identified_item_n"><?php echo $this->translate->_('fr0130000040')?></label>
+	</fieldset>
+	<input type="submit" value="<?php echo $this->translate->_('fr0130000050')?>"/>
+</form>
+<br/>
+<hr/>
+<br/>
+<form method="post" action="<?php echo $this->url(
+	array(
+		'controller' => 'ddifile',
+		'action' => 'multipleitemlist',
+	),
+	'ddifileMultipleitemlist'
+)?>">
+	<fieldset>
+		<legend><?php echo $this->translate->_('fr0130000060')?></legend>
+		<textarea cols="5" rows="3" name="question_item_separator"></textarea>
+	</fieldset>
+	<input type="submit" value="<?php echo $this->translate->_('fr0130000070')?>"/>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function() {
+	$('li.firstLevel').click(function(){
+		var cb = $(this).find('input');
+		cb.attr('checked') ? cb.removeAttr('checked') : cb.attr('checked', 'checked');
+	});
+});
+//]]>
+</script>

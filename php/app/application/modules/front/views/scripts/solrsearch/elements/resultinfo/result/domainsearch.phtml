@@ -1,0 +1,56 @@
+<?php 
+$translate = Zend_Registry::get('translateFront');
+$clientSettings = BDQ_Settings_Client::getInstance();
+?>
+<div class="resultInfoBox">
+	<?php 
+		$select = $this->search->getSelect();
+		$start = $select->getStart();
+		$rows = $select->getRows();
+		$total = $this->response->response['response']['numFound'];
+		$to = ($start + $rows) < $total ? ($start + $rows) : $total;
+		echo $translate->_('fr0105000000'), ' <b>', ($start + 1), '</b> ', $translate->_('fr0105000050'), ' <b>', $to, '</b> ', $translate->_('fr0105000100'), ' <b>', $total, '</b>';
+	?>
+	- <a class="yellowAnchor" href="<?php echo $this->url(array('id' => $this->domain['id']), 'domainDetails'); ?>"><?php echo $translate->_('fr0105000150'); ?></a>
+<?php
+	if (
+		! empty($this->conceptFilters)
+		|| ! empty($this->domainFilters)
+		|| ! empty($this->studySerieFilters)
+		|| ! empty($this->decadeFilters)
+		|| ! empty($this->queryFilters)
+		|| ! empty($this->studyFilters)
+	):
+	?>
+	<?php 
+	echo $this->partial('solrsearch/elements/resultinfo/facetsfilters.phtml',
+		array(
+			'conceptFacets' => $this->conceptFacets,
+			'domainFacets' => $this->domainFacets,
+			'studySerieFacets' => $this->studySerieFacets,
+			'decadeFacets' => $this->decadeFacets,
+			'studyFacets' => $this->studyFacets,
+			'conceptFilters' => $this->conceptFilters,
+			'domainFilters' => $this->domainFilters,
+			'studySerieFilters' => $this->studySerieFilters,
+			'decadeFilters' => $this->decadeFilters,
+			'queryFilters' => $this->queryFilters,
+			'studyFilters' => $this->studyFilters,
+		)
+	);
+	?>
+	<?php 
+	endif;
+	?>
+	<?php 
+		echo $this->partial('solrsearch/elements/resultinfo/sort.phtml', array(
+				'sortOrdersLabels' => $this->sortOrdersLabels,
+				'search' => $this->search,
+				'sort' => $this->sort
+			)
+		);
+	?>
+	<?php 
+		echo $this->partial('solrsearch/elements/resultinfo/result/details.phtml');
+	?>
+</div>

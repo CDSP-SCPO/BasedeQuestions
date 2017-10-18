@@ -1,0 +1,148 @@
+<?php 
+$date = new Zend_Date;
+?>
+<ul class="menu">
+	<li>
+		<a href="<?php echo $this->url(array(), 'ddifileAdd');?>" class="add">
+			<?php echo $this->translate->_('fr0160000000') ?>
+		</a>
+	</li>
+</ul>
+<?php
+	if (($c = count($this->ddifiles)) > 0):
+?>
+<table class="display" id="ddifile_index_table">
+	<thead>
+		<tr>
+			<th><?php echo $this->translate->_('fr0160000010') ?></th>
+			<th><?php echo $this->translate->_('fr0160000020') ?></th>
+			<th><?php echo $this->translate->_('fr0160000030') ?></th>
+			<th><?php echo $this->translate->_('fr0160000040') ?></th>
+			<th><?php echo $this->translate->_('fr0160000050') ?></th>
+			<th class="action view"></th>
+			<th class="action edit"></th>
+			<th class="action delete"></th>
+		</tr>
+	</thead>
+	<tbody>
+<?php 
+	$i = 0;
+	
+	foreach ($this->ddifiles as $ddifile):
+?>
+	<tr>
+		<td>
+			<?php 
+				echo stripslashes($ddifile['study_title']);
+			?>
+		</td>
+		<td>
+			<?php
+				echo stripslashes($ddifile['tl_label']);
+			?>
+		</td>
+		<td>
+			<?php 
+				$domainTitles = explode(GC_MULTIPLE_VALUE_SEPARATOR, $ddifile['study_domain']);
+				$l = count($domainTitles);
+				
+				for ($i = 0; $i < $l; $i++):
+					$domainTitle = $domainTitles[$i];
+			?>
+				
+				<?php echo $domainTitle; ?>
+				<br/>
+			<?php
+				endfor;
+			?>
+		</td>
+		<td>
+			<?php
+				echo stripslashes($ddifile['study_serie_title']);
+			?>
+		</td>
+		<td>
+			<?php
+				echo stripslashes($ddifile['ns_title']);
+			?>
+		</td>
+		<td class="action">
+			<a href="<?php 
+				echo $this->url(
+					array(
+						'id' => $ddifile['id']
+					),
+					'ddifileView'
+				);
+				?>" class="view">
+				<img src="/img/admin/view.png" alt="<?php echo $this->translate->_('fr0160000060'); ?>" title="<?php echo $this->translate->_('fr0160000070'); ?>"/>
+			</a>
+		</td>
+		<td class="action">
+			<a href="<?php 
+				echo $this->url(
+					array(
+						'id' => $ddifile['id']
+					),
+					'ddifileEdit'
+				);
+				?>" class="edit">
+				<img src="/img/admin/edit.png"/ alt="<?php echo $this->translate->_('fr0160000080'); ?>" title="<?php echo $this->translate->_('fr0160000090'); ?>"/>
+			</a>
+		</td>
+		<td class="action">
+			<a href="<?php 
+				echo $this->url(
+					array(
+						'id' => $ddifile['id']
+					),
+					'ddifileConfirmdelete'
+				);
+				?>" class="modal delete">
+				<img src="/img/admin/delete.png" alt="<?php echo $this->translate->_('fr0160000100'); ?>" title="<?php echo $this->translate->_('fr0160000110'); ?>"/>
+			</a>
+		</td>
+	</tr>
+<?php
+	$i++;
+	endforeach;
+?>
+	</tbody>
+</table>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+	$("#ddifile_index_table").dataTable({
+		"aaSorting": [[0, "asc"]],
+		"oLanguage": {
+			"sLengthMenu": "<?php echo $this->translate->_('fr0160000120'); ?>",
+			"sZeroRecords": "<?php echo $this->translate->_('fr0160000130'); ?>",
+			"sInfo": "<?php echo $this->translate->_('fr0160000140'); ?>",
+			"sInfoEmpty": "<?php echo $this->translate->_('fr0160000150'); ?>",
+			"sInfoFiltered": "<?php echo $this->translate->_('fr0160000160'); ?>",
+			"sSearch" : "<?php echo $this->translate->_('fr0160000170'); ?>",
+			"oPaginate":{
+					"sPrevious": "&lt;<?php echo $this->translate->_('fr0160000180'); ?>",
+					"sNext": "<?php echo $this->translate->_('fr0160000190'); ?>&gt;"
+			}
+		},
+		"sPaginationType": "input",
+		"aoColumns": [
+		         		null,
+		         		null,
+		         		null,
+		         		null,
+		         		null,
+		     			{ "bSortable": false, "bSearchable": false },
+		     			{ "bSortable": false, "bSearchable": false },
+		     			{ "bSortable": false, "bSearchable": false }
+		     		],
+		"bStateSave": true,
+		"iCookieDuration": 36000000
+	});
+});
+//]]>
+</script>
+<?php
+	endif;
+?>

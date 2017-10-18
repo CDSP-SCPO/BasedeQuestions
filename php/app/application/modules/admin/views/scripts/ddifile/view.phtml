@@ -1,0 +1,238 @@
+<?php 
+$date = new Zend_Date;
+?>
+<h2><?php echo $this->translate->_('fr0140000000') ?></h2>
+<ul>
+	<li>
+		<a href="<?php 
+			echo $this->url(
+				array(
+					'id' => $this->ddifile['id']
+				),
+				'ddifileIndex'
+			);
+			?>" class="index"><?php echo $this->translate->_('fr0140000010') ?></a>
+	</li>
+	<li>
+		<a href="<?php 
+			echo $this->url(
+				array(
+					'id' => $this->ddifile['id']
+				),
+				'ddifileEdit'
+			);
+			?>" class="edit"><?php echo $this->translate->_('fr0140000020') ?></a>
+	</li>
+	<li>
+		<a href="<?php 
+			echo $this->url(
+				array(
+					'id' => $this->ddifile['id']
+				),
+				'ddifileConfirmdelete'
+			);
+			?>" class="modal delete"><?php echo $this->translate->_('fr0140000030') ?></a>
+	</li>
+</ul>
+<dl class="view">
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0140000040')
+		?>
+	</dt>
+	<dd>
+	<?php 
+	 	echo stripslashes($this->ddifile['study_title'])
+	 ?>
+	</dd>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0140000050')
+		?>
+	</dt>
+	<dd>
+	<?php 
+		echo $this->solr_response->response['response']['numFound'], $this->translate->_('fr0140000060');
+	?>
+	</dd>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0140000070')
+		?>
+	</dt>
+	<dd>
+	<?php 
+		$year = stripslashes($this->ddifile['study_year']);
+		$year = explode('-', $year);
+		$year = $year[0];
+	 	echo $year - 5, ' - ', $year + 5;
+	 ?>
+	</dd>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0140000080')
+		?>
+	</dt>
+	<dd>
+	<?php 
+	 	echo isset($this->ddifile['study_serie_title']) ? 
+	 		stripslashes($this->ddifile['study_serie_title']) : 
+	 		$this->translate->_('fr0140000090');
+	 ?>
+	</dd>
+	
+	<!-- 
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0140000100')
+		?>
+	</dt>
+	<dd>
+	<?php 
+	 	echo stripslashes($this->ddifile['file_name'])
+	 ?>
+	</dd>
+	 -->
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0140000110')
+		?>
+	</dt>
+	<dd>
+	<?php 
+		$l = count($this->domains);
+		
+		if ($l > 0):
+	?>
+		<ul>
+	<?php 
+		$l = count($this->domains);
+		$i = 0;
+	
+	 	foreach($this->domains as $domain):
+	?>
+		<li><?php echo stripslashes($domain['title']), (($i < $l -1 ) ? '<br/>' : ''); ?></li>
+	 <?php
+	 		$i++;
+	 	endforeach;	
+	 ?>
+	 	</ul>
+	 	
+	 <?php
+	 	else:
+	 		echo $this->translate->_('fr0140000120');
+	 ?>
+	 	
+	 <?php
+	 	endif;
+	 ?>
+	</dd>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0140000130')
+		?>
+	</dt>
+	<dd>
+	 <?php 
+		echo (isset($this->ddifile['nesstar_server_title']) && ! empty($this->ddifile['nesstar_server_title'])) ? 
+	 		$this->ddifile['nesstar_server_title']
+	 		:
+	 		$this->translate->_('fr0140000140');
+	 ?>
+	</dd>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0140000150')
+		?>
+	</dt>
+	<dd>
+	<?php 
+	 	if (isset($this->ddifile['questionnaire_url']) && ! empty($this->ddifile['questionnaire_url'])):
+	 ?>
+	 	<a href="<?php echo $this->ddifile['questionnaire_url']; ?>" target="_blank"><?php echo $this->ddifile['questionnaire_url']; ?></a>
+	 <?php
+	 	else:
+	 		$this->translate->_('fr0140000160');
+	 	endif;
+	 ?>
+	</dd>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0140000170')
+		?>
+	</dt>
+	<dd>
+	<?php
+
+	 	if ( ! $this->questionnaires || count($this->questionnaires) == 0):
+	 		echo $this->translate->_('fr0140000180');
+
+	 	else:
+	 
+			$l = count($this->questionnaires);
+	?>
+		<ul>
+		<?php
+			for ($j = 0; $j < $l; $j++):
+		?>
+			<li>
+				<a href="<?php echo htmlspecialchars($this->url
+							(
+								array(
+									'id' => $this->questionnaires[$j]['questionnaire_id']
+								),
+								'questionnaireView'
+							)); ?>" target="_blank">
+			<?php
+				echo ($this->questionnaires[$j]['questionnaire_title']) ? $this->questionnaires[$j]['questionnaire_title'] :  $this->translate->_('fr0140000190');
+			?>
+				</a>
+			</li>
+		<?php 
+			endfor;
+		?>
+		</ul>
+	 <?php 
+	 	endif;
+	 ?>
+	</dd>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0140000200')
+		?>
+	</dt>
+	<dd>
+	<?php 
+	 	echo $this->ddifile['multiple_item_parsed'] ? $this->translate->_('fr0140000210') : $this->translate->_('fr0140000220');
+	 ?>
+	</dd>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0140000230')
+		?>
+	</dt>
+	<dd>
+	<?php 
+	 	$date->set($this->ddifile['created'], Zend_Date::ISO_8601);
+		echo $date->get('dd/MM/YYYY HH:mm');
+	 	
+	 ?>
+	</dd>
+	<?php 
+	if (isset($this->ddifile['modified'])):
+	?>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0140000240')
+		?>
+	</dt>
+	<dd>
+	<?php 
+	 	$date->set($this->ddifile['modified'], Zend_Date::ISO_8601);
+		echo $date->get('dd/MM/YYYY HH:mm');
+	 ?>
+	</dd>
+	<?php 
+	endif;
+	?>
+</dl>

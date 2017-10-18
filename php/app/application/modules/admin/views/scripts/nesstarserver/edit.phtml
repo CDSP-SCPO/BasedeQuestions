@@ -1,0 +1,32 @@
+<h2><?php echo $this->translate->_('fr0060000000')?></h2>
+<ul>
+	<li>
+		<a href="<?php echo $this->url(
+				array(),
+				'nesstarserverIndex'
+			) ?>" class="index"><?php echo $this->translate->_('fr0060000010')?></a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(
+				array(),
+				'nesstarserverView'
+			) ?>" class="view"><?php echo $this->translate->_('fr0060000020')?></a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(
+				array(),
+				'nesstarserverConfirmdelete'
+			) ?>" class="modal delete"><?php echo $this->translate->_('fr0060000030')?></a>
+	</li>
+</ul>
+<?php
+$this->form->setAction(
+	$this->url(
+		array(
+			'controller' => 'nesstarserver',
+			'action' => 'add'
+		)
+	)
+);
+echo $this->form;
+?>

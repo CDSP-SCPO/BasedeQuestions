@@ -1,0 +1,87 @@
+<?php 
+$cn = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+$translate = Zend_Registry::get('translateAdmin');
+?>
+<a href="<?php echo $this->url(array(), 'adminDisconnect');?>">
+	<?php echo $translate->_('fr0175000000') ?>
+</a>
+<div>
+	<ul id="tabnav" class="menu">
+		<li class="<?php 
+		if ($cn == 'domain') echo 'selected';
+		?>">
+			<a href="<?php 
+				echo $this->url(
+					array(),
+					'domainIndex'
+				);
+			?>">
+				<?php echo $translate->_('fr0175000010') ?>
+			</a>
+		</li>
+		<li class="<?php 
+		if ($cn == 'studyserie') echo 'selected';
+		?>">
+			<a href="<?php 
+				echo $this->url(
+					array(),
+					'studyserieIndex'
+				);
+				?>">
+				<?php echo $translate->_('fr0175000020') ?>
+			</a>
+		</li>
+		<li class="<?php 
+		if ($cn == 'ddifile') echo 'selected';
+		?>">
+			<a href="<?php 
+				echo $this->url(
+					array(),
+					'ddifileIndex'
+				);
+			?>">
+				<?php echo $translate->_('fr0175000030') ?>
+			</a>
+		</li>
+		<li class="<?php 
+		if ($cn == 'conceptlist') echo 'selected';
+		?>">
+			<a href="<?php 
+				echo $this->url(
+					array(),
+					'adminconceptlistIndex'
+				);
+			?>">
+				<span>
+				<?php echo $translate->_('fr0175000040') ?>
+				</span>
+			</a>
+		</li>
+		<li class="<?php 
+		if ($cn == 'concept') echo 'selected';
+		?>">
+			<a href="<?php 
+				echo $this->url(
+					array(),
+					'adminconceptIndex'
+				);
+			?>">
+				<span>
+				<?php echo $translate->_('fr0175000050') ?>
+				</span>
+			</a>
+		</li>
+		<li class="<?php 
+		if ($cn == 'nesstarserver') echo 'selected';
+		?>">
+			<a href="<?php 
+				echo $this->url(
+					array(),
+					'nesstarserverIndex'
+				);
+			?>">
+				<?php echo $translate->_('fr0175000060') ?>
+			</a>
+		</li>
+	</ul>
+</div>

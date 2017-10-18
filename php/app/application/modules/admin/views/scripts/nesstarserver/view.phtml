@@ -1,0 +1,120 @@
+<?php 
+$date = new Zend_Date;
+?>
+<h2><?php echo $this->translate->_('fr0045000000') ?></h2>
+<ul>
+	<li>
+		<a href="<?php 
+		echo $this->url(
+			array(),
+			'nesstarserverIndex'
+		);
+		?>" class="index"><?php echo $this->translate->_('fr0045000010') ?></a>
+	</li>
+	<li>
+		<a href="<?php 
+		echo $this->url(
+			array(
+				'id' => $this->nesstarserver->get_id()
+			),
+			'nesstarserverEdit'
+		);
+		?>" class="edit"><?php echo $this->translate->_('fr0045000020') ?></a>
+	</li>
+	<li>
+		<a href="<?php 
+		echo $this->url(
+			array(
+				'id' => $this->nesstarserver->get_id()
+			),
+			'nesstarserverConfirmdelete'
+		);
+		?>" class="modal delete"><?php echo $this->translate->_('fr0045000030') ?></a>
+	</li>
+</ul>
+<dl class="view">
+	<dt>
+		<?php echo $this->translate->_('fr0045000040')?>
+	</dt>
+	<dd>
+	<?php 
+	 	echo stripslashes($this->nesstarserver->get_title())
+	 ?>
+	</dd>
+	<dt>
+		<?php echo $this->translate->_('fr0045000050')?>
+	</dt>
+	<dd>
+	<?php 
+	 	echo $this->nesstarserver->get_ip()
+	 ?>
+	</dd>
+	<dt>
+		<?php echo $this->translate->_('fr0045000060')?>
+	</dt>
+	<dd>
+	<?php 
+	 	echo $this->nesstarserver->get_port()
+	 ?>
+	</dd>
+	<dt>
+		<?php echo $this->translate->_('fr0045000070')?>
+	</dt>
+	<dd>
+	<?php 
+	 	echo $this->nesstarserver->get_responsible() ? $this->nesstarserver->get_responsible() : $this->translate->_('fr0045000080');
+	 ?>
+	</dd>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0045000090')
+		?>
+	</dt>
+	<dd>
+	<?php 
+	 	$date->set($this->nesstarserver->get_created(), Zend_Date::ISO_8601);
+		echo $date->get('dd/MM/YYYY HH:mm');
+	 	
+	 ?>
+	</dd>
+	<?php 
+	if ($this->nesstarserver->get_modified() !== NULL):
+	?>
+	<dt>
+		<?php 
+			echo $this->translate->_('fr0045000100')
+		?>
+	</dt>
+	<dd>
+	<?php 
+	 	$date->set($this->nesstarserver->get_modified(), Zend_Date::ISO_8601);
+		echo $date->get('dd/MM/YYYY HH:mm');
+	 ?>
+	</dd>
+	<?php 
+	endif;
+	?>
+</dl>
+<?php 
+	if (count($this->studiesGroupedByLanguages) > 0):
+?>
+<?php
+	foreach ($this->studiesGroupedByLanguages as $studyGroup): 
+?>
+<h3><?php echo $this->translate->_('fr0045000110'), $studyGroup['language_code']; ?></h3>
+
+<ul>
+	<?php
+	foreach ($studyGroup['titles'] as $title): 
+	?>
+		<li><?php echo $title['title'] ?></li>
+	<?php 
+	endforeach;
+	?>
+</ul>
+<?php 
+	endforeach;
+?>
+<?php 
+	endif;
+?>

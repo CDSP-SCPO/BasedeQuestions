@@ -1,0 +1,49 @@
+<h2><?php echo $this->translate->_('fr0145000000')?></h2>
+<ul>
+	<li>
+		<a href="<?php echo $this->url(array(), 'ddifileIndex');?>" class="index">
+			<?php echo $this->translate->_('fr0145000010');?>
+		</a>
+	</li>
+</ul>
+<?php
+$client = Solr_Client::getInstance();
+$response = $client->ping();
+
+if ($response->response['status'] == 'OK')
+{
+	echo $this->form;
+}
+?>
+<a href="<?php echo $this->url(array(), 'ddifileIndex');?>">
+	<?php echo $this->translate->_('fr0145000020')?>
+</a>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	if ($('#item_analysis-1').attr('checked'))
+	{
+		$('.qi_sep').slideDown('fast');
+	}
+
+	$('#item_analysis-1').change(function() {
+
+		if ($(this).attr('checked'))
+		{
+			$('.qi_sep').slideDown('fast');
+		}
+
+	});
+	$('#item_analysis-0').change(function() {
+
+		if ($(this).attr('checked'))
+		{
+			$('.qi_sep').slideUp('fast');
+		}
+
+	});
+});
+</script>
+<?php 
+	echo $this->partial('ddifileform-questionnairescript.phtml');
+?>

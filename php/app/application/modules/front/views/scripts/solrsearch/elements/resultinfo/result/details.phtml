@@ -1,0 +1,29 @@
+<?php 
+$translate = Zend_Registry::get('translateFront');
+$clientSettings = BDQ_Settings_Client::getInstance();
+?>
+<div class="detail">
+	<?php
+		if ($clientSettings->displayModalities):
+	?> 
+		<?php
+			 echo $translate->_('fr0125000000');
+		?>
+		<br/>
+		<?php
+			echo $translate->_('fr0125000050');
+		?>
+	<?php 
+		else:
+	?>
+		<?php
+			 echo $translate->_('fr0125000100');
+		?>
+		<br/>
+		<?php
+			echo $translate->_('fr0125000150');
+		?>
+	<?php 
+		endif;
+	?>
+</div>

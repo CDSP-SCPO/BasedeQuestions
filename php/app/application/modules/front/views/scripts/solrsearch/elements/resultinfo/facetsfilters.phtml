@@ -1,0 +1,321 @@
+<?php 
+$translate = Zend_Registry::get('translateFront');
+?>
+<div id="filterListDiv">
+	<table cellpadding="0" cellspacing="0" id="filterListTable">
+		<?php
+		if ( ! empty($this->domainFilters)):
+			$l = count($this->domainFilters);
+		?>
+		<tbody>
+			<tr>
+				<td class="label">
+					<?php echo $l > 1 ? $translate->_('fr0085000000') : $translate->_('fr0085000050'); ?>
+				</td>
+				<td>
+					<ul>
+						<?php 
+							$l = count($this->domainFacets);
+	
+							for ($i = 0; $i < $l; $i += 3):
+									$id = $this->domainFacets[$i];
+									$domain = $this->domainFacets[$i + 1];
+	
+									if (array_search($id, $this->domainFilters) !== false):
+									
+						?>
+							<li>
+							<?php
+										echo $domain;
+							?>
+							</li>
+							<?php 
+								endif;
+							?>
+						<?php 
+							endfor;
+						?>
+					</ul>
+				</td>
+			</tr>
+			<?php 
+			endif;
+	
+			if (! empty($this->studySerieFilters)):
+				$l = count($this->studySerieFilters);
+			?>
+			<tr>
+				<td class="label">
+					<?php echo $l > 1 ? $translate->_('fr0085000100') : $translate->_('fr0085000150'); ?>
+				</td>
+				<td>
+					<ul>
+						<?php 
+							$l = count($this->studySerieFacets);
+								
+								for ($i = 0; $i < $l; $i += 3):
+									$id = $this->studySerieFacets[$i];
+									$serie = $this->studySerieFacets[$i + 1];
+									if (array_search($id, $this->studySerieFilters) !== false):
+						?>
+							<li>
+								<?php
+									echo $serie;
+								?>
+							</li>
+							<?php 
+								endif;
+							?>
+						<?php 
+							endfor;
+						?>
+					</ul>
+				</td>
+			</tr>
+			<?php 
+			endif;
+			?>
+			
+			<?php
+			if (! empty($this->studyFilters)):
+				$l = count($this->studyFilters);
+			?>
+			<tr>
+				<td class="label">
+					<?php echo $l > 1 ? $translate->_('fr0085000200') : $translate->_('fr0085000250'); ?>
+				</td>
+				<td>
+					<ul>
+						<?php 
+							$l = count($this->studyFacets);
+							
+							for ($i = 0; $i < $l; $i += 3):
+								$id = $this->studyFacets[$i];
+								$study = $this->studyFacets[$i + 1];
+	
+								if (array_search($id, $this->studyFilters) !== false):
+							
+						?>
+							<li>
+							<?php 
+								echo $study;
+							?>
+							</li>
+							<?php 
+								endif;
+							?>
+						<?php 
+							endfor;
+						?>
+					</ul>
+				</td>
+			</tr>
+			<?php 
+			endif;
+	
+			if (! empty($this->decadeFilters)):
+				$l = count($this->decadeFilters);
+			?>
+			<tr>
+				<td class="label">
+					<?php echo $l > 1 ? $translate->_('fr0085000300') : $translate->_('fr0085000350'); ?>
+				</td>
+				<td>
+					<ul>
+						<?php 
+							$l = count($this->decadeFacets);
+								
+							for ($i = $l - 1; $i >= 0; $i -= 3):
+								$year = $this->decadeFacets[$i - 2];
+								$decade = $this->decadeFacets[$i - 1];
+								if (array_search($year, $this->decadeFilters) !== false):
+						?>
+							<li>
+								<?php
+									echo $decade;
+								?>
+							</li>
+							<?php 
+								endif;
+							?>
+						<?php 
+							endfor;
+						?>
+					</ul>
+				</td>
+			</tr>
+			<?php 
+			endif;
+	
+			if (! empty($this->queryFilters)):
+				$l = count($this->queryFilters);
+				$qQ = array();
+				$mQ = array();
+				$vQ = array();
+				
+				for ($i = 0; $i < $l; $i++)
+				{
+					$filter = $this->queryFilters[$i];
+					$query = substr($filter, 0, -1); 
+					$target = substr($filter, -1);
+	
+					if ($target & SEARCH_QUESTION)
+					{
+						$qQ[] = $query;
+					}
+					
+					if ($target & SEARCH_MODALITIES)
+					{
+						$mQ[] = $query;
+					}
+					
+					if ($target & SEARCH_VARIABLE)
+					{
+						$vQ[] = $query;
+					}
+	
+				}
+			
+				if ($qQ):
+				?>
+			<tr>
+				<td class="label">
+					<?php echo $translate->_('fr0085000455'); ?>
+				</td>
+				<td class="queryFilterInfo">
+					<ul>
+					<?php 
+					$l = count($qQ);
+	
+					for ($j = 0; $j < $l; $j++):
+					?>
+						<li>
+						<?php
+						echo $qQ[$j];
+						?>
+						</li>
+					<?php 
+					endfor;
+					?>
+					</ul>
+				</td>
+			</tr>
+				<?php 
+				endif;
+				
+				if ($mQ):
+				?>
+			<tr>
+				<td class="label">
+					<?php echo $translate->_('fr0085000460'); ?>
+				</td>
+				<td class="queryFilterInfo">
+					<ul>
+					<?php 
+					$l = count($mQ);
+	
+					for ($j = 0; $j < $l; $j++):
+					?>
+						<li>
+						<?php
+						echo $mQ[$j];
+						?>
+						</li>
+					<?php 
+					endfor;
+					?>
+					</ul>
+				</td>
+			</tr>
+				<?php 
+				endif;
+				
+				if ($vQ):
+				?>
+			<tr>
+				<td class="label">
+					<?php echo $translate->_('fr0085000465'); ?>
+				</td>
+				<td class="queryFilterInfo">
+					<ul>
+					<?php 
+					$l = count($vQ);
+	
+					for ($j = 0; $j < $l; $j++):
+					?>
+						<li>
+						<?php
+						echo $vQ[$j];
+						?>
+						</li>
+					<?php 
+					endfor;
+					?>
+					</ul>
+				</td>
+			</tr>
+				<?php 
+				endif;
+			endif;
+	
+			if (! empty($this->conceptFilters)):
+				$l = count($this->conceptFilters);
+			?>
+			<tr>
+				<td class="label">
+					<?php echo $l > 1 ? $translate->_('fr0085000500') : $translate->_('fr0085000550'); ?>
+				</td>
+				<td>
+					<ul>
+						<?php 
+							$l = count($this->conceptFacets);
+							
+							for ($i = 0; $i < $l; $i += 3):
+								$id = $this->conceptFacets[$i];
+								$concept = $this->conceptFacets[$i + 1];
+								if (array_search($id, $this->conceptFilters) !== false):
+						?>
+							<li>
+							<?php
+								echo $concept;
+							?>
+							</li>
+							<?php 
+								endif;
+							?>
+						<?php 
+							endfor;
+						?>
+					</ul>
+				</td>
+			</tr>
+			<?php 
+			endif;
+			?>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th class="label" colspan="2">
+					<a class="yellowAnchor" href="<?php echo $this->url(
+						array(
+							'page' => 1,
+							'queryFilters' => URL_PARAM_NULL,
+							'domainIds' => URL_PARAM_NULL,
+							'studySerieIds' => URL_PARAM_NULL,
+							'studyIds' => URL_PARAM_NULL,
+							'conceptIds' => URL_PARAM_NULL,
+							'decades' => URL_PARAM_NULL,
+						),
+						Zend_Controller_Front::getInstance()->getRouter()->getCurrentRouteName()
+					);
+				
+				?>">
+					<?php 
+						echo $translate->_('fr0085000600');
+					?>
+				</a>
+				</th>
+			</tr>
+		</tfoot>
+	</table>
+</div>

@@ -1,0 +1,65 @@
+<?php 
+/**
+ * Producer facets
+ * 
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+$translate = Zend_Registry::get('translateFront');
+$clientSettings = BDQ_Settings_Client::getInstance();
+?>
+<li id="producerFacet">
+	<?php 
+	$this->facetGripStart();
+	?>
+	<span class="toggler<?php if ($clientSettings->producerFacetDisplay):?> down<?php endif;?>">&nbsp;</span>
+	<span class="title"><?php echo $translate->_('fr0200000000');?></span>
+	<?php 
+	$this->facetGripEnd();
+	?>
+	<div class="toggled<?php if (empty($this->domainFacets)): ?> noResult<?php endif; ?>" <?php if ( ! $clientSettings->producerFacetDisplay):?> style="display:none;"<?php endif;?>>
+		<?php 
+		if ( ! empty($this->domainFacets)):
+		?>
+		<table class="filter" id="domainFilters" cellpadding="0" cellspacing="0">
+			<thead>
+				<tr>
+					<th class="checkbox" title="<?php echo $translate->_('fr0200000050');
+
+					?>">&nbsp;</th>
+					<th class="title" title="<?php echo $translate->_('fr0200000100');
+
+					?>">&nbsp;</th>
+					<th class="count" title="<?php echo $translate->_('fr0200000150');
+
+					?>">&nbsp;</th>
+					<th class="invisible">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+			<?php
+			$l = count($this->domainFacets);
+			
+			for ($i = 0; $i < $l; $i += 3):
+				$id = $this->domainFacets[$i];
+				$domain = $this->domainFacets[$i + 1];
+				$count = $this->domainFacets[$i + 2];
+				$checked = array_search($id, $this->domainFilters) !== false;
+			?>
+				<tr<?php if (($i / 3) >= MAX_FACETS_DISPLAY): ?> style="display:none;"<?php endif; ?>>
+					<td class="checkbox"><input type="checkbox" id="domainCheckBox_<?php echo $id ?>" class="domainFilter resultFilter" name="domainFilters[]" value="<?php echo $id ?>"<?php if ($checked) { echo ' checked="checked"'; }?>/></td>
+					<td class="title"><label for="domainCheckBox_<?php echo $id ?>"><?php echo $domain; ?></label></td>
+					<td class="count"></td>
+					<td class="invisible"><?php echo normalize($domain);?></td>
+				</tr>
+			<?php 
+			endfor;
+			?>
+			</tbody>
+		</table>
+	<?php 
+	endif;
+	?>
+	</div>
+	<div class="clear"></div>
+</li>

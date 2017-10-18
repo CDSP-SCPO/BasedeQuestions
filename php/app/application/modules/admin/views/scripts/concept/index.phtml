@@ -1,0 +1,110 @@
+<ul class="menu">
+	<li>
+		<a href="<?php 
+	echo $this->url(
+		array(),
+		'adminconceptAdd'
+	);
+?>" class="add"><?php echo $this->translate->_('fr0250000000') ?></a>
+</li>
+</ul>
+<?php
+	if (count($this->concepts) > 0):
+?>
+<table class="display" id="concept_index_table">
+	<thead>
+		<tr>
+			<th><?php echo $this->translate->_('fr0250000010') ?></th>
+			<th style="width:25%;"><?php echo $this->translate->_('fr0250000020') ?></th>
+			<th class="action view"></th>
+			<th class="action edit"></th>
+			<th class="action delete"></th>
+		</tr>
+	</thead>
+	<tbody>
+<?php 
+	$i = 0;
+
+	foreach ($this->concepts as $concept):
+?>
+	<tr>
+		<td>
+			<?php 
+				echo stripslashes($concept['title']);
+			?>
+		</td>
+		<td>
+			<?php 
+				echo stripslashes($concept['concept_list_title']);
+			?>
+		</td>
+		<td>
+			<a href="<?php 
+	echo $this->url(
+		array(
+			'id' => $concept['id']
+		),
+		'adminconceptView'
+	);
+	?>"><img src="/img/admin/view.png" alt="<?php echo $this->translate->_('fr0250000030'); ?>" title="<?php echo $this->translate->_('fr0250000040'); ?>"/></a>
+		</td>
+		<td>
+			<a href="<?php 
+	echo $this->url(
+		array(
+			'id' => $concept['id']
+		),
+		'adminconceptEdit'
+	);
+	?>"><img src="/img/admin/edit.png"/ alt="<?php echo $this->translate->_('fr0250000050'); ?>" title="<?php echo $this->translate->_('fr0250000060'); ?>"/></a>
+		</td>
+		<td>
+			<a href="<?php 
+	echo $this->url(
+		array(
+			'id' => $concept['id']
+		),
+		'adminconceptConfirmdelete'
+	);
+?>" class="modal delete"><img src="/img/admin/delete.png" alt="<?php echo $this->translate->_('fr0250000070'); ?>" title="<?php echo $this->translate->_('fr0250000080'); ?>"/></a>
+		</td>
+	</tr>
+<?php 
+	$i++;
+	endforeach;
+?>
+	</tbody>
+</table>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+	$("#concept_index_table").dataTable({
+		"aaSorting": [[0, "asc"]],
+		"oLanguage": {
+			"sLengthMenu": "<?php echo $this->translate->_('fr0250000090'); ?>",
+			"sZeroRecords": "<?php echo $this->translate->_('fr0250000100'); ?>",
+			"sInfo": "<?php echo $this->translate->_('fr0250000110'); ?>",
+			"sInfoEmpty": "<?php echo $this->translate->_('fr0250000120'); ?>",
+			"sInfoFiltered": "<?php echo $this->translate->_('fr0250000130'); ?>",
+			"sSearch" : "<?php echo $this->translate->_('fr0250000140'); ?>",
+			"oPaginate":{
+				"sPrevious": "&lt;<?php echo $this->translate->_('fr0250000150'); ?>",
+				"sNext": "<?php echo $this->translate->_('fr0250000160'); ?>&gt;"
+			}
+		},
+		"sPaginationType": "input",
+		"aoColumns": [
+		         		null,
+		         		null,
+		     			{ "bSortable": false, "bSearchable": false },
+		     			{ "bSortable": false, "bSearchable": false },
+		     			{ "bSortable": false, "bSearchable": false }
+		     		],
+		"bStateSave": true,
+		"iCookieDuration": 36000000
+	});
+});
+//]]>
+</script>
+<?php 
+	endif;

@@ -1,0 +1,19 @@
+<h2><?php echo $this->translate->_('fr0085000000')?></h2>
+<p><?php echo $this->translate->_('fr0085000010')?> "<?php echo stripslashes($this->conceptlist['title']) ?>" ?</p>
+<form method="post" action="<?php echo $this->url(
+	array(
+		'controller' => 'conceptlist',
+		'action' => 'delete',
+		'id' => $this->conceptlist['id']
+	),
+	'adminconceptlistDelete'
+)?>" class="confirm_delete">
+	<input type="submit" name="" value="<?php echo $this->translate->_('fr0085000020')?>"/>
+</form>
+<form method="post" action="<?php echo $this->url(
+	array(
+	),
+	'adminconceptlistIndex'
+)?>" class="confirm_delete">
+	<input type="submit" name="" id="submit_cancel" value="<?php echo $this->translate->_('fr0085000030')?>"/>
+</form>

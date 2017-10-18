@@ -1,0 +1,27 @@
+<?php 
+$translate = Zend_Registry::get('translateFront');
+?>
+<div>
+	<span><?php echo $translate->_('fr0095000000')?>&nbsp;<?php echo $translate->_('fr0095000050')?></span>
+	<select id="sortSelect" style="margin-top:2px;">
+<?php
+$l = count($this->sortOrdersLabels);
+$i = 0;
+
+while(list($val, $lbl) = each($this->sortOrdersLabels)):
+?>
+	<option<?php if ($val == $this->sort):?> selected="selected"<?php endif;?> value="<?php 
+	echo $this->url(
+		array(
+			'page' => 1,
+			'sort' => $val
+		),
+		Zend_Controller_Front::getInstance()->getRouter()->getCurrentRouteName()
+	)
+?>"><?php echo $lbl;?></option>
+<?php 
+	$i++;
+endwhile;
+?>
+	</select>
+</div>

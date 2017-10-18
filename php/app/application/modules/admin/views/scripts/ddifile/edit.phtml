@@ -1,0 +1,169 @@
+<h2><?php echo $this->translate->_('fr0155000000');?></h2>
+<ul>
+	<li>
+		<a href="<?php echo $this->url(array(), 'ddifileIndex');?>" class="index">
+		<?php echo $this->translate->_('fr0155000010');?>
+		</a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array(), 'ddifileView');?>" class="view">
+			<?php echo $this->translate->_('fr0155000020');?>
+		</a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array(), 'ddifileConfirmdelete');?>" class="modal delete">
+			<?php echo $this->translate->_('fr0155000030');?>
+		</a>
+	</li>
+</ul>
+<h3><?php echo $this->study['title'] ?></h3>
+<?php
+$client = Solr_Client::getInstance();
+$response = $client->ping();
+
+if ($response->response['status'] == 'OK')
+{
+	echo $this->form;
+}
+?>
+<?php 
+	echo $this->partial('ddifileform-questionnairescript.phtml');
+?>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+
+		var savePdf = function()
+		{
+			var divs = $('div.fileInput');
+			var pdfVals = new Array;
+			divs.each(function(index, elt){
+				pdfVals.push(
+					{
+						'questionnaire_id':			$(this).find('input[type=hidden]').val(),
+						'questionnaire_title':		$(this).find('input[type=text]').val()
+					}
+				);
+			});
+			oldPdfVal = pdfVals;
+		};
+		var resetPdf = function()
+		{
+			var divs = $('div.fileInput');
+			divs.each(function(index, elt){
+				$(this).find('input[type=hidden]').val('');
+				$(this).find('input[type=file]').val('');
+				$(this).find('input[type=text]').val('');
+			});
+		};
+		var reloadPdf = function()
+		{
+			var divs = $('div.fileInput');
+
+			for (var i = 0; i < oldPdfVal.length; i++)
+			{
+				var div = divs.eq(i);
+				div.find('input[type=text]').val(oldPdfVal[i].questionnaire_title);
+				div.find('input[type=hidden]').val(oldPdfVal[i].questionnaire_id);
+			}
+
+		};
+
+		var oldPdfVal = <?php echo json_encode($this->questionnaires); ?>;
+
+		if ( ! oldPdfVal)
+		{
+			oldPdfVal = [];
+		}
+		
+		$('#nesstar_server_id-element').nextAll().slice(0,4).hide();
+		var nodes = "<dt>";
+		var oldQuestionnaireUrlVal = $('#questionnaire_url').val();
+
+		if (oldPdfVal != '')
+		{
+			var divs = $('div.fileInput');
+
+			for (var i = 0; i < oldPdfVal.length; i++)
+			{
+				var div = divs.eq(i);
+				div.find('input.questionnaire_label').val(oldPdfVal[i].questionnaire_title);
+				div.find('input[type=hidden]').val(oldPdfVal[i].questionnaire_id);
+				div.find('input[type=file]').hide();
+				div.find('span').last().hide();
+				var span = div.find('span').first();
+				span.html(span.html() + " : " + oldPdfVal[i].questionnaire_file_name.replace(/\-[0-9]{10}\./, '.'));
+				div.show();
+			}
+
+		}
+
+		nodes += "<?php echo $this->translate->_('fr0155000040') ?>";
+		nodes += "</dt>";
+		nodes += "<dd id=\"questionnaireChoice\">";
+		nodes += "<input class=\"hasPdf\" type=\"radio\" name=\"\" value=\"\" id=\"externLink\"/>";
+		nodes += "<label class=\"hasPdf\" for=\"externLink\">";
+		nodes += "<?php echo $this->translate->_('fr0155000050') ?>";
+		nodes += "</label>";
+		nodes += "<input class=\"hasLink\" type=\"radio\" name=\"\" value=\"\" id=\"pdfUpload\"/>";
+		nodes += "<label class=\"hasLink\" for=\"pdfUpload\">";
+		nodes += "<?php echo $this->translate->_('fr0155000060') ?>";
+		nodes += "</label>";
+		nodes += "</dd>";
+		$(nodes).insertAfter('#nesstar_server_id-element');
+
+		if (oldPdfVal != '')
+		{
+			$('#questionnaire_file_name-label').next().find('div.fileInput').first().append(
+				"<div class='questionnaireRemove'><?php echo $this->translate->_('fr0155000070');?></div>"
+			);
+		}
+
+		$('#pdfUpload').click(function(){
+			oldQuestionnaireUrlVal = $('#questionnaire_url').val();
+			$('#questionnaire_url').val('');
+			reloadPdf();
+			$('#nesstar_server_id-element').nextAll().slice(2,4).hide();
+			$('#nesstar_server_id-element').nextAll().slice(4,6).show();
+		});
+		$('#externLink').click(function(){
+			savePdf();
+			resetPdf();
+			$('#questionnaire_url').val(oldQuestionnaireUrlVal);
+			$('#nesstar_server_id-element').nextAll().slice(2,4).show();
+			$('#nesstar_server_id-element').nextAll().slice(4,6).hide();
+		});
+		$('form').append('<input type="hidden" name="pdfCount" id="pdfCount" />');
+		$('form').submit(function(){
+			$('div.fileInput').each(function(){
+
+				if ($(this).css('display') == 'none')
+				{
+					$(this).remove();
+				}
+
+				$(this).append('<input type="hidden" name="has_file[]" value="' + ($(this).find('input[type=file]').val() == '' ? '0' : '1') + '"/>');
+			});
+
+		});
+		$('div.questionnaireRemove').click(function(){
+			var div = $(this).closest('div.fileInput');
+
+			if (div.find('input[type=hidden]').val() != '')
+			{
+				div.find('span').first().html("<?php echo $this->translate->_('fr0155000080')?>");
+				div.find('input[type=hidden]').val('');
+				div.find('input[type=file]').show();
+				div.find('span').last().show();
+			}
+
+		});
+
+		if ($('.errors'))
+		{
+			$('.errors').closest('dd').show().prev().show();
+		}
+
+	});
+
+</script>

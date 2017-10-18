@@ -1,0 +1,75 @@
+<?php 
+/**
+ * Keyword facets
+ * 
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+$translate = Zend_Registry::get('translateFront');
+$clientSettings = BDQ_Settings_Client::getInstance();
+
+if ($this->search instanceOf Solr_BDQ_Search_ConceptSearch || $this->search instanceOf Solr_BDQ_Search_StudySearch)
+{
+	$clientSettings->keywordFacetDisplay = true;
+}
+?>
+<li id="keywordFacet">
+	<?php 
+	$this->facetGripStart();
+	?>
+	<span class="toggler<?php if ($clientSettings->keywordFacetDisplay):?> down<?php endif;?>">&nbsp;</span>
+	<span class="title"><?php echo $translate->_('fr0190000000');?></span>
+	<?php 
+	$this->facetGripEnd();
+	?>
+	<div class="toggled queryFilters<?php if (! $this->response || $this->response->response['response']['numFound'] == 0): ?> noResult<?php endif; ?>"<?php if ( ! $clientSettings->keywordFacetDisplay):?> style="display:none;"<?php endif;?>>
+	<?php
+	if ($this->response && $this->response->response['response']['numFound'] > 0):
+	?>
+		<table class="filter" id="queryFilters">
+			<thead>
+				<tr>
+					<th class="checkbox" title="<?php echo $translate->_('fr0190000005');?>">&nbsp;</th>
+					<th class="title" title="<?php echo $translate->_('fr0190000010');?>">&nbsp;</th>
+					<th class="qCb sCb" title="<?php echo $translate->_('fr0190000015');?>"><?php echo $translate->_('fr0190000020');?></th>
+					<th class="cCb sCb" title="<?php echo $translate->_('fr0190000025');?>"><?php echo $translate->_('fr0190000030');?></th>
+					<th class="vCb sCb" title="<?php echo $translate->_('fr0190000035');?>"><?php echo $translate->_('fr0190000040');?></th>
+					<th class="count" title="<?php echo $translate->_('fr0190000045');?>">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+		<?php 
+		$l = count($this->queryFilters);
+
+		for ($i = 0; $i < $l; $i++):
+			$filter = $this->queryFilters[$i];
+			$query = substr($filter, 0, -1); 
+			$target = substr($filter, -1);
+			$targetQ = $target & SEARCH_QUESTION;
+			$targetM = $target & SEARCH_MODALITIES;
+			$targetV = $target & SEARCH_VARIABLE;
+		?>
+			<tr>
+				<td class="checkbox"><input id="queryCheckbox_<?php echo $i;?>" class="queryFilter resultFilter" name="queryFilters2[]" value="<?php echo htmlspecialchars(stripslashes($query), ENT_QUOTES);?>" type="checkbox" checked="checked"></td>
+				<td class="title"><label for="queryCheckbox_<?php echo $i;?>"><?php echo $query;?></label></td>
+				<td class="checkbox"><input class="qfTarget qCb" name="qQueryFilter_<?php echo $i;?>"<?php if ($targetQ): ?> checked="checked"<?php endif; ?> value="" type="checkbox"></td>
+				<td class="checkbox"><input class="qfTarget cCb" name="cQueryFilter_<?php echo $i;?>"<?php if ($targetM): ?> checked="checked"<?php endif; ?> value="" type="checkbox"></td>
+				<td class="checkbox"><input class="qfTarget vCb" name="vQueryFilter_<?php echo $i;?>"<?php if ($targetV): ?> checked="checked"<?php endif; ?> value="" type="checkbox"></td>
+				<td class="count"></td>
+			</tr>
+		<?php 
+		endfor;
+		?>
+			</tbody>
+		</table>
+		<span style="display:none;">.</span> <!-- ie6 fix -->
+		<div style="border-top:dotted #666 1px;">
+			<input type="text" id="queryFilterInput" name="queryFilterInput" /><button type="button" id="queryFilterButton" value="Ok"><?php echo $translate->_('fr0190000050');?></button>
+			<input type="text" id="firefoxFix" style="display:none"/>
+		</div>
+	<?php
+	endif;
+	?>
+	</div>
+	<div class="clear"></div>
+</li>

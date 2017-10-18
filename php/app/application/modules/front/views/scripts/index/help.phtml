@@ -1,0 +1,527 @@
+<?php
+/**
+ * @author Anne-Sophie Cousteaux
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+$this->layout()->title = $this->translate->_('fr0280000000');
+$this->placeholder('topSection')->set(
+	'<h1>' . $this->translate->_('fr0280000050') . '</h1>'
+);
+$this->roundBoxStart(array('userGuide', 'infoBox')); // Wraps the following contents with the xHTML markup to create a cross browser round box
+$this->resultsLink(); //The link to the results, displayed if the user made a search
+?>
+<h2 id="introduction"><?php echo $this->translate->_('fr0280000100'); ?></h2>
+<p>
+	<?php echo $this->translate->_('fr0280000150'); ?>
+	<strong><?php echo $this->translate->_('fr0280000200'); ?></strong>
+	<?php echo $this->translate->_('fr0280000250'); ?>
+</p>
+<ul>
+	<li><?php echo $this->translate->_('fr0280000300'); ?></li>
+	<li><?php echo $this->translate->_('fr0280000350'); ?></li>
+	<li><?php echo $this->translate->_('fr0280000400'); ?></li>
+</ul>
+<h2 id="accueil"><?php echo $this->translate->_('fr0280000450'); ?></h2>
+<p>
+	<?php
+	echo $this->translate->_('fr0280000500'),
+		$this->translate->_('fr0280000550'),
+		$this->translate->_('fr0280000600'),
+		$this->translate->_('fr0280000650'),
+		$this->translate->_('fr0280000700');
+	?>
+</p>
+<p>
+	<?php 
+	echo $this->translate->_('fr0280000750'),
+		$this->translate->_('fr0280000800'),
+		$this->translate->_('fr0280000850'),
+		$this->translate->_('fr0280000900'),
+		$this->translate->_('fr0280000950');
+	?>
+</p>
+<p>
+	<?php 
+	echo $this->translate->_('fr0280001000'),
+		$this->translate->_('fr0280001050'),
+		$this->translate->_('fr0280001100'),
+		$this->translate->_('fr0280001150'),
+		$this->translate->_('fr0280001200');
+		$url = $this->url(array(), 'studyIndex');
+		echo sprintf($this->translate->_('fr0280001250'), $url),
+			$this->translate->_('fr0280001300');
+		$url = $this->url(array(), 'about');
+		echo sprintf($this->translate->_('fr0280001350'), $url);
+	?>
+</p>
+<h3 id="langue"><?php echo $this->translate->_('fr0280001400'); ?></h3>
+<p><?php echo $this->translate->_('fr0280001450'); ?></p>
+<h3 id="champs"><?php echo $this->translate->_('fr0280001500'); ?></h3>
+<p>
+	<?php echo $this->translate->_('fr0280001550'); ?>
+	<strong><?php echo $this->translate->_('fr0280001600'); ?></strong>.
+</p>
+<p>
+	<?php
+	echo $this->translate->_('fr0280001650'),
+		$this->translate->_('fr0280001700'),
+		$this->translate->_('fr0280001750'),
+	 	$this->translate->_('fr0280001800'),
+		$this->translate->_('fr0280001850');
+	?>
+</p>
+<p><?php echo $this->translate->_('fr0280001900'); ?></p>
+<ul>
+	<li><?php echo $this->translate->_('fr0280001950'); ?></li>
+	<li><?php echo $this->translate->_('fr0280002000'); ?></li>
+	<li><?php echo $this->translate->_('fr0280002050'); ?></li>
+</ul>
+<h2 id="rechsimple"><?php echo 	$this->translate->_('fr0280002100'); ?></h2>
+<p>
+	<?php
+	echo $this->translate->_('fr0280002150'),
+		$this->translate->_('fr0280002200'),
+		$this->translate->_('fr0280002250');
+	?>
+</p>
+<p><?php echo $this->translate->_('fr0280002300'); ?></p>
+<h3 id="formemots"><?php echo $this->translate->_('fr0280002350'); ?></h3>
+<p><?php echo $this->translate->_('fr0280002400'); ?></p>
+<ul>
+	<li><?php echo $this->translate->_('fr0280002450'); ?></li>
+	<li><?php echo $this->translate->_('fr0280002500'); ?></li>
+	<li><?php echo $this->translate->_('fr0280002550'); ?></li>
+</ul>
+<p><?php echo $this->translate->_('fr0280002600'); ?></p>
+<p>
+	<?php
+	echo $this->translate->_('fr0280002650'),
+		$this->translate->_('fr0280002700'),
+		$this->translate->_('fr0280002750'),
+		$this->translate->_('fr0280002800'),
+		$this->translate->_('fr0280002850');
+	?>
+</p>
+<p>
+	<?php
+	echo $this->translate->_('fr0280002900'),
+		$this->translate->_('fr0280002950');
+	?>
+</p>
+<h3 id="motsvides"><?php echo 	$this->translate->_('fr0280003000'); ?></h3>
+<p>
+	<?php 
+	echo $this->translate->_('fr0280003050'),
+		$this->translate->_('fr0280003100'), ' ';
+	$urls = getStopWordsUrl();
+	$l = count($urls);
+	$i = 0;
+									
+	while(list($name, $url) = each($urls))
+	{
+		echo "<a href=\"$url\">$name</a> ", ($i < $l - 1) ? ', ' : '';
+		$i++;
+	}
+						
+   echo '. ', $this->translate->_('fr0280003150');
+   ?>
+</p>
+<p>
+	<?php
+	echo $this->translate->_('fr0280003200'),
+		$this->translate->_('fr0280003250');
+	?>
+</p>
+<h3 id="saisie"><?php echo $this->translate->_('fr0280003300'); ?></h3>
+<p><?php echo $this->translate->_('fr0280003350'); ?></p>
+<p>
+	<?php
+	echo $this->translate->_('fr0280003400'),
+	    $this->translate->_('fr0280003450'),
+		$this->translate->_('fr0280003500');
+	?>
+</p>
+<h2 id="langrequete"><?php echo	$this->translate->_('fr0280003550'); ?></h2>
+<h3 id="booleens"><?php echo $this->translate->_('fr0280003600'); ?></h3>
+<p>
+	<?php
+	echo $this->translate->_('fr0280003650'),
+		$this->translate->_('fr0280003700'),
+		$this->translate->_('fr0280003750'),
+		$this->translate->_('fr0280003800'),
+		$this->translate->_('fr0280003850');
+	?>
+</p>
+<p><?php echo $this->translate->_('fr0280003900'); ?></p>
+<ul>
+	<li><?php echo $this->translate->_('fr0280003950'); ?></li>
+	<li><?php echo $this->translate->_('fr0280004000'); ?></li>
+	<li><?php echo $this->translate->_('fr0280004050'); ?></li>
+</ul>
+<p><?php echo $this->translate->_('fr0280004100'); ?></p>
+<h3 id="phrases"><?php echo $this->translate->_('fr0280004150'); ?></h3>
+<p>
+	<?php 
+	echo $this->translate->_('fr0280004200'),
+		$this->translate->_('fr0280004250'),
+		$this->translate->_('fr0280004300');
+	?>
+</p>
+<p><?php echo $this->translate->_('fr0280004350'); ?></p>
+<h3 id="jokers"><?php echo 	$this->translate->_('fr0280004400'); ?></h3>
+<p>
+	<?php
+	echo $this->translate->_('fr0280004450'),
+		$this->translate->_('fr0280004500'),
+		$this->translate->_('fr0280004550');
+	?>
+	</p>
+	<ul>
+		<li><?php echo $this->translate->_('fr0280004600'); ?></li>
+		<li><?php echo $this->translate->_('fr0280004650'); ?></li>
+	</ul>
+<p>
+	<?php
+	echo $this->translate->_('fr0280004700'),
+		$this->translate->_('fr0280004750'),
+		$this->translate->_('fr0280004800');
+	?>
+</p>
+<h3 id="orthomots"> <?php echo $this->translate->_('fr0280004850'); ?></h3>
+<p><?php echo $this->translate->_('fr0280004900'); ?></p>
+<p><?php echo $this->translate->_('fr0280004950'); ?></p>
+<p>
+	<?php 
+	echo $this->translate->_('fr0280005000'),
+		$this->translate->_('fr0280005050'),
+		$this->translate->_('fr0280005100');
+	?>
+</p>
+<h3 id="proximite"><?php echo $this->translate->_('fr0280005150'); ?></h3>
+<p><?php echo $this->translate->_('fr0280005200'); ?></p>
+<p><?php echo $this->translate->_('fr0280005250'); ?></p>
+<ul>
+	<li>
+		<?php
+		echo $this->translate->_('fr0280005300'),
+	 		$this->translate->_('fr0280005350'),
+	 		$this->translate->_('fr0280005400'),
+	 		$this->translate->_('fr0280005450'),
+	 		$this->translate->_('fr0280005500');
+ 		?>
+	</li>
+	<li>
+ 		<?php echo $this->translate->_('fr0280005550'); ?>
+	</li>
+	<li>
+		<?php echo $this->translate->_('fr0280005600'); ?>
+	</li>
+</ul>
+<h3 id="boost"><?php echo $this->translate->_('fr0280005650'); ?></h3>
+<p><?php echo $this->translate->_('fr0280005700'); ?></p>
+<p>
+<?php 
+echo $this->translate->_('fr0280005750'),
+	$this->translate->_('fr0280005800'),
+	$this->translate->_('fr0280005850');
+?>
+</p>
+<h3 id="reqcomplexes"><?php echo $this->translate->_('fr0280005900'); ?></h3>
+<p><?php echo $this->translate->_('fr0280005950'); ?></p>
+<h2 id="affichage"><?php echo $this->translate->_('fr0280006000'); ?></h2>
+<h3 id="tri"><?php echo	$this->translate->_('fr0280006050'); ?></h3>
+<p>
+	<strong><?php echo $this->translate->_('fr0280006100'); ?></strong>
+ 	<?php echo $this->translate->_('fr0280006150'); ?>
+</p>
+<p><?php echo $this->translate->_('fr0280006200'); ?></p>
+<ul>
+	<li><?php echo $this->translate->_('fr0280006250'); ?></li>
+	<li><?php echo $this->translate->_('fr0280006300'); ?></li>
+	<li><?php echo $this->translate->_('fr0280006350'); ?></li>
+</ul>
+<h3 id="question"><?php echo $this->translate->_('fr0280006400'); ?></h3>
+<p><?php echo $this->translate->_('fr0280006450'); ?></p>
+<ul>
+	<li><?php echo $this->translate->_('fr0280006500'); ?></li>
+	<li><?php echo $this->translate->_('fr0280006550'); ?></li>
+	<li><?php echo $this->translate->_('fr0280006600'); ?></li>
+	<li><?php echo $this->translate->_('fr0280006650'); ?></li>
+	<li><?php echo $this->translate->_('fr0280006700'); ?></li>
+</ul>
+<p><?php echo $this->translate->_('fr0280006750'); ?></p>
+<p><img src = "/img/icons/zoom_in.png" alt = "loupe"/> <?php echo $this->translate->_('fr0280006800'); ?></p>
+<p><?php echo $this->translate->_('fr0280006850'); ?></p>
+<p>
+	<?php
+	echo $this->translate->_('fr0280006900'),
+		$this->translate->_('fr0280006950'),
+		$this->translate->_('fr0280007000');
+	?>
+</p>
+<h3 id="affinage"><?php echo 	$this->translate->_('fr0280007050'); ?></h3>
+<p><?php echo $this->translate->_('fr0280007100'); ?></p>
+<ul>
+	<li><?php echo $this->translate->_('fr0280007150'); ?></li>
+	<li><?php echo $this->translate->_('fr0280007200'); ?></li>
+	<li><?php echo $this->translate->_('fr0280007250'); ?></li>
+	<li><?php echo $this->translate->_('fr0280007300'); ?></li>
+	<li><?php echo $this->translate->_('fr0280007350'); ?></li>
+ 	<li><?php echo $this->translate->_('fr0280007400'); ?></li>
+</ul>
+<p><?php echo $this->translate->_('fr0280007450'); ?></p>
+<p>
+	<?php 
+	echo $this->translate->_('fr0280007500'),
+		$this->translate->_('fr0280007550'),
+		$this->translate->_('fr0280007600');
+	?>
+</p>
+<p><?php echo $this->translate->_('fr0280007650'); ?></p>
+<p><?php echo $this->translate->_('fr0280007700'); ?></p>
+<h3 id="persoaffinage"><?php echo $this->translate->_('fr0280007750'); ?></h3>
+<p><?php echo $this->translate->_('fr0280007800'); ?></p>
+<p><?php echo $this->translate->_('fr0280007850'); ?></p>
+<p><?php echo $this->translate->_('fr0280007900'); ?></p>
+<ul>
+	<li><?php echo $this->translate->_('fr0280007950'); ?></li>
+	<li><?php echo $this->translate->_('fr0280008000'); ?></li>
+	<li><?php echo $this->translate->_('fr0280008050'); ?></li>
+</ul>
+<h2 id="selexport"><?php echo $this->translate->_('fr0280008100'); ?></h2>
+<p><img src = "/img/icons/basket_put.png" alt = "ajouter"/> <?php echo $this->translate->_('fr0280008150'); ?></p>
+<p>
+	<?php
+	echo $this->translate->_('fr0280008200'),
+		$this->translate->_('fr0280008250'),
+		$this->translate->_('fr0280008300');
+	?>
+</p>
+<p><?php echo $this->translate->_('fr0280008350'); ?></p>
+<p><img src = "/img/icons/basket_delete.png" alt = "supprimer"/> <?php echo $this->translate->_('fr0280008400'); ?></p>
+<p><img src = "/img/icons/basket_remove.png" alt = "tout supprimer"/> <?php echo $this->translate->_('fr0280008450'); ?></p>
+<p>
+	<img src = "/img/icons/csv_hover.png" alt = "csv"/>
+	<?php echo $this->translate->_('fr0280008500'); ?>
+	<?php echo $this->translate->_('fr0280008550'); ?>
+	<?php echo $this->translate->_('fr0280008600'); ?>
+</p>
+<p>
+	<img src = "/img/icons/xls_hover.png" alt = "xls"/>
+	<?php
+	echo $this->translate->_('fr0280008650'),
+		$this->translate->_('fr0280008700'),
+ 		$this->translate->_('fr0280008750');
+ 	?>
+</p>
+<h2 id="preferences"><?php echo $this->translate->_('fr0280008800'); ?></h2>
+<p><?php echo $this->translate->_('fr0280008850'); ?></p>
+<p>
+	<?php
+	echo $this->translate->_('fr0280008900'),
+		$this->translate->_('fr0280008950'),
+		$this->translate->_('fr0280009000');
+	?>
+</p>
+<h3 id="analysestextuelles"><?php echo 	$this->translate->_('fr0280009050'); ?></h3>
+<ul>
+	<li>
+		<?php echo 	$this->translate->_('fr0280009100'); ?>
+		<p><?php echo $this->translate->_('fr0280009150'); ?></p>
+		<p><?php echo $this->translate->_('fr0280009200'); ?></p>
+		<p><?php echo $this->translate->_('fr0280009250'); ?></p>
+		<p><?php echo $this->translate->_('fr0280009300'); ?></p>
+		<p>
+			<?php echo $this->translate->_('fr0280009350'); ?>
+			<?php echo $this->translate->_('fr0280009400'); ?>
+			<?php echo 	$this->translate->_('fr0280009450'); ?>
+		</p>
+	</li>
+	<li>
+		<?php echo $this->translate->_('fr0280009500'); ?>
+		<p><?php echo $this->translate->_('fr0280009550'); ?></p>
+	</li>
+</ul>
+<h3 id="interface"><?php echo $this->translate->_('fr0280009600'); ?></h3>
+<p><?php echo $this->translate->_('fr0280009650'); ?></p>
+<ul>
+	<li><?php echo $this->translate->_('fr0280009700'); ?>,</li>
+	<li><?php echo $this->translate->_('fr0280009750'); ?></li>
+	<li>
+		<?php echo $this->translate->_('fr0280009800'); ?>
+		<?php echo $this->translate->_('fr0280009850'); ?>,
+	</li>
+	<li><?php echo $this->translate->_('fr0280009900'); ?></li>
+</ul>
+<h3 id="prefquestion"><?php echo $this->translate->_('fr0280009950'); ?></h3>
+<p><?php echo $this->translate->_('fr0280010000'); ?></p>
+<ul>
+	<li>
+		<?php echo $this->translate->_('fr0280010050'); ?><br/>
+		<?php echo $this->translate->_('fr0280010100'); ?>
+	</li>
+	<li><?php echo $this->translate->_('fr0280010150'); ?></li>
+	<li><?php echo $this->translate->_('fr0280010200'); ?></li>
+	<li><?php echo $this->translate->_('fr0280010250'); ?></li>
+	<li><?php echo $this->translate->_('fr0280010300'); ?></li>
+	<li><?php echo $this->translate->_('fr0280010350'); ?></li>
+</ul>
+<p><?php echo $this->translate->_('fr0280010400'); ?></p>
+<ul>
+	<li><?php echo $this->translate->_('fr0280010450'); ?></li>
+	<li><?php echo $this->translate->_('fr0280010500'); ?></li>
+</ul>
+<h2 id="rechavancee"><?php echo $this->translate->_('fr0280010550'); ?></h2>
+<h3 id="aiderequete"><?php echo $this->translate->_('fr0280010600'); ?></h3>
+<p><?php echo $this->translate->_('fr0280010650'); ?></p>
+<p><?php echo $this->translate->_('fr0280010700'); ?></p>
+<ul>
+	<li><?php echo $this->translate->_('fr0280010750'); ?></li>
+	<li>
+		<?php 
+		echo $this->translate->_('fr0280010800'),
+			$this->translate->_('fr0280010850'),
+	 		$this->translate->_('fr0280010900'),
+	 		$this->translate->_('fr0280010950'),
+	 		$this->translate->_('fr0280011000'),
+	 		$this->translate->_('fr0280011050'),
+	 		$this->translate->_('fr0280011100'),
+	 		$this->translate->_('fr0280011150'),
+	 		$this->translate->_('fr0280011200');
+ 		?>
+ 	</li>
+</ul>
+<p><?php echo $this->translate->_('fr0280011250'); ?></p>
+<h3 id="diffchamps"><?php echo $this->translate->_('fr0280011300'); ?></h3>
+<p>
+	<?php
+	echo $this->translate->_('fr0280011350'),
+		$this->translate->_('fr0280011400');
+	?>
+</p>
+<p><?php echo $this->translate->_('fr0280011450'); ?></p>
+<ul>
+	<li><?php echo $this->translate->_('fr0280011500'); ?></li>
+	<li><?php echo $this->translate->_('fr0280011550'); ?></li>
+	<li><?php echo $this->translate->_('fr0280011600'); ?></li>
+</ul>
+<h2 id="autrerech"><?php echo 	$this->translate->_('fr0280011650'); ?></h2>
+<p><?php echo $this->translate->_('fr0280011700'); ?></p>
+<ul>
+	<li>
+		<?php
+		echo $this->translate->_('fr0280011750'),
+			$this->translate->_('fr0280011800'),
+			$this->translate->_('fr0280011850');
+		?>
+	</li>
+	<li>
+		<?php
+		echo $this->translate->_('fr0280011900'),
+			$this->translate->_('fr0280011950');
+		?>
+	</li>
+	<li>
+		<?php
+		echo $this->translate->_('fr0280012000'),
+			$this->translate->_('fr0280012050'),
+			$this->translate->_('fr0280012100');
+		?>
+	</li>
+</ul>
+<p><?php echo $this->translate->_('fr0280012150'); ?></p>
+<?php 
+$this->roundBoxEnd(); ?>
+<?php 
+$this->placeholder('leftTubeClass')->set('userGuideMenu');
+$this->placeholder('leftColumn')->captureStart(); ?>
+<div style="position:relative;">
+	<ul id="menu">
+		<li>
+			<a href="#introduction"><?php echo $this->translate->_('fr0280012200'); ?></a>
+		</li>
+		<li>
+			<a href="#accueil"><?php echo $this->translate->_('fr0280012250'); ?></a>
+			<ul>
+				<li><a href="#langue"><?php echo $this->translate->_('fr0280012300'); ?></a></li>
+	 			<li><a href="#champs"><?php echo $this->translate->_('fr0280012350'); ?></a></li>
+	 		</ul>
+	 	</li>
+		<li>
+			<a href="#rechsimple"><?php echo $this->translate->_('fr0280012400'); ?></a> 
+	 		<ul>
+	 			<li><a href="#formemots"><?php echo $this->translate->_('fr0280012450'); ?></a></li>
+	 			<li><a href="#motsvides"><?php echo $this->translate->_('fr0280012500'); ?></a></li>
+	 			<li><a href="#saisie"><?php echo $this->translate->_('fr0280012550'); ?></a></li>
+	 		</ul>
+	 	</li>
+	 	<li>
+	 		<a href="#langrequete"><?php echo 	$this->translate->_('fr0280012600'); ?></a> 
+	 		<ul>
+				<li><a href="#booleens"><?php echo $this->translate->_('fr0280012650'); ?></a></li>
+				<li><a href="#phrases"><?php echo $this->translate->_('fr0280012700'); ?></a></li>
+				<li><a href="#jokers"><?php echo $this->translate->_('fr0280012750'); ?></a></li>
+				<li><a href="#orthomots"><?php echo	$this->translate->_('fr0280012800'); ?></a></li>
+				<li><a href="#proximite"><?php echo $this->translate->_('fr0280012850'); ?></a></li>
+				<li><a href="#boost"><?php echo	$this->translate->_('fr0280012900'); ?></a></li>
+	 			<li><a href="#reqcomplexes"><?php echo $this->translate->_('fr0280012950'); ?></a></li>
+	 		</ul>
+	 	</li>
+	 	<li>
+	 		<a href="#affichage"><?php echo $this->translate->_('fr0280013000'); ?></a> 
+		 	<ul>
+				<li><a href="#tri"><?php echo $this->translate->_('fr0280013050'); ?></a></li>
+		 		<li><a href="#question"><?php echo $this->translate->_('fr0280013100'); ?></a></li>
+		 		<li><a href="#affinage"><?php echo $this->translate->_('fr0280013150'); ?></a></li>
+		 		<li><a href="#persoaffinage"><?php echo $this->translate->_('fr0280013200'); ?></a></li>
+		 	</ul>
+	 	</li>
+		<li>
+			<a href="#selexport"><?php echo $this->translate->_('fr0280013250'); ?></a>
+		</li>
+		<li>
+			<a href="#preferences"><?php echo $this->translate->_('fr0280013300'); ?></a>
+			<ul>
+				<li><a href="#analysestextuelles"><?php echo $this->translate->_('fr0280013350'); ?></a></li>
+				<li><a href="#interface"><?php echo $this->translate->_('fr0280013400'); ?></a></li>
+				<li><a href="#prefquestion"><?php echo $this->translate->_('fr0280013450'); ?></a></li>
+			</ul>
+		</li>
+		<li>
+			<a href="#rechavancee"><?php echo $this->translate->_('fr0280013500'); ?></a>
+	 		<ul>
+	 			<li><a href="#aiderequete"><?php echo $this->translate->_('fr0280013550'); ?></a></li>
+				<li><a href="#diffchamps"><?php echo $this->translate->_('fr0280013600'); ?></a></li>
+			</ul>
+	 	</li>
+	 	<li>
+	 		<a href="#autrerech"><?php echo $this->translate->_('fr0280013650'); ?></a>
+	 	</li>
+	 	<li>
+	 		<a class="backToTop" href="#top" style="text-transform:none;!important"><?php echo $this->translate->_('fr0280013700'); ?></a>
+	 	</li>
+	</ul>
+</div>
+<?php 
+$this->placeholder('leftColumn')->captureEnd();
+?>
+<script type="text/javascript" src="/scripts/easing.min.js"></script>
+<script type="text/javascript" src="/scripts/scrollFollow.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+	$('#menu').closest('div').height($('#contentWrapper').height());
+	$('#menu').scrollFollow({'container': 'contentWrapper'});
+	BDQGrips.resizeStop = BDQGrips.resize = function(){
+		$('#menu').width($('#leftColumn').width() - 20);
+	};
+	BDQGrips.resizeStop();
+	$('#menu').accordion({
+		'active':false,
+		'autoHeight':false,
+		'collapsible':true
+	});
+});
+//]]>
+</script>

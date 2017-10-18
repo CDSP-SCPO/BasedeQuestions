@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmx version="1.4">
+ <header creationtoolversion="1.0.0" datatype="winres"
+         segtype="sentence" adminlang="en-us" srclang="de-at"
+         o-tmf="abc" creationtool="XYZTool" >
+ </header>
+ <body>
+  <tu tuid='0000'>
+   <tuv xml:lang="fr"><seg>Recherche_simple</seg></tuv>
+   <tuv xml:lang="en"><seg>Simple_search</seg></tuv>
+  </tu>
+  <tu tuid='0001'>
+   <tuv xml:lang="fr"><seg>Resultats_de_recherche_simple</seg></tuv>
+   <tuv xml:lang="en"><seg>Simple_search_results</seg></tuv>
+  </tu>
+  <tu tuid='0002'>
+   <tuv xml:lang="fr"><seg>Recherche_avancee</seg></tuv>
+   <tuv xml:lang="en"><seg>Advanced_search</seg></tuv>
+  </tu>
+  <tu tuid='0003'>
+   <tuv xml:lang="fr"><seg>Resultats_de_recherche_avancee</seg></tuv>
+   <tuv xml:lang="en"><seg>Advanced_search_results</seg></tuv>
+  </tu>
+  <tu tuid='0004'>
+   <tuv xml:lang="fr"><seg>Preferences</seg></tuv>
+   <tuv xml:lang="en"><seg>Settings</seg></tuv>
+  </tu>
+  <tu tuid='0005'>
+   <tuv xml:lang="fr"><seg>Liste_des_enquetes</seg></tuv>
+   <tuv xml:lang="en"><seg>Study_list</seg></tuv>
+  </tu>
+  <tu tuid='0006'>
+   <tuv xml:lang="fr"><seg>Aide</seg></tuv>
+   <tuv xml:lang="en"><seg>Help</seg></tuv>
+  </tu>
+  <tu tuid='0007'>
+   <tuv xml:lang="fr"><seg>Votre_selection_de_questions</seg></tuv>
+   <tuv xml:lang="en"><seg>Your_question_selection</seg></tuv>
+  </tu>
+  <tu tuid='0008'>
+   <tuv xml:lang="fr"><seg>Details_d_une_enquete</seg></tuv>
+   <tuv xml:lang="en"><seg>Study_details</seg></tuv>
+  </tu>
+  <tu tuid='0009'>
+   <tuv xml:lang="fr"><seg>Details_d_une_variable</seg></tuv>
+   <tuv xml:lang="en"><seg>Variable_details</seg></tuv>
+  </tu>
+  <tu tuid='0010'>
+   <tuv xml:lang="fr"><seg>Details_d_un_producteur</seg></tuv>
+   <tuv xml:lang="en"><seg>Producer_details</seg></tuv>
+  </tu>
+  <tu tuid='0011'>
+   <tuv xml:lang="fr"><seg>Details_d_une_serie_d_enquete</seg></tuv>
+   <tuv xml:lang="en"><seg>Study_serie_details</seg></tuv>
+  </tu>
+  <tu tuid='0012'>
+   <tuv xml:lang="fr"><seg>Questions_et_variables_d_une_enquete</seg></tuv>
+   <tuv xml:lang="en"><seg>Study_variables_and_questions</seg></tuv>
+  </tu>
+  <tu tuid='0013'>
+   <tuv xml:lang="fr"><seg>Liste_de_concepts</seg></tuv>
+   <tuv xml:lang="en"><seg>Concept_list</seg></tuv>
+  </tu>
+  <tu tuid='0014'>
+   <tuv xml:lang="fr"><seg>Concept</seg></tuv>
+   <tuv xml:lang="en"><seg>Concept</seg></tuv>
+  </tu>
+  <tu tuid='0015'>
+   <tuv xml:lang="fr"><seg>A_propos</seg></tuv>
+   <tuv xml:lang="en"><seg>About</seg></tuv>
+  </tu>
+  <tu tuid='0016'>
+   <tuv xml:lang="fr"><seg>Accueil</seg></tuv>
+   <tuv xml:lang="en"><seg>Home</seg></tuv>
+  </tu>
+  <tu tuid='0017'>
+   <tuv xml:lang="fr"><seg>Serie_d_enquete</seg></tuv>
+   <tuv xml:lang="en"><seg>Study_serie</seg></tuv>
+  </tu>
+  <tu tuid='0018'>
+   <tuv xml:lang="fr"><seg>Producteur</seg></tuv>
+   <tuv xml:lang="en"><seg>Producer</seg></tuv>
+  </tu>
+ </body>
+</tmx>

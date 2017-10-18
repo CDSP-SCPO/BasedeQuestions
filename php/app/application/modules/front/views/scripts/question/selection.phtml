@@ -1,0 +1,265 @@
+<?php 
+/**
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+$this->layout()->title = $this->translate->_('fr0305000000');
+$this->placeholder('mainContainerClass')->set('oneColumn');
+$l = count($this->documents);
+$this->placeholder('topSection')->set(
+	'<h1>' . 
+	(($l > 1)
+	?
+	$this->translate->_('fr0305000050')
+	:
+	$this->translate->_('fr0305000100')
+	) . 
+	'</h1>'
+);
+$this->roundBoxStart(array('selection'));
+$this->resultsLink();
+
+if ($l > 0):
+?>
+<table class="selection display" cellpadding="0" cellspacing="0" summary="<?php echo $this->translate->_('fr0305000150'); ?>">
+	<thead>
+		<tr>
+			<th class="title"><?php echo $this->translate->_('fr0305000200'); ?></th>
+			<th class="title"><?php echo $this->translate->_('fr0305000250'); ?></th>
+			<th class="title"><?php echo $this->translate->_('fr0305000300'); ?></th>
+			<th class="title"><?php echo $this->translate->_('fr0305000350'); ?></th>
+			<th class="title"><?php echo $this->translate->_('fr0305000400'); ?></th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php 
+	for ($i = 0; $i < $l; $i++):
+		$details = binarySearch($this->documents[$i]->get_ddiFileId(), $this->studyDetails);
+		$solrDocument = $this->documents[$i];
+		$solrLangCode = $solrDocument->get_solrLangCode();
+		
+		$qField = 'q' . $solrLangCode;
+		$iField = 'i' . $solrLangCode;
+		$mField = 'm' . $solrLangCode;
+		$vlField = 'vl' . $solrLangCode;
+
+		$method = "get_$qField";
+		$question = $solrDocument->$method();
+
+		$method = "get_$iField";
+		$items = $solrDocument->$method();
+
+		$method = "get_$mField";
+		$modalities = $solrDocument->$method();
+
+		$method = "get_$vlField";
+		$variableLabel = $solrDocument->$method();
+		
+		$variableName = $solrDocument->get_variableName();
+		
+		$hasMultipleItems = $solrDocument->get_hasMultipleItems();
+		
+		$studyUrl = $this->url
+		(
+			array(
+				'id' => $solrDocument->get_ddiFileId()
+			),
+			'ddifileDetails'
+		);
+		
+		$l2 = count($solrDocument->get_variableId());
+		$variableIds = $solrDocument->get_variableId();
+		$variableUrl = array();
+		
+		for ($j = 0; $j < $l2; $j++)
+		{
+			$variableUrl[] = $this->url
+			(
+				array(
+					'id' => $variableIds[$j]
+				),
+				'variableDetails'
+			);
+		}
+		
+		if ($solrDocument->get_hasQuestionnaire()):
+			
+			if ($solrDocument->get_questionnaireUrl()):
+				$questionnaireUrl = $solrDocument->get_questionnaireUrl();
+			
+			else:
+				$questionnaireUrl = $this->url
+				(
+					array(
+						'id' => $solrDocument->get_ddiFileId()
+					),
+					'questionnaireView'
+				);
+			
+			endif;
+			 
+		endif;
+	?>
+		<tr id="q_<?php echo $this->documents[$i]->get_id();?>"<?php if ($i >= MAX_QUESTION_SELECTION_DISPLAY):?> style="display:none;"<?php endif; ?>>
+			<td class="title"><a class="goldAnchor" href="<?php echo $studyUrl; ?>" target="_self"><?php echo $solrDocument->get_studyTitle(); ?></a></td>
+			<td class="producer"><?php
+				echo $details['producer']; 
+				?></td>
+			<td class="distributor"><?php
+				echo $details['distributor']; 
+				?></td>
+			<td class="question">
+		<?php
+		$lang = $this->documents[$i]->get_solrLangCode();
+
+		if ( ! $hasMultipleItems):
+		?>
+			
+				<a class="goldAnchor" href="<?php echo $variableUrl[0]; ?>" target="_self"> <?php echo $variableLabel[0]; ?></a>
+				<br/>
+		<?php 
+		endif;
+
+		echo $question;
+				
+		if ($this->documents[$i]->get_hasMultipleItems()):
+			$l2 = count($items);
+		?>
+				<ul class="items<?php if ($l2 > MAX_ITEMS_OPENED): ?> more<?php endif;?>">
+			<?php
+			if ($l2 <= MAX_ITEMS_OPENED):
+
+				for ($j = 0; $j < $l2; $j++):
+			?>
+					<li class="item<?php if (($j > MAX_ITEMS_OPENED - 1) && $l > MAX_ITEMS_OPENED) echo ' hidden';?>">
+						<?php 
+						echo $items[$j];
+						?>
+						-
+						<a title="<?php echo $variableLabel[$j];?>" href="<?php echo $variableUrl[$j];?>" target="_self"><?php echo $variableName[$j]; ?></a>
+					</li>
+					<?php
+					endfor;
+					?>
+			<?php
+			else:
+				$openedItems = 0;
+				$fnd = false;
+				$show = false;
+
+				for ($j = 0; $j < $l2; $j++):
+
+					$show = $j < MAX_ITEMS_OPENED;
+			?>
+					<li class="item<?php if ( ! $show) echo ' hidden';?>">
+				<?php 
+				echo $items[$j];
+				?>
+						-
+						<a title="<?php echo $variableLabel[$j];?>" class="variable" href="<?php echo $variableUrl[$j];?>" target="_self"><?php echo $variableName[$j]; ?></a>
+					</li>
+						<?php
+					if ($fnd)
+					{
+						$openedItems++;
+					}
+
+				endfor;
+
+			endif;
+			?>
+				</ul>
+				
+		<?php 
+		endif;
+
+		$l2 = count($modalities);
+		?>
+				<ul class="modalities<?php if ($l2 > MAX_MODALITIES_OPENED): ?> more<?php endif;?>">
+		<?php
+		$mFirstMatch = $solrDocument->get_mFirstMatch();
+		
+		if  ($l2 <= MAX_MODALITIES_OPENED):
+		
+			for ($j = 0; $j < $l2; $j++):
+		?>
+					<li class="item<?php if (($j > MAX_MODALITIES_OPENED - 1) && $l > MAX_MODALITIES_OPENED) echo ' hidden'?>"><?php echo $modalities[$j];?></li>
+			<?php
+			endfor;
+			?>
+		<?php
+	 
+		else:
+			$openedModa = 0;
+			$fnd = false;
+			$show = false;
+
+			for ($j = 0; $j < $l2; $j++):
+				
+				$show = $j < MAX_MODALITIES_OPENED;
+		?>
+					<li class="item<?php if ( ! $show) echo ' hidden'?>"><?php echo $modalities[$j];?></li>
+		<?php
+				if ($fnd)
+				{
+					$openedModa++;
+				}
+
+			endfor;
+
+		endif;
+		?>
+				</ul>
+			</td>
+			<td class="delete"><img src="/img/icons/basket_delete.png" title="<?php echo $this->translate->_('fr0305000450');?>" alt="<?php echo $this->translate->_('fr0305000500');?>"/></td>
+		</tr>
+	<?php 
+	endfor;
+	?>
+	</tbody>
+</table>
+<?php
+else:
+	echo $this->translate->_('fr0305000550');
+
+endif;
+
+$this->roundBoxEnd();
+
+if ($l > 0):
+	echo $this->partial('basketScript.phtml');
+?>
+<script type="text/javascript" src="/scripts/dataTable.min.js"></script>
+<script type="text/javascript" src="/scripts/questionSelection.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function() {
+	questionSelection.init({
+		'exportUrl': "<?php echo $this->url(array(),'exportSelection')?>",
+		'questionSelectionUrl': "<?php echo $this->url(array(),'questionSelection')?>",
+		'maxQuestionDisplay': <?php echo MAX_QUESTION_SELECTION_DISPLAY ?>,
+		'translate':{
+			'table':{
+				'lengthMenu': "<?php echo $this->translate->_('fr0305000600'); ?>",
+				'zeroRecord': "<?php echo $this->translate->_('fr0305000650'); ?>",
+				'info': "<?php echo $this->translate->_('fr0305000700'); ?>",
+				'infoEmpty':  "<?php echo $this->translate->_('fr0305000750'); ?>",
+				'infoFiltered': "<?php echo $this->translate->_('fr0305000800'); ?>",
+				'search': "<?php echo $this->translate->_('fr0305000850'); ?>",
+				'paginate':{
+					'previous': "&lt;<?php echo $this->translate->_('fr0305000900'); ?>",
+					'next': "<?php echo $this->translate->_('fr0305000950'); ?>&gt;"
+				}
+			},
+			'clearBasket': "<?php echo $this->translate->_('fr0305001000'); ?>",
+			'exportCsv': "<?php echo $this->translate->_('fr0305001050'); ?>",
+			'exportXls': "<?php echo $this->translate->_('fr0305001100'); ?>",
+			'clearBasketConfirm': "<?php echo $this->translate->_('fr0305001150'); ?>"
+		}
+	});
+});
+//]]>
+</script>
+<?php 
+endif;
+?>

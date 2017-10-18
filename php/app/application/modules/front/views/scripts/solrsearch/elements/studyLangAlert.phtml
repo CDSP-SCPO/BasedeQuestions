@@ -1,0 +1,31 @@
+<?php 
+$translate = Zend_Registry::get('translateFront');
+?>
+<script type="text/javascript" src="/script/jGrowl.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+var langElement = '<?php
+	switch ($this->route):
+		case 'solrsearchHome':
+		case 'solrsearchResults':
+			echo '.radioSearchLang';
+		break;
+		case 'solradvancedSearch':
+			echo '#searchLang';
+		break; 
+	endswitch;
+	?>';
+$(document).ready(function(){
+	$.jGrowl.defaults.position = 'top-left';
+	$(langElement).change(function(){
+
+		if ($(this).val() == 'EN' && ! ($('.jGrowl-notification').length > 1))
+		{
+			$.jGrowl('<?php echo addslashes($translate->_('fr0176000000')); ?>', {'header':'<?php echo addslashes($translate->_('fr0176000050')); ?>', 'sticky':true});
+		}
+	
+	});
+});
+//]]>          
+</script>
+

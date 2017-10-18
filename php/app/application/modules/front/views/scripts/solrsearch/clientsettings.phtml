@@ -1,0 +1,104 @@
+<?php
+/**
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+
+$this->layout()->title = $this->translate->_('fr0225000000');
+$this->placeholder('mainContainerClass')->set('oneColumn');
+$this->placeholder('topSection')->set(
+	'<h1>' . $this->translate->_('fr0225000050') . '</h1>'
+);
+?>
+<form action="<?php echo $this->url(array(), 'solrsearcheditclientSettings')?>" method="post" id="clientSettingsForm">
+	<?php 
+	$this->roundBoxStart();
+	$this->resultsLink();
+	echo $this->partial('solrsearch/elements/clientSettingsSave.phtml');
+	?>
+	<fieldset>
+		<legend><?php echo 	$this->translate->_('fr0225000100'); ?></legend>
+		<p class="smallTooltip"><?php echo 	$this->translate->_('fr0225000150'); ?></p>
+		<input type="checkbox" name="stemming" id="stemming"<?php if ($this->clientSettings->stemming) echo ' checked="checked"' ?>/>
+		<label for="stemming"><?php echo $this->translate->_('fr0225000200'); ?></label>
+		<p class="smallTooltip"><?php echo $this->translate->_('fr0225000250'); ?></p>
+		<input type="checkbox" name="stopwords" id="stopwords"<?php if ($this->clientSettings->stopwords) echo ' checked="checked"' ?>/>
+		<label for="stopwords"><?php echo $this->translate->_('fr0225000300'); ?></label>
+		<p class="smallTooltip">
+			<?php 
+			echo $this->translate->_('fr0225000350'), ' ';
+			$urls = getStopWordsUrl();
+			$l = count($urls);
+			$i = 0;
+			
+			while(list($name, $url) = each($urls))
+			{
+				echo "<a href=\"$url\">$name</a> ", ($i < $l - 1) ? ', ' : '';
+				$i++;
+			}
+			?>
+		</p>
+	</fieldset>
+	<fieldset>
+		<legend><?php echo 	$this->translate->_('fr0225000400'); ?></legend>
+		<input type="checkbox" name="autoComplete" id="autoComplete"<?php if ($this->clientSettings->autoComplete) echo ' checked="checked"' ?>/> 
+		<label for="autoComplete"><?php echo $this->translate->_('fr0225000450'); ?></label>
+		<p class="smallTooltip">
+			<?php echo $this->translate->_('fr0225000500'); ?></p>
+			<?php echo 	$this->translate->_('fr0225000550'); ?>
+			<select name="rows">
+			<?php
+			$options = array(5, 10, 15, 20, 25);
+			$i = 0;
+			$l = count($options);
+	
+			for ($i = 0; $i < $l; $i++):
+			?>
+				<option value="<?php echo $options[$i]?>"<?php if ($options[$i] == $this->clientSettings->rows) echo ' selected="selected"'?>><?php echo $options[$i]?></option>
+			<?php 
+			endfor;
+			?>
+			</select>
+		<?php echo $this->translate->_('fr0225000600'); ?>
+		<br/>
+		<?php echo $this->translate->_('fr0225000650'); ?> 
+		<select name="sort">
+			<?php
+			$sortId = array_search($this->clientSettings->sort, $this->sortOrders);
+				
+			while (list($val, $lbl) = each($this->sortOrdersLabels)): 
+			?>
+			<option value="<?php echo $val?>" <?php if ($val == $sortId) echo ' selected="selected"'?>><?php echo $lbl?></option>
+			<?php 
+			endwhile;
+			?>
+		</select>
+		<p class="smallTooltip"><?php echo $this->translate->_('fr0225000700'); ?></p>
+		<input type="checkbox" name="fluoHighlight" id="fluoHighlight"<?php if ($this->clientSettings->fluoHighlight) echo ' checked="checked"' ?>/> <label for="fluoHighlight"><?php echo $this->translate->_('fr0225000750');?></label><br/>
+	</fieldset>
+	<fieldset>
+		<legend><?php echo $this->translate->_('fr0225000800'); ?>
+		</legend>
+		<p class="smallTooltip"><?php echo $this->translate->_('fr0225000850'); ?>
+		</p>
+		<input type="checkbox" name="displayConcept" id="displayConcept"<?php if ($this->clientSettings->displayConcept) echo ' checked="checked"' ?>/> <label for="displayConcept"><?php echo 	$this->translate->_('fr0225000900');?></label>
+		<p class="smallTooltip">
+			<?php echo $this->translate->_('fr0225000950'); ?>
+		</p>
+		<input type="checkbox" name="displayInterviewerInstructions" id="displayInterviewerInstructions"<?php if ($this->clientSettings->displayInterviewerInstructions) echo ' checked="checked"' ?>/> <label for="displayInterviewerInstructions"><?php echo 	$this->translate->_('fr0225001000');?></label><br/>
+		<input type="checkbox" name="displayPreQuestionText" id="displayPreQuestionText"<?php if ($this->clientSettings->displayPreQuestionText) echo ' checked="checked"' ?>/> <label for="displayPreQuestionText"><?php echo 	$this->translate->_('fr0225001050');?></label><br/>
+		<input type="checkbox" name="displayPostQuestionText" id="displayPostQuestionText"<?php if ($this->clientSettings->displayPostQuestionText) echo ' checked="checked"' ?>/> <label for="displayPostQuestionText"><?php echo 	$this->translate->_('fr0225001100');?></label><br/>
+		<input type="checkbox" name="displayUniverse" id="displayUniverse"<?php if ($this->clientSettings->displayUniverse) echo ' checked="checked"' ?>/> <label for="displayUniverse"><?php echo 	$this->translate->_('fr0225001150');?></label><br/>
+		<input type="checkbox" name="displayQuestionPositionDecile" id="displayQuestionPositionDecile"<?php if ($this->clientSettings->displayQuestionPositionDecile) echo ' checked="checked"' ?>/> <label for="displayQuestionPositionDecile"><?php echo 	$this->translate->_('fr0225001200');?></label><br/>
+		<input type="checkbox" name="displayNotes" id="displayNotes"<?php if ($this->clientSettings->displayNotes) echo ' checked="checked"' ?>/> <label for="displayNotes"><?php echo 	$this->translate->_('fr0225001250');?></label>
+		<p class="smallTooltip">
+			<?php echo 	$this->translate->_('fr0225001300');	?>
+		</p>
+		<input type="checkbox" name="displayQuestionnairePdfLink" id="displayQuestionnairePdfLink"<?php if ($this->clientSettings->displayQuestionnairePdfLink) echo ' checked="checked"' ?>/> <label for="displayQuestionnairePdfLink"><?php echo $this->translate->_('fr0225001350');?></label><br/>
+		<input type="checkbox" name="displayNavigationBar" id="displayNavigationBar"<?php if ($this->clientSettings->displayNavigationBar) echo ' checked="checked"' ?>/> <label for="displayNavigationBar"><?php echo 	$this->translate->_('fr0225001400');?></label><br/>
+	</fieldset>
+	<?php 
+	echo $this->partial('solrsearch/elements/clientSettingsSave.phtml');
+	$this->roundBoxEnd();
+	?>
+</form>

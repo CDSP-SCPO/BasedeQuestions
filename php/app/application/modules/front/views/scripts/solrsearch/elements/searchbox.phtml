@@ -1,0 +1,134 @@
+<?php 
+/**
+ * The simple search input form. 
+ * 
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+$translate = Zend_Registry::get('translateFront');
+$clientSettings = BDQ_Settings_Client::getInstance();
+?>
+<form action="<?php echo $this->url(array(), 'solrsearchHandler');?>" class="simpleSearchForm" id="simpleSearchBarForm_<?php echo $this->pos; ?>" method="get">
+	<table id="simpleSearchBarTable_<?php echo $this->pos; ?>" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr>
+				<td style="text-align: right; padding-right: 5px;">
+				<?php
+				$ls = count($this->solrDocumentLanguages);
+
+				if ($ls > 1):
+				for ($i = 0; $i < $ls; $i++):
+
+						if (isset($this->searchLang))
+						{
+							$checked = $this->solrDocumentLanguages[$i]['code_solr'] == $this->searchLang;
+						}
+
+						else
+						{
+							$checked = $i == 0;
+						}
+				?>
+					<input class="radioSearchLang" type="radio" name="searchLang" id="searchLang_<?php echo $this->solrDocumentLanguages[$i]['code'];?>_<?php echo $this->pos; ?>" value="<?php echo $this->solrDocumentLanguages[$i]['code_solr'];?>" <?php if ($checked) echo 'checked="checked"'; ?> /> 
+					<label title="<?php echo $translate->_('fr0180000000'), ' ', strtolower(stripslashes($this->solrDocumentLanguages[$i]['label']));; ?>" for="searchLang_<?php echo $this->solrDocumentLanguages[$i]['code'];?>_<?php echo $this->pos; ?>"><?php echo strtolower(stripslashes($this->solrDocumentLanguages[$i]['label']));?></label>
+				<?php 
+				endfor;
+				?>
+					<br/>
+				<?php 
+				else:
+				?>
+					<input class="searchLang" type="hidden" name="searchLang" id="searchLang_<?php echo $this->pos; ?>" value="<?php echo isset($this->solrDocumentLanguages[0]['code_solr']) ? $this->solrDocumentLanguages[0]['code_solr'] : DEFAULT_SOLR_DOCUMENT_LANGUAGE;?>"/>
+				<?php 
+				endif;
+		
+				if (isset($this->target))
+				{
+					$checked = $this->target & SEARCH_QUESTION;
+				} 
+				
+				else
+				{
+					$checked = true;
+				}
+				?>
+					<input type="checkbox" class="searchQuestion" name="searchQuestion" id="searchQuestion_<?php echo $this->pos; ?>"<?php if ($checked) echo ' checked="checked"'; ?>/>
+					<label title="<?php echo $translate->_('fr0180000050'); ?>" for="searchQuestion_<?php echo $this->pos; ?>"><?php echo 	$translate->_('fr0180000100');	?></label>
+				<?php 
+				if (isset($this->target))
+				{
+					$checked = $this->target & SEARCH_MODALITIES;
+				} 
+				
+				else
+				{
+					$checked = true;
+				}
+				?>
+					<input type="checkbox" class="searchModalities" name="searchModalities" id="searchModalities_<?php echo $this->pos; ?>"<?php if ($checked) echo ' checked="checked"'; ?>/>
+					<label title="<?php echo $translate->_('fr0180000150'); ?>" for="searchModalities_<?php echo $this->pos; ?>"><?php echo $translate->_('fr0180000200'); ?></label>
+				<?php 
+				if (isset($this->target))
+				{
+					$checked = $this->target & SEARCH_VARIABLE;
+				} 
+				
+				else
+				{
+					$checked = true;
+				}
+				?>
+					<input type="checkbox" class="searchVariableLabel" name="searchVariableLabel" id="searchVariableLabel_<?php echo $this->pos; ?>"<?php if ($checked) echo ' checked="checked"'; ?>/>
+					<label title="<?php echo $translate->_('fr0180000250'); ?>" for="searchVariableLabel_<?php echo $this->pos; ?>"><?php echo $translate->_('fr0180000300'); ?></label>
+				</td>
+				<td>
+					<input type="text" class="autocomplete simpleSearchInput simpleSearchBarInput" id="simpleSearchBarInput_<?php echo $this->pos; ?>" name="query" value='<?php echo htmlspecialchars($this->query, ENT_QUOTES); ?>' />
+				</td>
+				<td style="text-align:left;">
+					<span class="submit">
+						<input type="submit" class="submit" value="<?php echo $translate->_('fr0180000350'); ?>" />
+					</span>&nbsp;
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+<?php
+if($clientSettings->autoComplete):
+	echo $this->partial('solrsearch/elements/luceneQueryValidationScript.phtml');
+?>
+<script type="text/javascript" src="/scripts/BDQAutocomplete.min.js"></script>
+<?php 
+endif;
+?>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+<?php
+if ($clientSettings->autoComplete):
+?>
+	$("input.autocomplete").BDQAutocomplete({
+		'termSeparator': '<?php echo Solr_BDQ_Search_Autocomplete::termSeparator;?>',
+		'stemming': <?php echo $clientSettings->stemming;?>,
+		'translate': {
+			'atLeast': ' <?php echo	$translate->_('fr0180000400'); ?> ',
+			'results': ' <?php echo $translate->_('fr0180000450'); ?>'
+		},
+		'acUrl':'<?php echo AUTOCOMPLETE_URL ?>'
+	});
+<?php
+endif;
+?>
+	if($.browser.mozilla)
+	{
+		$('.simpleSearchForm').attr('autocomplete', 'off');
+	}
+
+	$('.simpleSearchForm').submit(function(){
+		return luceneQueryValidator.checkQuery($(this).find('input.simpleSearchInput').val());
+	});
+
+	$('.simpleSearchBarInput').focus();
+});
+//]]>
+</script>

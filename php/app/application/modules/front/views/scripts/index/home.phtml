@@ -1,0 +1,120 @@
+<?php
+/**
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+$this->layout()->title = $this->translate->_('fr0265000000');
+$this->placeholder('rightTubeClass')->set('infoBox');
+{ 
+/*
+ * Top section generation.
+ * The content is stored in a placeholder that is displayed in layout.
+ */
+	$this->placeholder('topSection')->captureStart();
+	echo $this->partial(
+		'solrsearch/elements/searchbox.phtml', 
+		array
+		(
+			'pos' => 'top',
+			'solrDocumentLanguages' => $this->solrDocumentLanguages,
+			'domains' => $this->domains,
+			'clientSettings' => $this->clientSettings,
+			'query' => '',
+			'target' => SEARCH_QUESTION,
+			'searchLang' => $this->searchLang,
+		)
+	);
+	$this->placeholder('topSection')->captureEnd();
+}
+
+$this->roundBoxStart();
+$this->resultsLink();
+?>
+<h1 id="homeH1"><?php echo $this->translate->_('fr0265000050'); ?></h1>
+<p><?php echo $this->translate->_('fr0265000100');?></p>
+<span><?php echo $this->translate->_('fr0265000150');?></span>
+<ul>
+	<li><?php echo $this->translate->_('fr0265000200');?></li>
+	<li><?php echo $this->translate->_('fr0265000250');?></li>
+	<li><?php echo $this->translate->_('fr0265000251');?></li>
+	<li><?php echo $this->translate->_('fr0265000300');?></li>
+	<li><?php echo $this->translate->_('fr0265000350');?></li>
+</ul>
+<p>
+	<?php
+	echo sprintf(
+		$this->translate->_('fr0265000351'),
+		$this->ddiFileCounts[0]['count'] + $this->ddiFileCounts[1]['count'],
+		$this->ddiFileCounts[0]['count'],
+		strtolower($this->ddiFileCounts[0]['language_label']),
+		$this->ddiFileCounts[1]['count'],
+		strtolower($this->ddiFileCounts[1]['language_label']),
+		$this->variableCount['count']
+	);
+	?>
+</p>
+<p class="information"><a class="yellowAnchor" style="font-size:14px!important;" href="<?php echo $this->url(array(), 'help');?>"><?php echo $this->translate->_('fr0265000400');?></a></p>
+<?php
+$this->roundBoxEnd();
+$this->placeholder('leftTubeClass')->set('bdqDesc');
+$this->placeholder('leftColumn')->captureStart();
+?>
+<h2><a href="<?php echo $this->url(array('id' => 5,),'domainDetails'); ?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265000450');?></a></h2>
+<ul>
+	<li>
+		<a href="<?php echo $this->url(array('id' => 7), 'studyserieDetails')?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265000500');?></a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array('id' => 8), 'studyserieDetails')?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265000550');?></a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array('id' => 9), 'studyserieDetails')?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265000600');?></a>, ...
+	</li>
+</ul>
+<h2><a href="<?php echo $this->url(array('id' => 2,),'domainDetails'); ?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265000650');?></a></h2>
+<ul>
+<!--
+	<li>
+		<a href="<?php echo $this->url(array('id' => 135), 'ddifileDetails'); ?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265000700');?></a>
+	</li>
+-->
+	<li>
+		<a href="<?php echo $this->url(array('id' => 140), 'ddifileDetails'); ?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265000750');?></a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array('id' => 139), 'ddifileDetails'); ?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265000800');?></a>, ...
+	</li>
+</ul>
+<h2><a href="<?php echo $this->url(array('id' => 1,),'domainDetails'); ?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265000850');?></a></h2>
+<ul>
+	<li>
+		<a href="<?php echo $this->url(array('id' => 2), 'studyserieDetails')?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265000900'); ?></a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array('id' => 1), 'studyserieDetails')?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265000950'); ?></a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array('id' => 6), 'studyserieDetails')?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265001000'); ?></a>
+	</li>
+</ul>
+<h2><a href="<?php echo $this->url(array('id' => 14,),'domainDetails'); ?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265001050');?></a></h2>
+<ul>
+	<li>
+		<a href="<?php echo $this->url(array('id' => 10), 'studyserieDetails')?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265001100');?></a>
+	</li>
+</ul>
+<h2><a href="<?php echo $this->url(array('id' => 11,),'domainDetails'); ?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265001150');?></a></h2>
+<ul>
+	<li>
+		<a href="<?php echo $this->url(array('id' => 11), 'studyserieDetails')?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265001200');?></a>
+	</li>
+</ul>
+<h2><a href="<?php echo $this->url(array('id' => 16),'domainDetails'); ?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265001250');?></a></h2>
+<ul>
+	<li>
+		<a href="<?php echo $this->url(array('id' => 326), 'ddifileDetails'); ?>" class="yellowAnchor"><?php echo $this->translate->_('fr0265001300');?></a>
+	</li>
+</ul>
+<p class="information"><a class="yellowAnchor" href="<?php echo $this->url(array(), 'studyIndex');?>"><?php echo $this->translate->_('fr0265001350');?></a></p>
+<?php 
+$this->placeholder('leftColumn')->captureEnd();

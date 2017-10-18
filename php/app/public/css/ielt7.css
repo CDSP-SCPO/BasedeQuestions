@@ -1,0 +1,79 @@
+@CHARSET "UTF-8";
+#logoSmall{
+behavior: url(/css/iepngfix/iepngfix.htc);
+}
+#topMenu{
+margin-right:10px;
+}
+span.cart{
+margin-right:9px;
+margin-top:1px;
+}
+div.score div{
+line-height:0;
+height:0;
+font-size:0;
+}
+div.score{
+line-height:0;
+margin:0;
+padding:0;
+}
+div.rightTube{
+margin-top:16px;	
+}
+div.detail{
+top:0;
+margin-right:18px;
+}
+table.filter .sorting {
+	background: url("/img/datatable/sort_b.png") no-repeat center center;
+}
+table.filter th.sorting_asc {
+	background: url('/img/datatable/sort_cb_b.png') no-repeat center center;
+}
+
+table.filter th.sorting_desc {
+	background: url('/img/datatable/sort_cb_desc_b.png') no-repeat center center;
+}
+table.display .sorting {
+	background: url("/img/datatable/sort_w.png") no-repeat 99% center;
+}
+table.display th.sorting_asc {
+	background: url('/img/datatable/sort_cb_w.png') no-repeat 99% center;
+}
+table.display th.sorting_desc {
+	background: url('/img/datatable/sort_cb_desc_w.png') no-repeat 99% center;
+}
+/** Special IE6 Style Positioning **/
+div.ie6 {
+	position: 			absolute;
+}
+
+div.ie6.top-right {
+	right: 				auto;
+	bottom: 			auto;
+	left: 				expression( ( 0 - jGrowl.offsetWidth + ( document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body.clientWidth ) + ( ignoreMe2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) ) + 'px' );
+  	top: 				expression( ( 0 + ( ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' );
+}
+
+div.ie6.top-left {
+	left: 				expression( ( 0 + ( ignoreMe2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) ) + 'px' );
+	top: 				expression( ( 0 + ( ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' );
+}
+
+div.ie6.bottom-right {
+	left: 				expression( ( 0 - jGrowl.offsetWidth + ( document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body.clientWidth ) + ( ignoreMe2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) ) + 'px' );
+	top: 				expression( ( 0 - jGrowl.offsetHeight + ( document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight ) + ( ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' );
+}
+
+div.ie6.bottom-left {
+	left: 				expression( ( 0 + ( ignoreMe2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) ) + 'px' );
+	top: 				expression( ( 0 - jGrowl.offsetHeight + ( document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight ) + ( ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' );
+}
+
+div.ie6.center {
+	left: 				expression( ( 0 + ( ignoreMe2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) ) + 'px' );
+	top: 				expression( ( 0 + ( ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' );
+	width: 				100%;
+}

@@ -1,0 +1,19 @@
+<h2><?php echo $this->translate->_('fr0150000000')?></h2>
+<p><?php echo $this->translate->_('fr0150000010')?> "<?php echo stripslashes($this->ddifile['title']) ?>" ?</p>
+<form method="post" action="<?php echo $this->url(
+	array(
+		'controller' => 'ddifile',
+		'action' => 'delete',
+		'id' => $this->ddifile['id']
+	),
+	'ddifileDelete'
+)?>" class="confirm_delete">
+	<input type="submit" name="" value="<?php echo $this->translate->_('fr0150000020')?>"/>
+</form>
+<form method="post" action="<?php echo $this->url(
+	array(
+	),
+	'ddifileIndex'
+)?>" class="confirm_delete">
+	<input type="submit" name="" id="submit_cancel" value="<?php echo $this->translate->_('fr0150000030')?>"/>
+</form>

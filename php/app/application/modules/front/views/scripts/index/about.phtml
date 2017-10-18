@@ -1,0 +1,50 @@
+<?php 
+/**
+ * @author Xavier Schepler
+ * @copyright Réseau Quetelet
+ */
+$this->layout()->title = $this->translate->_('fr0270000000');
+/*
+ * The placeholders hold variables displayed in the layout.
+ */
+$this->placeholder('mainContainerClass')->set('oneColumn');
+$this->placeholder('topSection')->set(
+ '<h1>' . $this->translate->_('fr0270000050') . '</h1>'
+);
+$this->roundBoxStart(array('infoBox'));
+$this->resultsLink();
+?>
+<h2><?php echo 	$this->translate->_('fr0270000100'); ?></h2>
+<span><?php
+	echo $this->translate->_('fr0270000150');?> 
+<a href="http://cdsp.sciences-po.fr/">
+<?php
+echo $this->translate->_('fr0270000200'); 
+?></a>,
+<?php echo $this->translate->_('fr0270000250'); ?>
+<a href="http://www.reseau-quetelet.cnrs.fr/"><?php echo $this->translate->_('fr0270000300'); ?></a>,
+<?php echo $this->translate->_('fr0270000350'); ?> 
+<?php echo $this->translate->_('fr0270000400'); ?></span>
+<h2><?php echo 	$this->translate->_('fr0270000450'); ?></h2>
+<ul>
+	<li>Apache Solr</li>
+	<li>Apache Tomcat</li>
+	<li>Zend Framework</li>
+	<li>PHP</li>
+	<li>MySQL</li>
+	<li>Apache httpd</li>
+	<li>jQuery</li>
+	<li>jQuery UI</li>
+	<li>BoUML</li>
+	<li>Eclipse PDT</li>
+	<li>...</li>
+</ul>
+<h2><?php echo 	$this->translate->_('fr0270000500'); ?></h2>
+<span>Some Icons are Copyright © <a href="http://p.yusukekamiyamane.com/">Yusuke Kamiyamane</a>. All rights reserved. Licensed under a Creative Commons Attribution 3.0 license.</span>
+<p>
+	<a href="http://validator.w3.org/check?uri=referer"><img
+	src="http://www.w3.org/Icons/valid-xhtml10"
+	alt="Valid XHTML 1.0 Transitional" height="31" width="88" style="border:none;" /></a>
+</p>
+<?php 
+$this->roundBoxEnd();			

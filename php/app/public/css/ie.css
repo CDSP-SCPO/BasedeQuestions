@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+form.simpleSearchForm span.submit{
+margin-top:1px;
+}
+body{
+min-width:880px;
+}
+div.focused{
+border:3px solid #FFC000;
+margin-bottom:5px!important;
+margin-left:0px!important;
+margin-top:0px!important;
+}
+div.resultInfoBox select, #topMenu select, #searchLang, .dataTables_wrapper select, #advancedSearchForm select, #advancedSearchForm input, #sortSelect{
+vertical-align:middle;
+}
+.dataTables_wrapper input{
+vertical-align:middle;
+}
+span.facetReset{
+display:inline;
+margin-top:-32px;
+}

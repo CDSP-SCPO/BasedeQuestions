@@ -1,0 +1,52 @@
+<div id="mainContainer" class="oneColumn">
+	<div id="topSection">
+		<div class="innerTube"></div>
+	</div>
+	<div id="contentWrapper">
+		<div id="contentColumn">
+			<div class="leftTube">
+				<div class="infoBox">
+				<?php 
+				$this->roundBoxStart();
+				?>
+				<h1><?php echo $this->translate->_('fr0310000000');?></h1>
+				<h2><?php echo $this->error, ' - ', $this->message ?></h2>
+				<a href="<?php 
+					echo $this->url(
+						array(
+							'lang' => 'fr'
+						),
+						'solrsearchHome'
+					);
+				?>"><?php echo $this->translate->_('fr0310000050');?></a>
+				<?php 
+					if ($this->error == 500):
+				?>
+					<p><?php echo $this->translate->_('fr0310000100');?></p>
+				<?php 
+					endif;
+				?>
+				<?php if ('development' == APPLICATION_ENV): ?>
+				<h3>Exception information:</h3>
+				<p>
+				    <b>Message:</b> <?php echo $this->exception->getMessage() ?>
+				</p>
+				<h3>Stack trace:</h3>
+				<pre><?php echo $this->exception->getTraceAsString() ?>
+				</pre>
+				<h3>Request Parameters:</h3>
+				<pre><?php echo var_export($this->request->getParams(), true) ?>
+				</pre>
+				<?php endif ?>
+				</div>
+				<?php 
+				$this->roundBoxEnd();
+				?>
+			</div>
+		</div>
+	</div>
+	<div id="leftColumn">
+		<div class="leftTube">
+		</div>
+	</div>
+</div>

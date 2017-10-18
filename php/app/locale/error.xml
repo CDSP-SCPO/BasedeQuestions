@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmx version="1.4">
+  <body>
+    <tu tuid='980300008'>
+      <tuv xml:lang="fr"><seg>Recherche avancée</seg></tuv>
+      <tuv xml:lang="en"><seg>Advanced search</seg></tuv>
+    </tu>
+    <!--File : application/modules/front/views/scripts/error/error.phtml-->
+    <tu tuid="fr0310000000">
+      <tuv xml:lang="fr">
+        <seg>Une erreur s'est produite.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>An error occured.</seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/front/views/scripts/error/error.phtml-->
+    <tu tuid="fr0310000050">
+      <tuv xml:lang="fr">
+        <seg>Retour à la base de questions.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Back to the question bank.</seg>
+      </tuv>
+    </tu>
+    <!--File : application/modules/front/views/scripts/error/error.phtml-->
+    <tu tuid="fr0310000100">
+      <tuv xml:lang="fr">
+        <seg>L'erreur a été enregistrée.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>The error was saved.</seg>
+      </tuv>
+    </tu>
+  </body>
+</tmx>

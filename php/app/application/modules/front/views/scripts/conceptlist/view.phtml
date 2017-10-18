@@ -1,0 +1,57 @@
+<?php
+$this->layout()->title = $this->translate->_('fr0070000000') . $this->conceptList['title'] . ' - ' . $this->translate->_('fr0070000050');
+$this->placeholder('fixedRightColumn')->set(true);
+$this->placeholder('topSection')->set(
+	'<h1>' .  $this->translate->_('fr0070000100') .
+							#Liste de concepts
+							' ' . $this->conceptList['title'] . '</h1>'
+);
+?>
+<div class="infoBox">
+	<?php
+		$this->roundBoxStart();
+		$this->resultsLink();
+	?>
+	<h2>
+	<?php
+		 echo 	$this->translate->_('fr0070000150');
+	?>
+	</h2>
+	<span>
+	<?php 
+		echo $this->conceptList['description'] ? nl2br($this->conceptList['description']) : $this->translate->_('fr0070000200');;
+	?>
+	</span>
+	<?php 
+	$this->placeholder('rightColumn')->captureStart();
+	?>
+	<h3>
+		<?php
+			 echo $this->translate->_('fr0070000250');
+		?>
+	</h3>
+	<ul class="concept">
+	<?php 
+		$l = count($this->concepts);
+		
+		for ($i = 0; $i < $l; $i++):
+	?>
+		<li>
+			<a href="<?php 
+				echo $this->url(
+					array(
+						'id' => $this->concepts[$i]['id'],
+					),
+					'conceptView'
+				);									
+			?>" class="yellowAnchor"><?php echo $this->concepts[$i]['title']; ?> (<?php echo $this->concepts[$i]['count']; ?>)</a>
+		</li>
+	<?php 
+		endfor;
+	?>
+	</ul>
+	<?php 
+		$this->placeholder('rightColumn')->captureEnd();
+		$this->roundBoxEnd();
+	?>
+</div>

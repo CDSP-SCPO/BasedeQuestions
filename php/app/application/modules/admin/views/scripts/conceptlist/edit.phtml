@@ -1,0 +1,21 @@
+<h2><?php echo $this->translate->_('fr0090000000')?></h2>
+<ul>
+	<li>
+		<a href="<?php echo $this->url(array(), 'adminconceptlistIndex');?>" class="index">
+			<?php echo $this->translate->_('fr0090000010') ?>
+		</a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array(), 'adminconceptlistView');?>" class="view">
+			<?php echo $this->translate->_('fr0090000020') ?>
+		</a>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array(), 'adminconceptlistConfirmdelete');?>" class="modal delete">
+			<?php echo $this->translate->_('fr0090000030') ?>
+		</a>
+	</li>
+</ul>
+<?php
+echo $this->form;
+?>

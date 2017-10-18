@@ -1,0 +1,107 @@
+/* 
+FEUILLE DE STYLE POUR HABILLAGE VECTOR SEULEMENT
+Cette page contrôle l'apparence pour l'apparence Vector. Les modifications
+devant s'appliquer à toutes les apparences devraient aller dans MediaWiki:Common.css.
+*/
+
+/* PAGES DE DISCUSSION : COLORATION INDENTÉE */
+.ns-1 dd, .ns-3 dd, .ns-talk dd, .ns-5 dd, .ns-7 dd, .ns-9 dd,
+.ns-11 dd, .ns-13 dd,.ns-15 dd, .ns-101 dd, .ns-103 dd, .ns-105 dd {
+ margin:0;
+ padding:0;
+}
+
+.ns-1 dl, .ns-3 dl, .ns-talk dl, .ns-5 dl, .ns-7 dl, .ns-9 dl,
+.ns-11 dl, .ns-13 dl, .ns-15 dl, .ns-101 dl, .ns-103 dl, .ns-105 dl {
+ border-top:solid 1px #a7d7f9;
+ border-left:solid 1px #a7d7f9;
+ padding-top:.5em;
+ padding-left:.5em;
+ margin-left:1em;
+
+}
+
+.ns-1 dl, .ns-3 dl, .ns-talk dl, .ns-5 dl, .ns-7 dl, .ns-9 dl,
+.ns-11 dl, .ns-13 dl, .ns-15 dl, .ns-101 dl, .ns-103 dl, .ns-105 dl,
+
+.ns-1 dl dl dl, .ns-3 dl dl dl, .ns-talk dl dl dl, .ns-5 dl dl dl, .ns-7 dl dl dl, .ns-9 dl dl dl,
+.ns-11 dl dl dl, .ns-13 dl dl dl, .ns-15 dl dl dl, .ns-101 dl dl dl, .ns-103 dl dl dl, .ns-105 dl dl dl,
+
+.ns-1 dl dl dl dl dl, .ns-3 dl dl dl dl dl, .ns-talk dl dl dl dl dl, .ns-5 dl dl dl dl dl,
+.ns-7 dl dl dl dl dl, .ns-9 dl dl dl dl dl, .ns-11 dl dl dl dl dl,
+.ns-13 dl dl dl dl dl, .ns-15 dl dl dl dl dl, .ns-101 dl dl dl dl dl,
+.ns-103 dl dl dl dl dl, .ns-105 dl dl dl dl dl,
+
+.ns-1 dl dl dl dl dl dl dl, .ns-3 dl dl dl dl dl dl dl, .ns-talk dl dl dl dl dl dl dl,
+.ns-5 dl dl dl dl dl dl dl, .ns-7 dl dl dl dl dl dl dl,
+.ns-9 dl dl dl dl dl dl dl, .ns-11 dl dl dl dl dl dl dl,
+.ns-13 dl dl dl dl dl dl dl, .ns-15 dl dl dl dl dl dl dl,
+.ns-101 dl dl dl dl dl dl dl, .ns-103 dl dl dl dl dl dl dl,
+.ns-105 dl dl dl dl dl dl dl,
+
+.ns-1 dl dl dl dl dl dl dl dl dl, .ns-3 dl dl dl dl dl dl dl dl dl, .ns-talk dl dl dl dl dl dl dl dl dl,
+.ns-5 dl dl dl dl dl dl dl dl dl, .ns-7 dl dl dl dl dl dl dl dl dl,
+.ns-9 dl dl dl dl dl dl dl dl dl, .ns-11 dl dl dl dl dl dl dl dl dl,
+.ns-13 dl dl dl dl dl dl dl dl dl, .ns-15 dl dl dl dl dl dl dl dl dl,
+.ns-101 dl dl dl dl dl dl dl dl dl, .ns-103 dl dl dl dl dl dl dl dl dl,
+.ns-105 dl dl dl dl dl dl dl dl dl
+{ background:#f5faff; }
+
+.ns-1 dl dl, .ns-3 dl dl, .ns-talk dl dl, .ns-5 dl dl, .ns-7 dl dl, .ns-9 dl dl,
+.ns-11 dl dl, .ns-13 dl dl, .ns-15 dl dl, .ns-101 dl dl, .ns-103 dl dl, .ns-105 dl dl,
+
+.ns-1 dl dl dl dl, .ns-3 dl dl dl dl, .ns-talk dl dl dl dl, .ns-5 dl dl dl dl, .ns-7 dl dl dl dl,
+.ns-9 dl dl dl dl, .ns-11 dl dl dl dl, .ns-13 dl dl dl dl, .ns-15 dl dl dl dl,
+.ns-101 dl dl dl dl, .ns-103 dl dl dl dl, .ns-105 dl dl dl dl,
+
+.ns-1 dl dl dl dl dl dl, .ns-3 dl dl dl dl dl dl, .ns-talk dl dl dl dl dl dl,
+.ns-5 dl dl dl dl dl dl, .ns-7 dl dl dl dl dl dl,
+.ns-9 dl dl dl dl dl dl, .ns-11 dl dl dl dl dl dl,
+.ns-13 dl dl dl dl dl dl, .ns-15 dl dl dl dl dl dl,
+.ns-101 dl dl dl dl dl dl, .ns-103 dl dl dl dl dl dl,
+.ns-105 dl dl dl dl dl dl,
+
+.ns-1 dl dl dl dl dl dl dl dl, .ns-3 dl dl dl dl dl dl dl dl, .ns-talk dl dl dl dl dl dl dl dl,
+.ns-5 dl dl dl dl dl dl dl dl, .ns-7 dl dl dl dl dl dl dl dl,
+.ns-9 dl dl dl dl dl dl dl dl, .ns-11 dl dl dl dl dl dl dl dl,
+.ns-13 dl dl dl dl dl dl dl dl, .ns-15 dl dl dl dl dl dl dl dl,
+.ns-101 dl dl dl dl dl dl dl dl, .ns-103 dl dl dl dl dl dl dl dl,
+.ns-105 dl dl dl dl dl dl dl dl,
+
+.ns-1 dl dl dl dl dl dl dl dl dl dl, .ns-3 dl dl dl dl dl dl dl dl dl dl, .ns-talk dl dl dl dl dl dl dl dl dl dl,
+.ns-5 dl dl dl dl dl dl dl dl dl dl, .ns-7 dl dl dl dl dl dl dl dl dl dl,
+.ns-9 dl dl dl dl dl dl dl dl dl dl, .ns-11 dl dl dl dl dl dl dl dl dl dl,
+.ns-13 dl dl dl dl dl dl dl dl dl dl, .ns-15 dl dl dl dl dl dl dl dl dl dl,
+.ns-101 dl dl dl dl dl dl dl dl dl dl, .ns-103 dl dl dl dl dl dl dl dl dl dl,
+.ns-105 dl dl dl dl dl dl dl dl dl dl
+{ background:white; }
+
+
+/* {{tl|Lien AdQ}} */
+
+#mw-panel div.portal div.body ul li.AdQ, #panel div.portal div.body ul li.PdQ {
+  background: url("http://upload.wikimedia.org/wikipedia/commons/d/d4/Monobook-bullet-star.png") no-repeat 0% -0.3em;
+  margin-left: -10px;
+  padding-left: 10px;
+}
+
+/* {{tl|Lien BA}} */
+#mw-panel div.portal div.body ul li.BA {
+  background: url("http://upload.wikimedia.org/wikipedia/commons/a/a1/Monobook-bullet-star-gray.png") no-repeat 0% -0.3em;
+  margin-left: -10px;
+  padding-left: 10px;
+}
+
+/* Correction pour la page d'accueil */
+body.page-Wikipédia_Accueil_principal #accueil_titre {
+  margin-top: 0;
+}
+
+body.page-Wikipédia_Accueil_principal #siteSub,
+body.page-Wikipédia_Accueil_principal #contentSub {
+ display: none;
+}
+
+#coordinates-title {
+  margin-top: 0;
+}

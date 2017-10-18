@@ -1,0 +1,20 @@
+<h2><?php echo $this->translate->_('fr0055000000')?></h2>
+<p><?php echo $this->translate->_('fr0055000010')?> "<?php echo stripslashes($this->nesstarserver->get_title()) ?>" ?</p>
+<p><?php echo $this->translate->_('fr0055000020') ?></p>
+<form method="post" action="<?php echo $this->url(
+	array(
+		'controller' => 'nesstarserver',
+		'action' => 'delete',
+		'id' => $this->nesstarserver->get_id()
+	),
+	'nesstarserverDelete'
+)?>" class="confirm_delete">
+	<input type="submit" name="" value="<?php echo $this->translate->_('fr0055000030')?>"/>
+</form>
+<form method="post" action="<?php echo $this->url(
+	array(
+	),
+	'nesstarserverIndex'
+)?>" class="confirm_delete">
+	<input type="submit" name="" id="submit_cancel" value="<?php echo $this->translate->_('fr0055000040')?>"/>
+</form>
