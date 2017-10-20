@@ -39,6 +39,10 @@ git clone https://github.com/CDSP-SCPO/BasedeQuestions.git
 cd BasedeQuestions/
 ```
 
+### Copy data
+
+Copy the `quetelet-data` folder in the root directory of this repository cloned before.
+
 ### Pull official image from Docker Store (recommended way)
 
 ```bash
@@ -53,9 +57,6 @@ docker-compose build
 
 It will take a couple of minutes to download or build everything.
 
-### Copy data
-
-Copy the `quetelet-data` folder in the root directory of this repository cloned before.
 
 ### Create and run containers
 
