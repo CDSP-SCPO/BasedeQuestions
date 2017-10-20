@@ -20,7 +20,7 @@ services:
     volumes:
       - ./quetelet-data/mysql-data/:/var/lib/mysql
       - ./quetelet-data/mysql-scripts/:/docker-entrypoint-initdb.d
-    command: mysqld --sql_mode="" 
+    command: mysqld --sql_mode=""
   nginx:
     image: nginx:stable-alpine
     ports:
@@ -31,7 +31,19 @@ services:
       - ./nginx/bdq.reseau-quetelet.cnrs.fr.conf:/etc/nginx/conf.d/default.conf:ro 
     links:
       - php-fpm:php-fpm
-
+  mysql-backup:
+    image: yloeffler/mysql-backup
+    env_file:
+      - ./quetelet-data/docker-app-variables.env
+    links:
+      - mysql:mysql
+    environment: 
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - INIT_BACKUP=yes
+      - MAX_BACKUPS=7
+    volumes:
+      - ./quetelet-data/mysql-backup/:/backup
 
 
 
